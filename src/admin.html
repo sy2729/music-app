@@ -28,7 +28,10 @@
             </ul>
 
             <div id="upload">
-                <button id="uploadBtn">Upload</button>
+                <button id="uploadBtn">Click or Drag to Upload</button>
+                <div class="uploadAnim">
+                    <span></span><span></span><span></span>
+                </div>
             </div>
         </aside>
         <main>
@@ -46,6 +49,7 @@
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/leancloud-storage/dist/av-min.js"></script>
     <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
+    <script src="../vendor/moxie.js"></script>
     <script src="../node_modules/plupload/js/plupload.min.js"></script>
     <script>
         var { Query, User } = AV;
@@ -74,11 +78,13 @@
             $('nav > ul > li').eq(0).addClass('active');
         }
 
-        console.log(Qiniu)
+        
     </script>
 
 
     <script>
+        var anim = $('.uploadAnim');
+        anim.hide();
          var uploader = Qiniu.uploader({
                 runtimes: 'html5',    //上传模式,依次退化
                 browse_button: 'uploadBtn',       //上传选择的点选按钮，**必需**
@@ -100,10 +106,13 @@
                     },
                     'UploadProgress': function (up, file) {
                         // 每个文件上传时,处理相关的事情
-                        uploadStatus.textContent = '上传中'
+                        $(uploadBtn).hide();
+                        anim.show();
                     },
                     'FileUploaded': function (up, file, info) {
-                        uploadStatus.textContent = '上传完毕'
+                        $(uploadBtn).show();
+                        anim.hide();
+                        
                         // 每个文件上传成功后,处理相关的事情
                         // 其中 info.response 是文件上传成功后，服务端返回的json，形式如
                         // {
