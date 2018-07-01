@@ -50,6 +50,8 @@ body {
 .window > aside {
     width: 300px;
     border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
 }
 .window > aside > h4 {
     width: 100%;
@@ -58,8 +60,11 @@ body {
     margin-bottom: 10px;
 }
 
+.window > aside > ul {
+    flex-grow: 1;
+}
 .window > aside > ul >li {
-    padding: 7px;
+    padding: 10px;
     border-bottom: 1px solid rgba(57, 39, 113, 0.3);
     text-indent: 5px;
     cursor: pointer;
@@ -72,4 +77,31 @@ body {
 
 .window > main {
     flex-grow: 1;
+}
+
+
+.window > aside > #upload {
+    height: 200px;
+    width: 100%;
+    background: #fff;
+    display: flex;
+    position: relative;
+}
+.window > aside > #upload > #uploadBtn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    height: 50px;
+    width: 100px;
+    border: 1px solid #3A2772;
+    color: #3A2772;
+    background: transparent;
+    cursor: pointer;    
+}
+
+.window > aside > #upload > #uploadBtn:hover {
+    background: #3A2772;
+    color: #fff;
 }
