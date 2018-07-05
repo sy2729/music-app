@@ -2,16 +2,21 @@
     let view = {
         el: '.song-form',
         template: `
-            <label for="">Song Name</label>
-            <input type="text"><br>
-            <label for="">Singer</label>
-            <input type="text"><br>
-            <label for="">Link</label>
-            <input type="text">
+            <div><label for="">Song Name</label>
+            <input type="text" value='__songName__'></div>
+            <div><label for="">Singer</label>
+            <input type="text"></div>
+            <div><label for="">Link</label>
+            <input type="text" value='__songLink__'></div>
         `,
 
-        render(){
-            $(this.el).html(this.template);
+        render(data = {}){
+            let placeholder = ['songName','songLink'];
+            let html = this.template;
+            placeholder.map((word)=> {
+                html = html.replace(`__${word}__`, data[word] || '');
+            })
+            $(this.el).html(html);
         }
 
     };
@@ -23,6 +28,9 @@
             this.view = view;
             this.model = model;
             this.view.render(this.model.data);
+            eventHub.on('upload', (data)=>{
+                this.view.render(data);
+            })
         }
     };
 

@@ -67,8 +67,14 @@
                         var domain = up.getOption('domain');
                         var res = JSON.parse(info.response);
                         var sourceLink = 'http://' + domain + '/' + encodeURIComponent(res.key);
+
+                        
+                        eventHub.emit('upload', {
+                            songName: res.key,
+                            songLink: sourceLink
+                        })
                         console.log(sourceLink);
-                        window.open(sourceLink);
+                        // window.open(sourceLink);
                     },
                     'Error': function (up, err, errTip) {
                         //上传出错时,处理相关的事情
