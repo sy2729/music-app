@@ -52,7 +52,29 @@ body {
     border-right: 1px solid #eee;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
+.window > aside .add-new {
+    position: absolute;
+    right: 0;
+    top: 3%;
+    display: inline-block;
+    padding: 4px;
+    border: 1px solid #3A2772;
+    color: #3A2772;
+}
+.window > aside .add-new:hover {
+    color: #fff;
+    background: #3A2772;
+    cursor: pointer;
+}
+.window > aside .add-new.active {
+    color: #fff;
+    background: #3A2772;
+    
+}
+
+
 .window > aside > h4 {
     width: 100%;
     padding: 15px 0;
@@ -60,17 +82,17 @@ body {
     margin-bottom: 10px;
 }
 
-.window > aside > ul {
+.window > aside > .list-wrap {
     flex-grow: 1;
 }
-.window > aside > ul >li {
+.window > aside > .list-wrap > ul >li {
     padding: 10px;
     border-bottom: 1px solid rgba(57, 39, 113, 0.3);
     text-indent: 5px;
     cursor: pointer;
     transition: all .3s;
 }
-.window > aside > ul >li:hover {
+.window > aside > .list-wrap > ul >li:hover {
     background: #3A2772;
     color: #fff;
 }
