@@ -73,7 +73,6 @@
                             songName: res.key,
                             songLink: sourceLink
                         })
-                        console.log(sourceLink);
                         // window.open(sourceLink);
                     },
                     'Error': function (up, err, errTip) {

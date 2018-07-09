@@ -1,7 +1,8 @@
 * {margin: 0; padding: 0; box-sizing: border-box;}
 a {text-decoration: none;color: inherit;}
 ul > li {list-style: none;}
-
+input {font: inherit;}
+button[type='submit'] {font: inherit;}
 
 /* nav section */
 nav {
@@ -166,3 +167,41 @@ body {
     transform: translateX(30px);
   }
 }
+
+
+
+/* song-form section */
+
+.song-form > form {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+.song-form > form > div{
+    margin: 10px 0;
+    display: flex;
+
+}
+.song-form > form > div > label{
+    width: 6em;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 6px;
+    align-items: center;
+}
+.song-form > form > div > input {
+    padding: 3px 5px;
+}
+.song-form > form > button{
+    margin-left: calc(6em + 10px);
+    padding: 5px 7px;
+    background: #fff;
+    border: 1px solid #3A2772;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.song-form > form > button:hover {
+    background: #3A2772;
+    color: #fff;
+}
+
+
