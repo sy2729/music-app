@@ -93,6 +93,12 @@ body {
     cursor: pointer;
     transition: all .3s;
 }
+
+.window > aside > .list-wrap > ul >li.active {
+    background: #3A2772;
+    color: #fff;
+}
+
 .window > aside > .list-wrap > ul >li:hover {
     background: #3A2772;
     color: #fff;

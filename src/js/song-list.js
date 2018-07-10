@@ -11,11 +11,15 @@
             
             //replaced with data;
             let {songs} = data;
-            let liList = songs.map((each)=>$('<li></li>').text(each.name));
+            let liList = songs.map((each)=>$('<li></li>').text(each.name).attr('data-id', each.id));
             $(this.el).find('ul').empty();
             liList.map((i)=> {
                 $(this.el).find('ul').append(i);
             })
+        },
+        activateItem(li){
+            let $li = $(li);
+            $li.addClass('active').siblings().removeClass('active');
         }
     }
 
@@ -28,7 +32,6 @@
             let dataQuery = new AV.Query('Song');
             return dataQuery.find().then((data)=>{
                 this.data.songs = data.map((i)=>{
-                    console.log(this.data.songs);
                     return {id: i.id, ...i.attributes};
                 });
                 return data
@@ -43,16 +46,30 @@
             this.view = view;
             this.model = model;
             this.view.render(this.model.data);
+            this.getAllData();
+            this.bindEventHub();
+            this.bindEvents();
+        },
 
-            // console.log(window.eventHub);
+        getAllData(){
+            return this.model.find().then(() => {
+                this.view.render(this.model.data);
+            });
+        },
+
+
+        bindEvents(){
+            $(this.view.el).on('click', 'li', (e)=>{
+                this.view.activateItem(e.currentTarget);
+                eventHub.emit('select', {id: $(e.currentTarget).attr('data-id')})
+            })
+        },
+        bindEventHub(){
             window.eventHub.on('create',(songData)=>{
                 this.model.data.songs.push(songData);
                 this.view.render(this.model.data);
             });
 
-            this.model.find().then(()=>{
-                this.view.render(this.model.data);
-            });
         }
     };
 
