@@ -51,6 +51,17 @@
                 let {id, attributes} = newSong;
                  Object.assign(this.data, {id, ...attributes});
             })
+        },
+
+        update(data){
+            var song = AV.Object.createWithoutData('Song', this.data.id);
+            song.set('name', data.name)
+            song.set('singer', data.singer)
+            song.set('link', data.link)
+            return song.save().then((response)=>{
+                Object.assign(this.data, data);
+                return response;
+            });
         }
     };
 
@@ -67,21 +78,44 @@
         bindEvents(){
             this.view.$el.on('submit', 'form', (e)=>{
                 e.preventDefault();
-                let userInputs = 'name singer link'.split(' ');
-                let data = {};
-                userInputs.map((item)=>{
-                   data[item] = this.view.$el.find(`[name="${item}"]`).val();
-                })  
-                this.model.create(data)
-                    .then(()=>{
-                        var string = JSON.stringify(this.model.data);
-                        var newData = JSON.parse(string);
-                        this.view.reset();
-                        eventHub.emit('create', newData);
-                        
-                    })
+                
+                if(this.model.data.id) {
+                    this.update();
+                }else {
+                    this.create();
+
+                }
                 
             })
+        },
+
+        create(){
+            let userInputs = 'name singer link'.split(' ');
+            let data = {};
+            userInputs.map((item) => {
+                data[item] = this.view.$el.find(`[name="${item}"]`).val();
+            })
+
+            this.model.create(data)
+                .then(() => {
+                    var string = JSON.stringify(this.model.data);
+                    var newData = JSON.parse(string);
+                    this.view.reset();
+                    eventHub.emit('create', newData);
+
+                })
+        },
+
+        update(){
+            let userInputs = 'name singer link'.split(' ');
+            let data = {};
+            userInputs.map((item) => {
+                data[item] = this.view.$el.find(`[name="${item}"]`).val();
+            });
+            this.model.update(data)
+                .then(()=>{
+                    eventHub.emit('update', this.model.data);
+                });
         },
 
         bindEventHub(){

@@ -90,6 +90,17 @@
 
             eventHub.on('upload', ()=>{
                 this.view.deactivateItem();
+            });
+
+            eventHub.on('update', (data)=>{
+                var songs = this.model.data.songs;
+                for(let i = 0; i < songs.length; i++) {
+                    if(songs[i].id === data.id) {
+                        this.model.data.songs[i] = data;
+                        break;
+                    };
+                };
+                this.view.render(this.model.data);
             })
 
         }
