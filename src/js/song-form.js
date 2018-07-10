@@ -7,18 +7,19 @@
         template: `
             <form>
             <div><label for="">Song Name</label>
-            <input type="text" value='__songName__' name='name'></div>
+            <input type="text" value='__name__' name='name'></div>
             <div><label for="">Singer</label>
             <input type="text" name='singer'></div>
             <div><label for="">Link</label>
-            <input type="text" value='__songLink__' name='link'></div>
+            <input type="text" value='__link__' name='link'></div>
 
             <button type='submit'>Submit</button>
             </form>
         `,
 
         render(data = {}){
-            let placeholder = ['songName','songLink'];
+            console.log(data)
+            let placeholder = ['name','link'];
             let html = this.template;
             placeholder.map((word)=> {
                 html = html.replace(`__${word}__`, data[word] || '');
@@ -58,6 +59,7 @@
             });
             this.view.init();
             this.bindEvents();
+            this.bindEventHub();
         },
 
         bindEvents(){
@@ -79,6 +81,13 @@
                 
             })
         },
+
+        bindEventHub(){
+            eventHub.on('select', (data)=>{
+                this.model.data = data;
+                this.view.render(this.model.data);
+            })
+        }
     };
 
     controller.init(view, model);

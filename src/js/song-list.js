@@ -61,7 +61,16 @@
         bindEvents(){
             $(this.view.el).on('click', 'li', (e)=>{
                 this.view.activateItem(e.currentTarget);
-                eventHub.emit('select', {id: $(e.currentTarget).attr('data-id')})
+                let songs = this.model.data.songs;
+                let id = $(e.currentTarget).attr('data-id');
+                let data;
+                for(let i = 0; i < songs.length; i++) {
+                    if(songs[i].id === id) {
+                        data = songs[i];
+                        break;
+                    }
+                }
+                eventHub.emit('select', JSON.parse(JSON.stringify(data)));
             })
         },
         bindEventHub(){

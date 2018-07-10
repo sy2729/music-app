@@ -70,8 +70,8 @@
 
                         
                         eventHub.emit('upload', {
-                            songName: res.key,
-                            songLink: sourceLink
+                            name: res.key,
+                            link: sourceLink
                         })
                         // window.open(sourceLink);
                     },
