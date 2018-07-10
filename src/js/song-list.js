@@ -20,6 +20,11 @@
         activateItem(li){
             let $li = $(li);
             $li.addClass('active').siblings().removeClass('active');
+        },
+        deactivateItem(){
+            var lis = $(this.el).children().children();
+            lis.each((i, item)=>{
+                $(item).removeClass('active')});
         }
     }
 
@@ -78,6 +83,10 @@
                 this.model.data.songs.push(songData);
                 this.view.render(this.model.data);
             });
+
+            eventHub.on('addNewSong', ()=>{
+                this.view.deactivateItem();
+            })
 
         }
     };

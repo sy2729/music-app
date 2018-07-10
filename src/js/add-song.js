@@ -22,6 +22,14 @@
             this.view.render(this.model.data);
             this.view.activateItem($(this.view.el).find('.add-new')[0]);
             this.bindEventHub();
+            this.bindEvents();
+        },
+
+        bindEvents(){
+            $(this.view.el).on('click', '.add-new',()=>{
+                this.view.activateItem($(this.view.el).find('.add-new')[0])
+                eventHub.emit('addNewSong', {})
+            })
         },
 
         bindEventHub(){

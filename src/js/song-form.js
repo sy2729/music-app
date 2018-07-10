@@ -18,13 +18,18 @@
         `,
 
         render(data = {}){
-            console.log(data)
             let placeholder = ['name','link'];
             let html = this.template;
             placeholder.map((word)=> {
                 html = html.replace(`__${word}__`, data[word] || '');
             })
             $(this.el).html(html);
+
+            if(data.id){
+                $(this.el).prepend('<h2>Edit Song</h2>')
+            }else {
+                $(this.el).prepend('<h2>New Song</h2>')
+            }
         },
 
         reset() {
@@ -86,6 +91,10 @@
             eventHub.on('select', (data)=>{
                 this.model.data = data;
                 this.view.render(this.model.data);
+            });
+
+            eventHub.on('addNewSong', (data)=>{
+                this.view.reset();
             })
         }
     };
