@@ -35,6 +35,10 @@
         bindEventHub(){
             eventHub.on('select',(data)=>{
                 this.view.deactivateItem($(this.view.el).find('.add-new')[0]);
+            });
+
+            eventHub.on('upload', ()=>{
+                this.view.activateItem($(this.view.el).find('.add-new')[0]);
             })
         }
     };

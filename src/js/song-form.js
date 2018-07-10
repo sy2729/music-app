@@ -58,10 +58,7 @@
         init(view, model){
             this.view = view;
             this.model = model;
-            this.view.render(this.model.data);
-            eventHub.on('upload', (data)=>{
-                this.view.render(data);
-            });
+            this.view.render(this.model.data);           
             this.view.init();
             this.bindEvents();
             this.bindEventHub();
@@ -93,8 +90,16 @@
                 this.view.render(this.model.data);
             });
 
+            eventHub.on('upload', (data) => {
+                this.model.data = data;
+                this.view.render(this.model.data);
+            });
+
             eventHub.on('addNewSong', (data)=>{
-                this.view.reset();
+                if(this.model.data.id) {
+                    this.model.data = {};
+                    this.view.render(this.model.data);
+                }
             })
         }
     };

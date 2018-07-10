@@ -86,6 +86,10 @@
 
             eventHub.on('addNewSong', ()=>{
                 this.view.deactivateItem();
+            });
+
+            eventHub.on('upload', ()=>{
+                this.view.deactivateItem();
             })
 
         }
