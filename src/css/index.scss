@@ -1,0 +1,84 @@
+$pageWidth: 320;
+$theme: #D23F3A;
+$fontColor: #333;
+
+@function px($size) {
+  $remSize: $size / $pageWidth * 10;
+  @return #{$remSize}rem;
+}
+
+// clear style
+p, span, a {
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+// top section
+.topfix {
+    width: 100%;
+    height: px(64);
+    background: $theme;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 px(10);
+}
+
+.topfix > .logo-wrap > .logo, .topfix > .logo-wrap > .logo-name {
+    font-size: px(25);
+    color: #fff;
+    vertical-align: middle;
+}
+
+.topfix > .logo-wrap > .logo-name {
+    font-size: px(22);
+}
+
+.topfix > .app-download {
+    align-self: center;
+    font-size: px(14);
+    padding: 3px 10px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    color: #fff;
+}
+
+// tab switch section
+.tab-wrap {
+    width: 100%;
+    height: px(40);
+    display: flex;
+    border-bottom: 1px solid #E5E5E5;
+
+    div {
+        width: 33.3%;
+        text-align: center;
+        line-height: px(40);
+        font-size: px(15);
+            span {
+                color: $fontColor;
+                position: relative;
+            }
+    }
+    
+}
+
+.tab-wrap{
+    span.active {
+        color: $theme;
+            &:after {
+                content: '';
+                position: absolute;
+                bottom: px(-10);
+                left: 0;
+                right: 0;
+                background: $theme;
+                height: 2px;
+            }
+
+    }
+} 

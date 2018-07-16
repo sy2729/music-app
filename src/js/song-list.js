@@ -11,15 +11,17 @@
             
             //replaced with data;
             let {songs} = data;
-            let liList = songs.map((each)=>$('<li></li>').text(each.name).attr('data-id', each.id));
+            let liList = songs.map((each)=>{
+                var $li = $('<li></li>').text(each.name).attr('data-id', each.id);
+                if(each.id === data.selectedSongId) {
+                    $li.addClass('active');
+                }
+                return $li;
+            });
             $(this.el).find('ul').empty();
             liList.map((i)=> {
                 $(this.el).find('ul').append(i);
             })
-        },
-        activateItem(li){
-            let $li = $(li);
-            $li.addClass('active').siblings().removeClass('active');
         },
         deactivateItem(){
             var lis = $(this.el).children().children();
@@ -31,6 +33,7 @@
     let model = {
         data: {
             songs: [],
+            selectedSongId: undefined
         },
 
         find() {
@@ -65,9 +68,10 @@
 
         bindEvents(){
             $(this.view.el).on('click', 'li', (e)=>{
-                this.view.activateItem(e.currentTarget);
                 let songs = this.model.data.songs;
                 let id = $(e.currentTarget).attr('data-id');
+                this.model.data.selectedSongId = id;
+                this.view.render(this.model.data)
                 let data;
                 for(let i = 0; i < songs.length; i++) {
                     if(songs[i].id === id) {

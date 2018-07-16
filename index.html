@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+        !function(){
+            var pageWidth = window.innerWidth;
+
+            document.write(`<style>html{font-size: ${pageWidth / 10}px}</style>`)
+        }()
+    </script>
+    <link rel="stylesheet" href="./dist/css/normalize.css">
+    <link rel="stylesheet" href="./dist/css/index.css">
+</head>
+<body>
+    <!-- Icon font library -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'iconfont';  /* project id 748539 */
+            src: url('//at.alicdn.com/t/font_748539_gugvqdjs3bk.eot');
+            src: url('//at.alicdn.com/t/font_748539_gugvqdjs3bk.eot?#iefix') format('embedded-opentype'),
+            url('//at.alicdn.com/t/font_748539_gugvqdjs3bk.woff') format('woff'),
+            url('//at.alicdn.com/t/font_748539_gugvqdjs3bk.ttf') format('truetype'),
+            url('//at.alicdn.com/t/font_748539_gugvqdjs3bk.svg#iconfont') format('svg');
+        }
+
+    .iconfont{
+        font-family:"iconfont" !important;
+        font-size:16px;font-style:normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    </style>
+    <div class="topfix">
+       <div class="logo-wrap">
+            <i class="iconfont logo">&#xe600;</i>
+            <span class="logo-name">Netease Music</span>
+       </div>
+        <a href="" type="button" class="app-download">Download APP</a>
+    </div>
+
+    <div class="tab-wrap" id="tabs"></div>
+
+
+
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./src/js/app/tabs.js"></script>
+</body>
+</html>
