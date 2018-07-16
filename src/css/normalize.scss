@@ -13,9 +13,7 @@ html {
   -webkit-text-size-adjust: 100%; /* 2 */
 }
 
-* {
-  box-sizing: border-box;
-}
+* {box-sizing: border-box; padding: 0; margin: 0;}
 
 /* Sections
    ========================================================================== */

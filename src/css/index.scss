@@ -12,8 +12,18 @@ p, span, a {
     font-size: 16px;
 }
 
-a {
-    text-decoration: none;
+h2,h3,h4,h5,h6 {margin: 0;padding: 0;}
+a {text-decoration: none;}
+ul > li {list-style: none;}
+
+
+
+//wrap-content-above
+.wrap-content-above {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
 }
 
 
@@ -43,7 +53,7 @@ a {
     font-size: px(14);
     padding: 3px 10px;
     border: 1px solid #fff;
-    border-radius: 4px;
+    border-radius: 15px;
     color: #fff;
 }
 
@@ -53,6 +63,7 @@ a {
     height: px(40);
     display: flex;
     border-bottom: 1px solid #E5E5E5;
+    background: #fff;
 
     div {
         width: 33.3%;
@@ -68,6 +79,7 @@ a {
 }
 
 .tab-wrap{
+    margin-bottom: px(20);
     span.active {
         color: $theme;
             &:after {
@@ -81,4 +93,60 @@ a {
             }
 
     }
-} 
+}
+
+
+//wrap-content
+.wrap-content {
+    margin-top: px(124);
+}
+
+.heading {
+    font-size: px(17);
+    color: $fontColor;
+    padding: 0 0 px(9) px(14);
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        background: #D23F3A;
+        width: 2px;
+        height: 60%;
+    }
+}
+
+
+// list recommendation area
+
+ .list-recommendation-wrap {
+     ul {
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: space-between;
+         margin-bottom: px(24);
+
+         li {
+             max-width: px(104.55);
+             margin-bottom: px(16);
+
+             img {
+                 width: 100%;
+                 height: px(104.55);
+             }
+
+             .list-recommend-descrip {
+                 width: 100%;
+                 padding: 6px 2px 0 6px;
+                 font-size: px(13);
+                 line-height: 1.2;
+                 text-overflow: ellipsis;
+                 overflow: hidden;
+                 display: -webkit-box;
+                 -webkit-line-clamp: 2;
+                 -webkit-box-orient: vertical;
+             }
+         }
+     }
+ }
