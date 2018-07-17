@@ -1,5 +1,5 @@
 $pageWidth: 320;
-$theme: #D23F3A;
+$theme: #d33a31;
 $fontColor: #333;
 
 @function px($size) {
@@ -182,3 +182,73 @@ ul > li {list-style: none;}
          }
      }
  }
+
+
+ .new-song {
+        margin-bottom: px(40);
+
+     li {
+         height: px(55);
+         display: flex;
+         justify-content: space-between;
+         padding: px(6.6) px(5.4) px(5.4) px(5.4);
+         border-bottom: 1px solid #EBEBEC;
+
+         .song-info-wrap {
+
+            // display: flex;
+            // flex-direction: column;
+
+
+             .song-name {
+                 font-size: px(17);
+                 margin-bottom: px(20);
+             }
+             .song-info-other {
+                 font-size: px(12);
+                 color: #8A8A8A;
+             }
+
+         }
+
+         .song-play {
+             align-self: center;
+             font-size: px(22);
+             color: #AFAFAF;
+         }
+     }
+ }
+
+footer {
+    height: px(170.55);
+    width: 100%;
+    background: url(../img/index-bg.png) no-repeat center;
+    background-size: cover;
+    display: inline-block;  
+    text-align: center;
+    
+    img {
+        height: px(44);
+        width: auto;
+        margin: 0 auto;
+        display: block;
+        margin-top: px(38);
+    }
+
+    .openapp {
+        font-size: px(16);
+        line-height: px(38);
+        border: 1px solid $theme;
+        margin: 15px 37px 5px;
+        border-radius: px(38);
+        color: $theme;
+    }
+
+    .copyright {
+        font-size: px(12);
+        color: #888;
+        line-height: 16px;
+        // -webkit-transform: scale(.75);
+        // transform: scale(.75);
+    }
+}
