@@ -36,17 +36,17 @@
             listRecom: [
                 {
                     title: 'Lorem ipsum dolor sit amet',
-                    imageUrl: 'http://via.placeholder.com/246',
+                    imageUrl: 'http://p1.music.126.net/tk4L-mj-QoIBlj4zYQZJlQ==/109951163410830065.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp',
                     listened: 2000
                 },
                 {
                     title: 'Lorem ipsum dolor sit amet',
-                    imageUrl: 'http://via.placeholder.com/246',
+                    imageUrl: 'http://p1.music.126.net/P1IXTC2djtA89w7SDaTMyQ==/109951163391859286.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp',
                     listened: 2000
                 },
                 {
                     title: 'Lorem ipsum dolor sit amet, consectetur adipisicing.',
-                    image: 'http://via.placeholder.com/246',
+                    image: 'http://p1.music.126.net/Vd6GYgfktYVQHOkqWWB0Sw==/6641050231992600.webp?imageView&thumbnail=252x0&quality=75&tostatic=0&type=webp',
                     listened: 2000
                 },
                 {

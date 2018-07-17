@@ -48,63 +48,22 @@
         <div class="tab-wrap" id="tabs"></div>
     </div>
 
-    <div class="wrap-content">
+    <div class="wrap-content" id="page1">
         <h2 class="heading">Recommendation</h2>
-        
         <div class="list-recommendation-wrap" id="list-recommen"></div>
-        
-        
         <!-- New Song Section -->
         <h2 class="heading">New Songs</h2>
-        <ul class="new-song" id='newSong'>
-            <li>
-                <span class="song-info-wrap">
-                    <span class="song-name">123 title</span>
-                    <div class="song-info-other">
-                        <span class="song-singer">shuai yuan</span> -
-                        <span class="song-album">yazeishuai</span>
-                    </div>
-                </span>
-                <i class="song-play iconfont">&#xe720;</i>
-            </li>
-            <li>
-                <span class="song-info-wrap">
-                    <span class="song-name">123 title</span>
-                    <div class="song-info-other">
-                        <span class="song-singer">shuai yuan</span> -
-                        <span class="song-album">yazeishuai</span>
-                    </div>
-                </span>
-                <i class="song-play iconfont">&#xe720;</i>
-            </li>
-            <li>
-                <span class="song-info-wrap">
-                    <span class="song-name">123 title</span>
-                    <div class="song-info-other">
-                        <span class="song-singer">shuai yuan</span> -
-                        <span class="song-album">yazeishuai</span>
-                    </div>
-                </span>
-                <i class="song-play iconfont">&#xe720;</i>
-            </li>
-             
-        </ul>
-
+        <ul class="new-song" id='newSong'></ul>
         <!-- Bottom Section -->
-        <footer>
-            <img src="./dist/img/music163.png" alt="logo">
-            <div class="openapp">
-                Open in App & Find More Music >
-            </div>
-            <p class="copyright">
-                shuaiyuan&copy;sy2729@columbia.edu
-            </p>
-        </footer>
-
+        <footer class="index-footer" id="indexFooter"></footer>
     </div>
 
+
+    <script src="./vendor/av-min.js"></script>
+    <script src="./vendor/av.js"></script>
+    <script src="./vendor/qiniu.min.js"></script>
     <script src="./vendor/jquery.js"></script>
     <script src="./src/js/app/tabs.js"></script>
-    <script src="./src/js/app/list-recommendation.js"></script>
+    <script src="./src/js/app/page1.js"></script>
 </body>
 </html>
