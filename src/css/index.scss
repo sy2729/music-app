@@ -195,11 +195,6 @@ ul > li {list-style: none;}
          border-bottom: 1px solid #EBEBEC;
 
          .song-info-wrap {
-
-            // display: flex;
-            // flex-direction: column;
-
-
              .song-name {
                  font-size: px(17);
                  margin-bottom: px(20);
@@ -211,10 +206,14 @@ ul > li {list-style: none;}
 
          }
 
-         .song-play {
+         a {
              align-self: center;
              font-size: px(22);
              color: #AFAFAF;
+
+             .song-play {
+                 font-size: inherit;
+             }
          }
      }
  }

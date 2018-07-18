@@ -2,9 +2,9 @@
     let view = {
         el: "#tabs",
         template: `
-            <div><span class="active">Recommend</span></div>
-            <div><span>Hot</span></div>
-            <div><span>Search</span></div>
+            <div data-page="page1"><span class="active">Recommend</span></div>
+            <div data-page="page2"><span>Hot</span></div>
+            <div data-page="page3"><span>Search</span></div>
         `,
         render(){
             $(this.el).html(this.template);
@@ -23,10 +23,16 @@
         },
 
         bindEvents(){
-            
-            $(this.view.el).on('click', 'div', (e)=>{
+            this.changePage()
+        },
+
+        changePage() {
+            let page;
+            $(this.view.el).on('click', 'div', (e) => {
                 $(e.currentTarget).siblings().children().removeClass('active');
                 $(e.currentTarget).children().addClass('active');
+                page = $(e.currentTarget).attr('data-page');
+                console.log(page);
             })
         }
     }
