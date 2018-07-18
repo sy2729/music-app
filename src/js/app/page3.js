@@ -30,7 +30,8 @@
             eventHub.on('switchPage', (page) => {
                 pageID = $(this.view.el)[0].id;
                 if (page === pageID) {
-                    $(this.view.el).addClass('active').siblings().removeClass('active');
+                    $('#inDev').addClass('active').siblings().removeClass('active');
+                    // $(this.view.el).addClass('active').siblings().removeClass('active');
                 }
             })
         }

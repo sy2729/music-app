@@ -12,7 +12,6 @@
         },
 
         play() {
-            console.log(111)
             $(this.el).find('audio')[0].play();
         },
 
@@ -58,7 +57,6 @@
          playSong(){
             //  console.log($(this.view.el))
             $(this.view.el).on('click', '.play', ()=>{
-                console.log(222)
                 this.view.play();
             })
          },
