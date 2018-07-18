@@ -35,6 +35,7 @@
             this.createListRecommend();
             this.createNewSong();
             this.createFooter();
+            this.eventHub();
         },
 
         createListRecommend(){
@@ -53,6 +54,16 @@
             let script = document.createElement('script');
             script.src = './src/js/app/footer.js';
             $(document.body).append(script);
+        },
+
+
+        eventHub() {
+            eventHub.on('switchPage', (page) => {
+                pageID = $(this.view.el)[0].id;
+                if(page === pageID) {
+                    $(this.view.el).addClass('active').siblings().removeClass('active');
+                }
+            })
         }
     }
 

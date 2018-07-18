@@ -95,11 +95,20 @@ ul > li {list-style: none;}
     }
 }
 
+//------------ page switch section ------------
+.pages {
+    .page {
+        display: none;
+        margin-top: px(124);
+    }
 
-//wrap-content
-.wrap-content {
-    margin-top: px(124);
+    .page.active {
+        display: block;
+    }
 }
+
+
+//------------Page1: wrap-content------------
 
 .heading {
     font-size: px(17);
@@ -197,7 +206,8 @@ ul > li {list-style: none;}
          .song-info-wrap {
              .song-name {
                  font-size: px(17);
-                 margin-bottom: px(20);
+                 display: inline-block;
+                 margin-bottom: px(3);
              }
              .song-info-other {
                  font-size: px(12);

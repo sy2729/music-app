@@ -32,7 +32,7 @@
                 $(e.currentTarget).siblings().children().removeClass('active');
                 $(e.currentTarget).children().addClass('active');
                 page = $(e.currentTarget).attr('data-page');
-                console.log(page);
+                eventHub.emit('switchPage', page);
             })
         }
     }
