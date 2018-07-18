@@ -46,22 +46,22 @@
                 },
                 {
                     title: 'Lorem ipsum dolor sit amet, consectetur adipisicing.',
-                    image: 'http://p1.music.126.net/Vd6GYgfktYVQHOkqWWB0Sw==/6641050231992600.webp?imageView&thumbnail=252x0&quality=75&tostatic=0&type=webp',
+                    imageUrl: 'http://p1.music.126.net/YVgW0O5SijOq0m8C90PavQ==/18894007812317570.webp?imageView&thumbnail=246x0&quality=75&tostatic=0&type=webp',
                     listened: 2000
                 },
                 {
                     title: 'Lorem ipsum dolor sit amet',
-                    image: 'http://via.placeholder.com/246',
+                    imageUrl: 'http://via.placeholder.com/246',
                     listened: 2000
                 },
                 {
                     title: 'Lorem ipsum dolor sit amet',
-                    image: 'http://via.placeholder.com/246',
+                    imageUrl: 'http://via.placeholder.com/246',
                     listened: 2000
                 },
                 {
                     title: 'Lorem ipsum dolor sit amet, consectetur adipisicing.',
-                    image: 'http://via.placeholder.com/246',
+                    imageUrl: 'http://via.placeholder.com/246',
                     listened: 2000
                 },
             ]
