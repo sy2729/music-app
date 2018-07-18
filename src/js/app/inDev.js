@@ -11,7 +11,7 @@
 
     let model = {
         data: {
-            imgUrl: 'src/img/inDev.png'
+            imgUrl: './dist/img/inDev.png'
         }
     };
 
