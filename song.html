@@ -5,10 +5,40 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   
   <title></title>
+  <link rel="stylesheet" href="./dist/css/normalize.css">
+  <link rel="stylesheet" href="./dist/css/songPlay.css">
+  <script>
+    !function () {
+      var pageWidth = window.innerWidth;
 
+      document.write(`<style>html{font-size: ${pageWidth / 10}px}</style>`)
+    }()
+  </script>
 </head>
 <body>
-  <h1>Play the song</h1>
+  <div class="song-page-wrap" id="page">
+    <div class="blur-bg"></div>
+    <div class="disc">
+      <img class="ring" src="//s3.music.126.net/m/s/img/disc-ip6.png?69796123ad7cfe95781ea38aac8f2d48" alt="">
+      <img class="light" src="//s3.music.126.net/m/s/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577" alt="">
+      <div class="cover-crop">
+        <img class="cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJcxA7zgZV18VbaOmtChAVxMBSdU0qHYZ_6pp19P89431Vf-oZ"
+          alt="">
+      </div>
+    </div>
+
+    <div class="song-info">
+      <h1 class="song-name">Song - Name</h1>
+    </div>
+
+    <div class="app-intro">
+      <a type="button" class="app-open">Open</a>
+      <a type="button" class="app-download">Download</a>
+    </div>
+
+  </div>
+
+
 
   <div id="song"></div>
 

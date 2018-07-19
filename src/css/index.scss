@@ -7,16 +7,6 @@ $fontColor: #333;
   @return #{$remSize}rem;
 }
 
-// clear style
-p, span, a {
-    font-size: px(16);
-}
-
-h2,h3,h4,h5,h6 {margin: 0;padding: 0;}
-a {text-decoration: none;}
-ul > li {list-style: none;}
-
-
 
 //wrap-content-above
 .wrap-content-above {

@@ -1,0 +1,96 @@
+$pageWidth: 320;
+$theme: #d33a31;
+$fontColor: #333;
+
+@function px($size) {
+  $remSize: $size / $pageWidth * 10;
+  @return #{$remSize}rem;
+}
+
+.song-page-wrap {
+    display: table;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+
+    .blur-bg {
+        position: absolute;
+        background: transparent url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJcxA7zgZV18VbaOmtChAVxMBSdU0qHYZ_6pp19P89431Vf-oZ') center center no-repeat;
+        background-size: cover;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        filter: blur(6px);
+    }
+    
+    .disc {
+        width: px(230.39);
+        height: px(230.39);
+        position: relative;
+        margin: 0 auto;
+        margin-top: px(57.6);
+
+        .ring, .light {
+            position: absolute;
+            width: 100%;
+            height: auto;
+            z-index: 2;
+        }
+
+        .cover-crop {
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            border-radius: 50%;
+            overflow: hidden;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            
+            .cover {
+                width: 100%;
+                height: auto;    
+            }
+        }
+        
+    }
+
+    .song-info {
+        position: relative;
+        color: #fff;
+        width: 80%;
+        margin: 0 auto;
+        
+        .song-name {
+            font-size: px(18);
+            
+            text-align: center;
+        }
+    }
+
+    .app-intro {
+        position: absolute;
+        width: 100%;
+        bottom: px(38);
+        display: flex;
+        padding: 0 px(22.5);
+        font-size: px(16);
+        justify-content: space-between;
+
+        a {
+            border: 1px solid $theme;
+            width: px(121.2);
+            height: px(31.6);
+            padding: px(4.8);
+            text-align: center;
+            border-radius: 3px;
+            color: $theme;
+        }
+
+        a.app-download {
+            background: $theme;
+            color: #fff;
+        }
+    }
+}

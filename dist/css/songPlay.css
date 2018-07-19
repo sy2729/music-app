@@ -1,0 +1,66 @@
+.song-page-wrap {
+  display: table;
+  width: 100%;
+  height: 100vh;
+  position: relative; }
+  .song-page-wrap .blur-bg {
+    position: absolute;
+    background: transparent url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJcxA7zgZV18VbaOmtChAVxMBSdU0qHYZ_6pp19P89431Vf-oZ") center center no-repeat;
+    background-size: cover;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    filter: blur(6px); }
+  .song-page-wrap .disc {
+    width: 7.1996875rem;
+    height: 7.1996875rem;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 1.8rem; }
+    .song-page-wrap .disc .ring, .song-page-wrap .disc .light {
+      position: absolute;
+      width: 100%;
+      height: auto;
+      z-index: 2; }
+    .song-page-wrap .disc .cover-crop {
+      position: absolute;
+      width: 70%;
+      height: 70%;
+      border-radius: 50%;
+      overflow: hidden;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
+      .song-page-wrap .disc .cover-crop .cover {
+        width: 100%;
+        height: auto; }
+  .song-page-wrap .song-info {
+    position: relative;
+    color: #fff;
+    width: 80%;
+    margin: 0 auto; }
+    .song-page-wrap .song-info .song-name {
+      font-size: 0.5625rem;
+      text-align: center; }
+  .song-page-wrap .app-intro {
+    position: absolute;
+    width: 100%;
+    bottom: 1.1875rem;
+    display: flex;
+    padding: 0 0.703125rem;
+    font-size: 0.5rem;
+    justify-content: space-between; }
+    .song-page-wrap .app-intro a {
+      border: 1px solid #d33a31;
+      width: 3.7875rem;
+      height: 0.9875rem;
+      padding: 0.15rem;
+      text-align: center;
+      border-radius: 3px;
+      color: #d33a31; }
+    .song-page-wrap .app-intro a.app-download {
+      background: #d33a31;
+      color: #fff; }
+
+/*# sourceMappingURL=songPlay.css.map */
