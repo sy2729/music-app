@@ -18,6 +18,11 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "presets": ["env"] 
+    "babel-preset-stage-3": "^6.24.1",
+    "presets": [
+      "react",
+      "es2015",
+      "stage-3"
+    ]
   }
 }
