@@ -38,19 +38,19 @@
 
         createListRecommend() {
             let script = document.createElement('script');
-            script.src = './src/js/app/list-recommendation.js';
+            script.src = './dist/js/app/list-recommendation.js';
             $(document.body).append(script);
         },
 
         createNewSong() {
             let script = document.createElement('script');
-            script.src = './src/js/app/new-song.js';
+            script.src = './dist/js/app/new-song.js';
             $(document.body).append(script);
         },
 
         createFooter() {
             let script = document.createElement('script');
-            script.src = './src/js/app/footer.js';
+            script.src = './dist/js/app/footer.js';
             $(document.body).append(script);
         },
 
