@@ -85,6 +85,7 @@ body {
 
 .window > aside > .list-wrap {
     flex-grow: 1;
+    overflow-y: scroll;
 }
 .window > aside > .list-wrap > ul >li {
     padding: 10px;
@@ -111,6 +112,7 @@ body {
 
 .window > aside > #upload {
     height: 200px;
+    min-height: 200px;
     width: 100%;
     background: #fff;
     display: flex;

@@ -50,6 +50,7 @@
             }).then((newSong)=>{
                 let {id, attributes} = newSong;
                  Object.assign(this.data, {id, ...attributes});
+                 console.log(this.data)
             })
         },
 

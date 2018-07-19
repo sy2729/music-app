@@ -30,7 +30,8 @@
         getSongData(id){
             var query = new AV.Query('Song');
             return query.get(id).then((data)=>{
-                Object.assign(this.data, { id: data.id, ...data.attributes})
+                let {id, attributes} = data;
+                Object.assign(this.data, {id, ...attributes})
             })
         }
 
