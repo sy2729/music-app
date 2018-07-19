@@ -2,9 +2,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 {
     let view = {
-        el: '#song',
+        el: '#page',
         template: `
-            <audio src="{{songUrl}}"></audio>
+        <div class="blur-bg"></div>
+        <div class="disc">
+            <img class="ring" src="//s3.music.126.net/m/s/img/disc-ip6.png?69796123ad7cfe95781ea38aac8f2d48" alt="">
+            <img class="light" src="//s3.music.126.net/m/s/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577" alt="">
+            <div class="cover-crop">
+                <img class="cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJcxA7zgZV18VbaOmtChAVxMBSdU0qHYZ_6pp19P89431Vf-oZ"
+                alt="">
+
+                <img class='play-button' src="./dist/img/playButton.png">
+            </div>
+        </div>
+
+        <div class="song-info">
+            <h1 class="song-name">Song - Name</h1>
+        </div>
+
+        <div class="app-intro">
+            <a type="button" class="app-open">Open</a>
+            <a type="button" class="app-download">Download</a>
+        </div>
+        <audio src="{{songUrl}}"></audio>
             <button class="play">play</button>
             <button class="pause">pause</button>
         `,
@@ -15,10 +35,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
         play() {
             $(this.el).find('audio')[0].play();
+            $(this.el).find('.disc').addClass('active');
         },
 
         pause() {
             $(this.el).find('audio')[0].pause();
+            $(this.el).find('.disc').removeClass('active');
         }
     };
 
@@ -46,8 +68,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             let id = this.getSongId();
             this.model.getSongData(id).then(() => {
                 this.view.render(this.model.data);
+            }).then(() => {
+                this.bindEvents();
             });
-            this.bindEvents();
         },
 
         bindEvents() {
@@ -56,13 +79,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
 
         playSong() {
-            //  console.log($(this.view.el))
-            $(this.view.el).on('click', '.play', () => {
+
+            $(this.view.el).on('click', '.play-button', () => {
                 this.view.play();
             });
         },
         pauseSong() {
-            $(this.view.el).on('click', '.pause', () => {
+            $(this.view.el).on('click', '.cover', () => {
                 this.view.pause();
             });
         },

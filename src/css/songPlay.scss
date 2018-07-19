@@ -24,18 +24,26 @@ $fontColor: #333;
         filter: blur(6px);
     }
     
+    // disc inactive - song not playing
+    @keyframes rotateDisc {
+        from {transform: rotate(0deg)}
+        to {transform: rotate(360deg)}
+    }
     .disc {
         width: px(230.39);
         height: px(230.39);
         position: relative;
         margin: 0 auto;
         margin-top: px(57.6);
+        animation: rotateDisc 15s linear infinite;
+        animation-play-state: paused;
 
         .ring, .light {
             position: absolute;
             width: 100%;
             height: auto;
             z-index: 2;
+            pointer-events: none;
         }
 
         .cover-crop {
@@ -50,11 +58,32 @@ $fontColor: #333;
             
             .cover {
                 width: 100%;
-                height: auto;    
+                height: auto;
+                z-index: 3;
+            }
+
+            .play-button {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: px(50);
+                height: px(50);
+                z-index: 4;
             }
         }
         
     }
+
+    // disc active - playing the song
+    .disc.active {
+        animation-play-state: running;
+
+        .play-button {
+            display: none;
+        }
+    }
+
 
     .song-info {
         position: relative;
