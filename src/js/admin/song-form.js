@@ -12,13 +12,15 @@
             <input type="text" name='singer'></div>
             <div><label for="">Link</label>
             <input type="text" value='__link__' name='link'></div>
+            <div><label for="">Cover</label>
+            <input type="text" value='__cover__' name='cover'></div>
 
             <button type='submit'>Submit</button>
             </form>
         `,
 
         render(data = {}){
-            let placeholder = ['name','link'];
+            let placeholder = ['name','link','cover'];
             let html = this.template;
             placeholder.map((word)=> {
                 html = html.replace(`__${word}__`, data[word] || '');
@@ -40,14 +42,13 @@
 
     let model = {
         data: {
-            name: '', singer: '', link: '', id: '',
+            name: '', singer: '', link: '', id: '', cover: '',
         },
         create(data){
-            console.log('create invoked in model')
             var Song = AV.Object.extend('Song');
             var song = new Song();
             return song.save({
-                name: data.name, singer: data.singer, link: data.link
+                name: data.name, singer: data.singer, link: data.link, cover: data.cover
             }).then((newSong)=>{
                 let {id, attributes} = newSong; 
                  Object.assign(this.data, {id, ...attributes});
@@ -59,6 +60,7 @@
             song.set('name', data.name)
             song.set('singer', data.singer)
             song.set('link', data.link)
+            song.set('cover', data.cover)
             return song.save().then((response)=>{
                 Object.assign(this.data, data);
                 return response;
@@ -91,7 +93,7 @@
         },
 
         create(){
-            let userInputs = 'name singer link'.split(' ');
+            let userInputs = 'name singer link cover'.split(' ');
             let data = {};
             userInputs.map((item) => {
                 data[item] = this.view.$el.find(`[name="${item}"]`).val();
@@ -108,7 +110,7 @@
         },
 
         update(){
-            let userInputs = 'name singer link'.split(' ');
+            let userInputs = 'name singer link cover'.split(' ');
             let data = {};
             userInputs.map((item) => {
                 data[item] = this.view.$el.find(`[name="${item}"]`).val();

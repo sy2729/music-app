@@ -9,10 +9,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             <img class="ring" src="//s3.music.126.net/m/s/img/disc-ip6.png?69796123ad7cfe95781ea38aac8f2d48" alt="">
             <img class="light" src="//s3.music.126.net/m/s/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577" alt="">
             <div class="cover-crop">
-                <img class="cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJcxA7zgZV18VbaOmtChAVxMBSdU0qHYZ_6pp19P89431Vf-oZ"
+                <img class="cover" src="{{cover}}"
                 alt="">
 
-                <img class='play-button' src="./dist/img/playButton.png">
+                <div class="play-button-wrap">
+                    <img class='play-button' src="./dist/img/playButton.png">
+                </div>
             </div>
         </div>
 
@@ -25,11 +27,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             <a type="button" class="app-download">Download</a>
         </div>
         <audio src="{{songUrl}}"></audio>
-            <button class="play">play</button>
-            <button class="pause">pause</button>
         `,
         render(data) {
+            $(this.el).html(this.template);
             let content = this.template.replace("{{songUrl}}", data.link);
+            if (data.cover === '') {
+                content = content.replace("{{cover}}", data.defaultCover);
+                // this.changeCover(data.defaultCover)
+            }
             $(this.el).html(content);
         },
 
@@ -41,6 +46,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         pause() {
             $(this.el).find('audio')[0].pause();
             $(this.el).find('.disc').removeClass('active');
+        },
+
+        changeCover(url) {
+            $(this.el).find('.blur-bg').css('background-image', `url(${url})`);
         }
     };
 
@@ -49,7 +58,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             id: '',
             name: '',
             singer: '',
-            link: ''
+            link: '',
+            cover: '',
+            defaultCover: 'http://res.cloudinary.com/shuaiyuan/image/upload/q_53/v1532056943/1_vyrvol.jpg'
         },
         getSongData(id) {
             var query = new AV.Query('Song');
@@ -69,6 +80,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.model.getSongData(id).then(() => {
                 this.view.render(this.model.data);
             }).then(() => {
+                if (this.model.data.cover === '') {
+                    this.view.changeCover(this.model.data.defaultCover);
+                }
                 this.bindEvents();
             });
         },
@@ -76,16 +90,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         bindEvents() {
             this.playSong();
             this.pauseSong();
+            this.changeCover();
         },
 
         playSong() {
 
-            $(this.view.el).on('click', '.play-button', () => {
+            $(this.view.el).on('click', '.play-button', e => {
                 this.view.play();
+                e.stopPropagation();
             });
         },
         pauseSong() {
-            $(this.view.el).on('click', '.cover', () => {
+            $(this.view.el).on('click', '.play-button-wrap', () => {
                 this.view.pause();
             });
         },
@@ -107,7 +123,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
 
             return id;
-        }
+        },
+
+        changeCover() {}
     };
 
     controller.init(view, model);
