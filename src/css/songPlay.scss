@@ -23,6 +23,15 @@ $fontColor: #333;
         width: 100%;
         filter: blur(6px);
     }
+
+    .play-logo {
+        position: absolute;
+        width: px(100);
+        height: auto;
+        top: px(12);
+        left: px(10);
+    }
+
     
     // disc inactive - song not playing
     @keyframes rotateDisc {

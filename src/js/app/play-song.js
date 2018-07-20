@@ -3,6 +3,7 @@
         el: '#page',
         template: `
         <div class="blur-bg"></div>
+        <a href="./index.html"><img class='play-logo' src="./dist/img/music163.png"></a>
         <div class="disc">
             <img class="ring" src="//s3.music.126.net/m/s/img/disc-ip6.png?69796123ad7cfe95781ea38aac8f2d48" alt="">
             <img class="light" src="//s3.music.126.net/m/s/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577" alt="">
