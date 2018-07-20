@@ -33,7 +33,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             let content = this.template.replace("{{songUrl}}", data.link);
             if (data.cover === '') {
                 content = content.replace("{{cover}}", data.defaultCover);
-                // this.changeCover(data.defaultCover)
+            } else {
+                content = content.replace("{{cover}}", data.cover);
             }
             $(this.el).html(content);
         },
@@ -48,7 +49,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             $(this.el).find('.disc').removeClass('active');
         },
 
-        changeCover(url) {
+        useCover(url) {
+            $(this.el).find('.blur-bg').css('background-image', `url(${url})`);
+        },
+
+        useDefaultCover(url) {
             $(this.el).find('.blur-bg').css('background-image', `url(${url})`);
         }
     };
@@ -81,7 +86,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 this.view.render(this.model.data);
             }).then(() => {
                 if (this.model.data.cover === '') {
-                    this.view.changeCover(this.model.data.defaultCover);
+                    this.view.useDefaultCover(this.model.data.defaultCover);
+                } else {
+                    this.view.useDefaultCover(this.model.data.cover);
                 }
                 this.bindEvents();
             });
