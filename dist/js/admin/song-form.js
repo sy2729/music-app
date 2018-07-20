@@ -11,7 +11,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             <div><label for="">Song Name</label>
             <input type="text" value='__name__' name='name'></div>
             <div><label for="">Singer</label>
-            <input type="text" name='singer'></div>
+            <input type="text" name='singer' value='__singer__'></div>
             <div><label for="">Link</label>
             <input type="text" value='__link__' name='link'></div>
             <div><label for="">Cover</label>
@@ -22,7 +22,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         `,
 
         render(data = {}) {
-            let placeholder = ['name', 'link', 'cover'];
+            let placeholder = ['name', 'link', 'singer', 'cover'];
             let html = this.template;
             placeholder.map(word => {
                 html = html.replace(`__${word}__`, data[word] || '');
