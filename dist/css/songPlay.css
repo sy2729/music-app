@@ -117,8 +117,7 @@
   animation-play-state: running;
 }
 .song-page-wrap .disc.active .play-button-wrap .play-button {
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
 .song-page-wrap .song-info {
   position: relative;

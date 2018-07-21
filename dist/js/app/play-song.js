@@ -32,20 +32,24 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         `,
         render(data) {
             window.testData = data;
+            let { status, song } = data;
             $(this.el).html(this.template);
-            let content = this.template.replace("{{songUrl}}", data.link).replace("{{songName}}", data.name);
+            let content = this.template.replace("{{songUrl}}", song.link).replace("{{songName}}", song.name);
 
-            let array = data.lyrics.split('\n').map(i => {
+            let array = song.lyrics.split('\n').map(i => {
                 return $('<p></p>').text(i);
             });
-
             $(this.el).html(content);
+            if (song.cover) {
+                this.useCover(song.cover);
+            } else {
+                this.useCover(song.defaultCover);
+            }
             $(this.el).find('.song-lyrics').append(array);
+            this.checkStatus(status);
             let audio = $(this.el).find('audio').get(0);
-            console.log('end');
             audio.onended = () => {
-                console.log('end');
-                this.pause();
+                eventHub.emit('songEnd', {});
             };
         },
 
@@ -62,23 +66,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         useCover(url) {
             $(this.el).find('.cover').css('background-image', `url(${url})`);
             $(this.el).find('.blur-bg').css('background-image', `url(${url})`);
+        },
+
+        checkStatus(status) {
+            status ? this.play() : this.pause();
         }
     };
 
     let model = {
         data: {
-            id: '',
-            name: '',
-            singer: '',
-            link: '',
-            cover: '',
-            defaultCover: 'http://res.cloudinary.com/shuaiyuan/image/upload/q_53/v1532056943/1_vyrvol.jpg'
+            song: {
+                id: '',
+                name: '',
+                singer: '',
+                link: '',
+                cover: '',
+                defaultCover: 'http://res.cloudinary.com/shuaiyuan/image/upload/q_53/v1532056943/1_vyrvol.jpg'
+            },
+            status: true
         },
         getSongData(id) {
             var query = new AV.Query('Song');
             return query.get(id).then(data => {
                 let { id, attributes } = data;
-                Object.assign(this.data, _extends({ id }, attributes));
+                Object.assign(this.data.song, _extends({ id }, attributes));
             });
         }
 
@@ -92,7 +103,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.model.getSongData(id).then(() => {
                 this.view.render(this.model.data);
             }).then(() => {
-                this.changeCover();
                 this.bindEvents();
             });
         },
@@ -100,19 +110,27 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         bindEvents() {
             this.playSong();
             this.pauseSong();
-            this.changeCover();
+            eventHub.on('songEnd', () => {
+                console.log(1);
+                this.model.data.status = false;
+                console.log(2);
+                this.view.checkStatus(this.model.data.status);
+            });
+            console.log(eventHub);
         },
 
         playSong() {
 
             $(this.view.el).on('click', '.play-button', e => {
-                this.view.play();
+                this.model.data.status = true;
+                this.view.checkStatus(this.model.data.status);
                 e.stopPropagation();
             });
         },
         pauseSong() {
             $(this.view.el).on('click', '.play-button-wrap', () => {
-                this.view.pause();
+                this.model.data.status = false;
+                this.view.checkStatus(this.model.data.status);
             });
         },
         getSongId() {
@@ -133,14 +151,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
 
             return id;
-        },
-
-        changeCover() {
-            if (this.model.data.cover === '') {
-                this.view.useCover(this.model.data.defaultCover);
-            } else {
-                this.view.useCover(this.model.data.cover);
-            }
         },
 
         watchSongPlay() {
