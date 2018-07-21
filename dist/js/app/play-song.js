@@ -10,8 +10,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             <img class="ring" src="//s3.music.126.net/m/s/img/disc-ip6.png?69796123ad7cfe95781ea38aac8f2d48" alt="">
             <img class="light" src="//s3.music.126.net/m/s/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577" alt="">
             <div class="cover-crop">
-                <img class="cover" src="{{cover}}"
-                alt="">
+                <div class="cover"></div>
 
                 <div class="play-button-wrap">
                     <img class='play-button' src="./dist/img/playButton.png">
@@ -20,8 +19,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         </div>
 
         <div class="song-info">
-            <h1 class="song-name">Song - Name</h1>
+            <h1 class="song-name">{{songName}}</h1>
+            <div class="song-lyrics"></div>
         </div>
+
 
         <div class="app-intro">
             <a type="button" class="app-open">Open</a>
@@ -30,14 +31,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         <audio src="{{songUrl}}"></audio>
         `,
         render(data) {
+            window.testData = data;
             $(this.el).html(this.template);
-            let content = this.template.replace("{{songUrl}}", data.link);
-            if (data.cover === '') {
-                content = content.replace("{{cover}}", data.defaultCover);
-            } else {
-                content = content.replace("{{cover}}", data.cover);
-            }
+            let content = this.template.replace("{{songUrl}}", data.link).replace("{{songName}}", data.name);
+
+            let array = data.lyrics.split('\n').map(i => {
+                return $('<p></p>').text(i);
+            });
+
             $(this.el).html(content);
+            $(this.el).find('.song-lyrics').append(array);
+            let audio = $(this.el).find('audio').get(0);
+            console.log('end');
+            audio.onended = () => {
+                console.log('end');
+                this.pause();
+            };
         },
 
         play() {
@@ -51,10 +60,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
 
         useCover(url) {
-            $(this.el).find('.blur-bg').css('background-image', `url(${url})`);
-        },
-
-        useDefaultCover(url) {
+            $(this.el).find('.cover').css('background-image', `url(${url})`);
             $(this.el).find('.blur-bg').css('background-image', `url(${url})`);
         }
     };
@@ -86,11 +92,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.model.getSongData(id).then(() => {
                 this.view.render(this.model.data);
             }).then(() => {
-                if (this.model.data.cover === '') {
-                    this.view.useDefaultCover(this.model.data.defaultCover);
-                } else {
-                    this.view.useDefaultCover(this.model.data.cover);
-                }
+                this.changeCover();
                 this.bindEvents();
             });
         },
@@ -133,7 +135,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             return id;
         },
 
-        changeCover() {}
+        changeCover() {
+            if (this.model.data.cover === '') {
+                this.view.useCover(this.model.data.defaultCover);
+            } else {
+                this.view.useCover(this.model.data.cover);
+            }
+        },
+
+        watchSongPlay() {
+            let audio = $(this.el).find('audio');
+        }
     };
 
     controller.init(view, model);

@@ -230,6 +230,16 @@ body {
     border-radius: 50%;
     text-indent: 6px;
 }
+.song-form > form > div > textarea {
+    width: 600px;
+	height: 120px;
+	border: 3px solid #cccccc;
+	padding: 5px;
+	font-family: Tahoma, sans-serif;
+	background-image: url(bg.gif);
+	background-position: bottom right;
+	background-repeat: no-repeat;
+}
 
 .song-form > form > button{
     margin-left: calc(6em + 10px);

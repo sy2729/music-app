@@ -7,21 +7,49 @@ $fontColor: #333;
   @return #{$remSize}rem;
 }
 
+@keyframes bg-move {
+    from {background-position: 60% 50%}
+    to {background-position: 50% 50%}
+}
+
 .song-page-wrap {
     display: table;
     width: 100%;
     height: 100vh;
     position: relative;
+    overflow: hidden;
 
     .blur-bg {
-        position: absolute;
+        position: fixed;
         background: transparent url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJcxA7zgZV18VbaOmtChAVxMBSdU0qHYZ_6pp19P89431Vf-oZ') center center no-repeat;
         background-size: cover;
         left: 0;
         top: 0;
         height: 100%;
         width: 100%;
+        background-size: auto 100%;
+        transform: scale(1.05);
+        transform-origin: center top;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 100%;
+        overflow: hidden;
         filter: blur(6px);
+        animation: bg-move 1s ease-in-out forwards;
+        will-change: background-position;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0,0,0,0);
+            background: linear-gradient(180deg, rgba(0,0,0,0.027048319327731107) 0%, rgba(0,0,0,0.15309873949579833) 91%, rgba(0,0,0,0.09987745098039214) 100%);
+
+        }
     }
 
     .play-logo {
@@ -68,6 +96,9 @@ $fontColor: #333;
             .cover {
                 width: auto;
                 height: 100%;
+                background: transparent url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJcxA7zgZV18VbaOmtChAVxMBSdU0qHYZ_6pp19P89431Vf-oZ') center center no-repeat;
+                background-size: cover;
+
             }
 
             .play-button-wrap {
@@ -102,7 +133,8 @@ $fontColor: #333;
         .play-button-wrap{
             animation-play-state: running;
             .play-button {
-                display: none;
+                opacity: 0;
+                pointer-events: none;
             }
         }
         
@@ -119,6 +151,19 @@ $fontColor: #333;
             font-size: px(18);
             
             text-align: center;
+        }
+
+        .song-lyrics {
+            height: px(67);
+            overflow: scroll;
+            text-align: center;
+            color: #f9f9f9;
+            font-size: px(13);
+            margin-top: px(14px);
+            
+            p {
+                padding-bottom: px(5);
+            }
         }
     }
 
