@@ -6,8 +6,11 @@
         },
         template: `
             <form>
-            <div><label for="">Song Name</label>
-            <input type="text" value='__name__' name='name'></div>
+            <div>
+            <label for="">Song Name</label>
+            <input type="text" value='__name__' name='name'>
+            <span class="input-alert">The name can't be empty</span>
+            </div>
             <div><label for="">Singer</label>
             <input type="text" name='singer' value='__singer__'></div>
             <div><label for="">Link</label>
@@ -36,6 +39,14 @@
 
         reset() {
             this.render({})
+        },
+
+        inputAlert(state){
+            if(state) {
+                $(this.el).find('.input-alert').addClass('active');
+            }else {
+                $(this.el).find('.input-alert').removeClass('active');
+            }
         }
 
     };
@@ -89,7 +100,9 @@
 
                 }
                 
-            })
+            });
+
+            this.checkNameInput();
         },
 
         create(){
@@ -97,16 +110,19 @@
             let data = {};
             userInputs.map((item) => {
                 data[item] = this.view.$el.find(`[name="${item}"]`).val();
+                
             })
+            let checkResult = this.checkSubmit(data);
+            if (checkResult) {
+                this.model.create(data)
+                    .then(() => {
+                        var string = JSON.stringify(this.model.data);
+                        var newData = JSON.parse(string);
+                        this.view.reset();
+                        eventHub.emit('create', newData);
 
-            this.model.create(data)
-                .then(() => {
-                    var string = JSON.stringify(this.model.data);
-                    var newData = JSON.parse(string);
-                    this.view.reset();
-                    eventHub.emit('create', newData);
-
-                })
+                    })
+                }
         },
 
         update(){
@@ -115,10 +131,14 @@
             userInputs.map((item) => {
                 data[item] = this.view.$el.find(`[name="${item}"]`).val();
             });
-            this.model.update(data)
-                .then(()=>{
-                    eventHub.emit('update', this.model.data);
+
+            let checkResult = this.checkSubmit(data);
+            if(checkResult) {
+                this.model.update(data)
+                    .then(()=>{
+                        eventHub.emit('update', this.model.data);
                 });
+            }
         },
 
         bindEventHub(){
@@ -137,6 +157,21 @@
                     this.model.data = {};
                     this.view.render(this.model.data);
                 }
+            })
+        },
+
+        checkSubmit(data){
+            if (data['name'] === ''){
+                this.view.inputAlert(true);
+                return false;
+            }else {
+                return true;
+            }
+        },
+
+        checkNameInput(){
+            $(this.view.el).on('keydown', "[name='name']", ()=>{
+                this.view.inputAlert(false);
             })
         }
     };
