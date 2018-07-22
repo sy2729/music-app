@@ -158,12 +158,19 @@ $fontColor: #333;
             height: px(67);
             overflow: scroll;
             text-align: center;
-            color: #f9f9f9;
+            color: hsla(0,0%,100%,.6);
             font-size: px(13);
             margin-top: px(14px);
+            line-height: 1.4;
             
             p {
+                font-size: inherit;
                 padding-bottom: px(5);
+                transition: transform .6s ease-in-out;
+            }
+
+            p.active {
+                color: rgb(255, 255, 255);
             }
         }
     }

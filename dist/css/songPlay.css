@@ -133,12 +133,18 @@
   height: 2.09375rem;
   overflow: scroll;
   text-align: center;
-  color: #f9f9f9;
+  color: rgba(255, 255, 255, 0.6);
   font-size: 0.40625rem;
   margin-top: 0.4375pxrem;
+  line-height: 1.4;
 }
 .song-page-wrap .song-info .song-lyrics p {
+  font-size: inherit;
   padding-bottom: 0.15625rem;
+  transition: transform 0.6s ease-in-out;
+}
+.song-page-wrap .song-info .song-lyrics p.active {
+  color: white;
 }
 .song-page-wrap .app-intro {
   position: absolute;

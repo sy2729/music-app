@@ -36,8 +36,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             $(this.el).html(this.template);
             let content = this.template.replace("{{songUrl}}", song.link).replace("{{songName}}", song.name);
 
+            // use reg to split the time
+            let reg = /\[([\d:.]+)\](.+)/;
+
             let array = song.lyrics.split('\n').map(i => {
-                return $('<p></p>').text(i);
+                let result = i.match(reg);
+                if (result) {
+                    let minutes = result[1].split(':')[0];
+                    let seconds = result[1].split(':')[1];
+                    let newTime = parseInt(minutes) * 60 + parseFloat(seconds);
+                    return $('<p></p>').text(result[2]).attr('data-time', newTime);
+                } else {
+                    return $('<p></p>').text(i);
+                }
             });
             $(this.el).html(content);
             if (song.cover) {
@@ -47,9 +58,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }
             $(this.el).find('.song-lyrics').append(array);
             this.checkStatus(status);
+
             let audio = $(this.el).find('audio').get(0);
             audio.onended = () => {
                 eventHub.emit('songEnd', {});
+            };
+
+            audio.ontimeupdate = () => {
+                this.checkLyrics(audio.currentTime);
             };
         },
 
@@ -70,6 +86,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
         checkStatus(status) {
             status ? this.play() : this.pause();
+        },
+
+        checkLyrics(time) {
+            let lyricTimes = $(this.el).find('.song-lyrics > p');
+            let p;
+            for (let i = 0; i < lyricTimes.length; i++) {
+                if (i === lyricTimes.length - 1) {
+                    p = lyricTimes[i];
+                    break;
+                } else {
+                    let currentTime = lyricTimes[i].getAttribute('data-time');
+                    let nextTime = lyricTimes[i + 1].getAttribute('data-time');
+                    if (currentTime <= time && time < nextTime) {
+                        p = lyricTimes[i];
+                        break;
+                    }
+                }
+            }
+            let pHeight = p.getBoundingClientRect().top;
+            let lyricAllHeight = $(this.el).find('.song-lyrics > p')[0].getBoundingClientRect().top;
+            let scroll = lyricAllHeight - pHeight;
+
+            $(this.el).find('.song-lyrics > p').css({ transform: `translateY(${scroll + 25}px)` });
+            $(p).addClass('active').siblings().removeClass('active');
         }
     };
 
@@ -111,12 +151,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.playSong();
             this.pauseSong();
             eventHub.on('songEnd', () => {
-                console.log(1);
                 this.model.data.status = false;
-                console.log(2);
                 this.view.checkStatus(this.model.data.status);
             });
-            console.log(eventHub);
         },
 
         playSong() {
