@@ -5,15 +5,17 @@
         <div class="blur-bg"></div>
         <a href="./index.html"><img class='play-logo' src="./dist/img/music163.png"></a>
         <div class="disc">
-            <img class="ring" src="//s3.music.126.net/m/s/img/disc-ip6.png?69796123ad7cfe95781ea38aac8f2d48" alt="">
-            <img class="light" src="//s3.music.126.net/m/s/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577" alt="">
-            <div class="cover-crop">
-                <div class="cover"></div>
+            <div class='cover-wrap'>
+                <img class="ring" src="//s3.music.126.net/m/s/img/disc-ip6.png?69796123ad7cfe95781ea38aac8f2d48" alt="">
+                <img class="light" src="//s3.music.126.net/m/s/img/disc_light-ip6.png?996fc8a2bc62e1ab3f51f135fc459577" alt="">
+                <div class="cover-crop">
+                    <div class="cover"></div>
 
+                </div>
+            </div>
                 <div class="play-button-wrap">
                     <img class='play-button' src="./dist/img/playButton.png">
                 </div>
-            </div>
         </div>
 
         <div class="song-info">
@@ -58,7 +60,6 @@
                 this.useCover(song.defaultCover)
             }
             $(this.el).find('.song-lyrics').append(array);
-            this.checkStatus(status);
 
             let audio = $(this.el).find('audio').get(0);
             audio.onended = ()=>{
@@ -127,7 +128,7 @@
                 cover: '',
                 defaultCover: 'http://res.cloudinary.com/shuaiyuan/image/upload/q_53/v1532056943/1_vyrvol.jpg',
             },
-            status: true
+            status: false
         },
         getSongData(id){
             var query = new AV.Query('Song');
@@ -159,7 +160,7 @@
              eventHub.on('songEnd', () => {
                 this.model.data.status = false;
                 this.view.checkStatus(this.model.data.status);
-            })
+            });
          },
 
          playSong(){

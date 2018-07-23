@@ -15,7 +15,8 @@
     "plupload": "^2.3.2",
     "postcss-cli": "^6.0.0",
     "qiniu": "^7.2.1",
-    "qiniu-js": "^1.0.22"
+    "qiniu-js": "^1.0.22",
+    "vconsole": "^3.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

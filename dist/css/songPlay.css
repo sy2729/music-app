@@ -64,17 +64,24 @@
   position: relative;
   margin: 0 auto;
   margin-top: 1.8rem;
-  animation: rotateDisc 15s linear infinite;
-  animation-play-state: paused;
 }
-.song-page-wrap .disc .ring, .song-page-wrap .disc .light {
-  position: absolute;
-  width: 100%;
-  height: auto;
+.song-page-wrap .disc .cover-wrap {
+  -webkit-animation: none;
   z-index: 2;
   pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
-.song-page-wrap .disc .cover-crop {
+.song-page-wrap .disc .cover-wrap .ring, .song-page-wrap .disc .cover-wrap .light {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  z-index: 3;
+}
+.song-page-wrap .disc .cover-wrap .cover-crop {
   position: absolute;
   width: 70%;
   height: 70%;
@@ -83,14 +90,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 2;
 }
-.song-page-wrap .disc .cover-crop .cover {
+.song-page-wrap .disc .cover-wrap .cover-crop .cover {
   width: auto;
   height: 100%;
   background: transparent url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJcxA7zgZV18VbaOmtChAVxMBSdU0qHYZ_6pp19P89431Vf-oZ") center center no-repeat;
   background-size: cover;
 }
-.song-page-wrap .disc .cover-crop .play-button-wrap {
+.song-page-wrap .disc .play-button-wrap {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -98,10 +106,8 @@
   right: 0;
   width: 100%;
   height: 100%;
-  animation: rotateDisc 15s linear infinite reverse;
-  animation-play-state: paused;
 }
-.song-page-wrap .disc .cover-crop .play-button-wrap .play-button {
+.song-page-wrap .disc .play-button-wrap .play-button {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -110,14 +116,12 @@
   height: 1.5625rem;
   z-index: 4;
 }
-.song-page-wrap .disc.active {
-  animation-play-state: running;
-}
-.song-page-wrap .disc.active .play-button-wrap {
-  animation-play-state: running;
+.song-page-wrap .disc.active .cover-wrap {
+  animation: rotateDisc 15s linear infinite;
 }
 .song-page-wrap .disc.active .play-button-wrap .play-button {
   display: none;
+  pointer-events: none;
 }
 .song-page-wrap .song-info {
   position: relative;
@@ -131,7 +135,7 @@
 }
 .song-page-wrap .song-info .song-lyrics {
   height: 2.09375rem;
-  overflow: scroll;
+  overflow: hidden;
   text-align: center;
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.40625rem;
@@ -141,7 +145,7 @@
 .song-page-wrap .song-info .song-lyrics p {
   font-size: inherit;
   padding-bottom: 0.15625rem;
-  transition: transform 0.6s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 .song-page-wrap .song-info .song-lyrics p.active {
   color: white;

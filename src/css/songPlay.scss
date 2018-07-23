@@ -72,70 +72,83 @@ $fontColor: #333;
         position: relative;
         margin: 0 auto;
         margin-top: px(57.6);
-        animation: rotateDisc 15s linear infinite;
-        animation-play-state: paused;
-
-        .ring, .light {
-            position: absolute;
-            width: 100%;
-            height: auto;
+        
+        .cover-wrap {
+            // animation: rotateDisc 15s linear infinite;
+            // animation-play-state: paused;
+            -webkit-animation: none;
             z-index: 2;
             pointer-events: none;
-        }
-
-        .cover-crop {
             position: absolute;
-            width: 70%;
-            height: 70%;
-            border-radius: 50%;
-            overflow: hidden;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             
-            .cover {
-                width: auto;
-                height: 100%;
-                background: transparent url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJcxA7zgZV18VbaOmtChAVxMBSdU0qHYZ_6pp19P89431Vf-oZ') center center no-repeat;
-                background-size: cover;
-
+            .ring, .light {
+                width: 100%;
+                height: auto;
+                position: absolute;
+                z-index: 3;
             }
-
-            .play-button-wrap {
-              position: absolute;
-              top:0;
-              bottom: 0;
-              left: 0;
-              right: 0;
-              width: 100%;
-              height: 100%;
-              animation: rotateDisc 15s linear infinite reverse;
-              animation-play-state: paused;
-            
-                .play-button {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: px(50);
-                    height: px(50);
-                    z-index: 4;
+            .cover-crop {
+                position: absolute;
+                width: 70%;
+                height: 70%;
+                border-radius: 50%;
+                overflow: hidden;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 2;
+                
+                .cover {
+                    width: auto;
+                    height: 100%;
+                    background: transparent url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJcxA7zgZV18VbaOmtChAVxMBSdU0qHYZ_6pp19P89431Vf-oZ') center center no-repeat;
+                    background-size: cover;
+    
                 }
+    
+                
             }
-
         }
+
+                .play-button-wrap {
+                  position: absolute;
+                  top:0;
+                  bottom: 0;
+                  left: 0;
+                  right: 0;
+                  width: 100%;
+                  height: 100%;
+
+                
+                    .play-button {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: px(50);
+                        height: px(50);
+                        z-index: 4;
+                    }
+                }
         
     }
 
     // disc active - playing the song
     .disc.active {
-        animation-play-state: running;
+        .cover-wrap {
+            animation: rotateDisc 15s linear infinite;
+            // animation-play-state: running;
+
+        }
         .play-button-wrap{
-            animation-play-state: running;
             .play-button {
                 display: none;
                 // opacity: 0;
-                // pointer-events: none;
+                pointer-events: none;
             }
         }
         
@@ -156,7 +169,7 @@ $fontColor: #333;
 
         .song-lyrics {
             height: px(67);
-            overflow: scroll;
+            overflow: hidden;
             text-align: center;
             color: hsla(0,0%,100%,.6);
             font-size: px(13);
@@ -166,7 +179,7 @@ $fontColor: #333;
             p {
                 font-size: inherit;
                 padding-bottom: px(5);
-                transition: transform .6s ease-in-out;
+                transition: transform .2s ease-in-out;
             }
 
             p.active {
