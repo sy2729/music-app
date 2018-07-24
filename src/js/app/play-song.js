@@ -40,11 +40,12 @@
 
             // use reg to split the time
             let reg = /\[([\d:.]+)\](.+)/;
-
+            let lyricsTimeLine;
             let array = song.lyrics.split('\n')
                         .map((i)=>{
                             let result = i.match(reg);
                             if(result) {
+                                lyricsTimeLine = true;
                                 let minutes = result[1].split(':')[0];
                                 let seconds = result[1].split(':')[1];
                                 let newTime = parseInt(minutes) * 60 + parseFloat(seconds);
@@ -65,11 +66,14 @@
             audio.onended = ()=>{
                 eventHub.emit('songEnd', {});
             }
-
-            audio.ontimeupdate = ()=>{
-                this.checkLyrics(audio.currentTime)
-                
+            if(lyricsTimeLine) {
+                audio.ontimeupdate = ()=>{
+                    this.checkLyrics(audio.currentTime)
+                }
+            }else {
+                $(this.el).find('.song-lyrics').css('overflow', 'scroll');
             }
+            
             
         },
 
