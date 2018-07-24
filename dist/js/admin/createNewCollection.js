@@ -9,9 +9,7 @@
         }
     };
 
-    let model = {
-
-    };
+    let model = {};
 
     let controller = {
         init(view, model) {
@@ -21,18 +19,18 @@
             this.bindEvent();
             this.bindEventHub();
         },
-        bindEvent(){
-            $(this.view.el).on('click', ()=>{
-                console.log('clicked')
+        bindEvent() {
+            $(this.view.el).on('click', () => {
+                console.log('clicked');
                 eventHub.emit('createNewCollection');
                 $(this.view.el).addClass('active');
-            })
+            });
         },
 
-        bindEventHub(){
-            eventHub.on('cancelCreateNewCollection', ()=>{
+        bindEventHub() {
+            eventHub.on('cancelCreateNewCollection', () => {
                 $(this.view.el).removeClass('active');
-            })
+            });
         }
     };
 

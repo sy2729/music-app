@@ -3,26 +3,24 @@
         el: '#songCollection',
         template: `
             <ul class='song-collection-list'>
-                <li>SongCollection 1</li>
-                <li>SongCollection 2</li>
-                <li>SongCollection 3</li>
+                <li class='animate'>SongCollection 1</li>
+                <li class='animate'>SongCollection 2</li>
+                <li class='animate'>SongCollection 3</li>
             </ul>
 
             <section class='otherArea'>
-                <div id='newCollection' class='active'></div>
-                <div id='createNewCollection'></div>
+                <div id='newCollection' class='active animate'></div>
+                <div id='createNewCollection' class='animate'></div>
                 <div id='songsInCollection'></div>
             </section>
         
          `,
-        render(){
+        render() {
             $(this.el).html(this.template);
         }
     };
 
-    let model = {
-
-    };
+    let model = {};
 
     let controller = {
         init(view, model) {
@@ -35,23 +33,19 @@
             this.createComponent('./dist/js/admin/createNewCollection.js');
         },
 
-        bindEvent(){
+        bindEvent() {},
 
-        },
-
-        bindEventHub(){
+        bindEventHub() {
             switchPage.call(this, 'songCollection');
         },
 
-        createComponent(path){
+        createComponent(path) {
             let script = document.createElement('script');
             script.src = path;
             $(document.body).append(script);
-        },
-
+        }
 
     };
 
-
-    controller.init(view, model)
+    controller.init(view, model);
 }
