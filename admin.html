@@ -9,24 +9,23 @@
 </head>
 <body>
     
-    <nav>
-        <ul>
-            <li>Song List</li>
-            <li>Dummy</li>
-            <li>Dummy</li>
-            <li>Dummt</li>
-        </ul>
+    <nav id='nav'>
+        
     </nav>
     <div class="window">
-        <aside>
+        <aside class="song-list-aside">
             <div class="add-song"></div>
-            <h4>Song List</h4>
+
             <div class="list-wrap"></div>
             <div id="upload"></div>
         </aside>
         <main class="song-form">
         </main>
+
+
+        <section id="songCollection" class="active clearfix"></section>
     </div>
+    
 
 
 
@@ -41,11 +40,24 @@
     <script src="./vendor/qiniu.min.js"></script>
     <script src="../vendor/moxie.js"></script>
     <script src="./vendor/plupload.min.js"></script>
-    <script src="./src/js/eventHub.js"></script>
-    <script src="./src/js/admin/song-list.js"></script>
-    <script src="./src/js/admin/song-form.js"></script>
-    <script src="./src/js/admin/add-song.js"></script>
-    <script src="./src/js/admin/upload-song.js"></script>
+    <script src="./dist/js/eventHub.js"></script>
+    <script>
+        function switchPage(currentPage) {
+                eventHub.on('switchPage', (data) => {
+                    if (data !== currentPage) {
+                        $(this.view.el).addClass('active')
+                    } else {
+                        $(this.view.el).removeClass('active')
+                    }
+                });
+            }
+    </script>
+    <script src="./dist/js/admin/song-list.js"></script>
+    <script src="./dist/js/admin/song-form.js"></script>
+    <script src="./dist/js/admin/add-song.js"></script>
+    <script src="./dist/js/admin/upload-song.js"></script>
+    <script src="./dist/js/admin/nav.js"></script>
+    <script src="./dist/js/admin/songCollection.js"></script>
     
 
 
@@ -54,6 +66,7 @@
         window.onload = function () {
             $('nav > ul > li').eq(0).addClass('active');
         }
+
     </script>
 
 

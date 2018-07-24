@@ -25,6 +25,7 @@
             this.model = model;
             this.view.render(this.model.data)
             this.initQiniu();
+            this.bindEventHub();
         },
 
         initQiniu() {
@@ -83,6 +84,10 @@
                     },
                 }
             });
+        },
+
+        bindEventHub(){
+            switchPage.call(this, 'songList');
         }
     };
 

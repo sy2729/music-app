@@ -4,6 +4,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     let view = {
         el: '.list-wrap',
         template: `
+            <h4>Song List</h4>
             <ul>
             </ul>
         `,
@@ -107,6 +108,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 };
                 this.view.render(this.model.data);
             });
+
+            switchPage.call(this, 'songList');
         }
     };
 

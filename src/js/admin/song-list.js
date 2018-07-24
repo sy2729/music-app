@@ -2,6 +2,7 @@
     let view = {
         el: '.list-wrap',
         template: `
+            <h4>Song List</h4>
             <ul>
             </ul>
         `,
@@ -105,7 +106,9 @@
                     };
                 };
                 this.view.render(this.model.data);
-            })
+            });
+
+            switchPage.call(this, 'songList');
 
         }
     };

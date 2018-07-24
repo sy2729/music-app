@@ -40,6 +40,7 @@
             eventHub.on('upload', () => {
                 this.view.activateItem($(this.view.el).find('.add-new')[0]);
             });
+            switchPage.call(this, 'songList');
         }
     };
 

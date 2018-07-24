@@ -162,7 +162,18 @@
                     this.model.data = {};
                     this.view.render(this.model.data);
                 }
-            })
+            });
+
+            eventHub.on('switchPage', (data) => {
+                if (data !== 'songList') {
+                    $(this.view.el).addClass('active');
+                    $('.song-list-aside').addClass('active');
+
+                } else {
+                    $(this.view.el).removeClass('active')
+                    $('.song-list-aside').removeClass('active');
+                }
+            });
         },
 
         checkSubmit(data){

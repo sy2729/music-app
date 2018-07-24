@@ -1,8 +1,13 @@
-* {margin: 0; padding: 0; box-sizing: border-box;}
+* {margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;}
 a {text-decoration: none;color: inherit;}
 ul > li {list-style: none;}
 input {font: inherit;}
 button[type='submit'] {font: inherit;}
+.clearfix::after {
+    display: block;
+    content: "";
+    clear: both;
+}
 
 /* nav section */
 nav {
@@ -21,7 +26,7 @@ nav > ul > li {
     transition: all .3s;
 }
 nav > ul > li:hover {
-    background-color: rgb(216, 203, 255);
+    background-color: rgb(235, 228, 255);
     /* color: #fff; */
 }
 
@@ -41,19 +46,28 @@ body {
     overflow: hidden;
 }
 .window {
-    width: calc(100% - 50px);
+    width: 100%;
     height: calc(100vh - 50px);
-    background: #ddd;
+    
     margin: 0 auto;
     display: flex;
 }
 
+/* window > songList component */
 .window > aside {
     width: 300px;
     border-right: 1px solid #eee;
     display: flex;
     flex-direction: column;
     position: relative;
+}
+
+.window > .song-list-aside.active {
+    display: none;
+}
+
+.window > aside .add-song.active {
+    display: none;
 }
 .window > aside .add-new {
     position: absolute;
@@ -76,7 +90,7 @@ body {
 }
 
 
-.window > aside > h4 {
+.window > aside h4 {
     width: 100%;
     padding: 15px 0;
     text-align: center;
@@ -86,6 +100,9 @@ body {
 .window > aside > .list-wrap {
     flex-grow: 1;
     overflow-y: scroll;
+}
+.window > aside > .list-wrap.active {
+    display: none;
 }
 .window > aside > .list-wrap > ul >li {
     padding: 10px;
@@ -118,6 +135,9 @@ body {
     display: flex;
     position: relative;
     border: 2px dashed #ddd;    
+}
+.window > aside > #upload.active {
+    display: none;
 }
 .window > aside > #upload > #uploadBtn {
     position: absolute;
@@ -180,6 +200,9 @@ body {
 
 /* song-form section */
 
+.song-form.active {
+    display: none;
+}
 .song-form > form {
     margin-top: 30px;
     margin-left: 30px;
@@ -255,3 +278,125 @@ body {
 }
 
 
+
+/* ------------------------------------------------------------------------ */
+/* window > song Collection Component */
+.window > #songCollection {
+    position: relative;
+    width: 100%;
+    background: url('../../dist/img/logo.svg') center center no-repeat;
+    background-size: 20%;
+    
+}
+
+.window > #songCollection.active {
+    display: none;
+}
+
+#songCollection > .song-collection-list {
+    height: 100vh;
+    width: 20%;
+    min-width: 150px;
+    background: #ddd;
+    float: left;
+}
+#songCollection > .song-collection-list > li {
+    line-height: 3;
+    text-indent: 5px;
+    cursor: pointer;
+}
+
+#songCollection > .song-collection-list > li:hover {
+    background: #ccc;
+}
+
+
+
+
+#songCollection > .otherArea {
+    width: 80%;
+    float: right;
+    height: 100vh;
+    position: relative;
+}
+
+#songCollection > .otherArea > #createNewCollection.active {
+    display: none;
+}
+#songCollection > .otherArea > #createNewCollection {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: -20px;
+}
+#songCollection > .otherArea > #createNewCollection > button {
+    display: block;
+    padding: 10px 17px;
+    background: transparent;
+    border: 1px solid #372D6E;
+    color: #372D6E;
+    font:inherit;
+    cursor: pointer;
+    transition: all .4s ease;
+}
+#songCollection > .otherArea > #createNewCollection > button:hover {
+    background: #372D6E;
+    color: #fff;
+}
+
+#songCollection > .otherArea > #newCollection {
+    width: 400px;
+    padding: 50px 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    text-align: center;
+    box-shadow: 2px 2px 10px 0 rgba(100, 100, 100, 0.5);
+    background: rgba(255,255,255,0.8);
+    margin-top: -30px;
+
+}
+
+#songCollection > .otherArea > #newCollection.active {
+    display: none;
+}
+
+#songCollection > .otherArea > #newCollection .row {
+    margin: 30px 0;
+    
+}
+#songCollection > .otherArea > #newCollection .row > label {
+     margin-right: 6px;
+}
+#songCollection > .otherArea > #newCollection .row > input {
+    padding: 3px 5px;
+}
+
+#songCollection > .otherArea > #newCollection .btn-wrap {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: wrap;
+    
+}
+
+#songCollection > .otherArea > #newCollection .btn-wrap > button {
+    width: 120px;
+    padding: 7px 10px;
+    background: none;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#songCollection > .otherArea > #newCollection .btn-wrap > button.submit {
+    border: 1px solid #372D6E;
+}
+
+#songCollection > .otherArea > #newCollection .btn-wrap > button.submit:hover {
+    background: #372D6E;
+    color: #fff;
+}
