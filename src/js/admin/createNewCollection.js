@@ -23,7 +23,6 @@
         },
         bindEvent() {
             $(this.view.el).on('click', () => {
-                console.log('clicked')
                 eventHub.emit('createNewCollection');
                 $(this.view.el).addClass('active');
             })
@@ -32,7 +31,14 @@
         bindEventHub() {
             eventHub.on('cancelCreateNewCollection', () => {
                 $(this.view.el).removeClass('active');
-            })
+            });
+
+            eventHub.on('selectCollection', () => {
+                $(this.view.el).addClass('active');
+            });
+            eventHub.on('returnToHome', () => {
+                $(this.view.el).removeClass('active');
+            });
         }
     };
 

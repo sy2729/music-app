@@ -24,14 +24,23 @@
     };
 
     let model = {
-        collection: {
-
+        data: {
+            name: '',
+            cover: '',
+            id: ''
         },
 
         create(data) {
 
 
-            eventHub.emit('createSongCollectionFinished')
+            var SongCollection = AV.Object.extend('SongCollection');
+            // 新建对象
+            var songCollection = new SongCollection();
+            return songCollection.save({
+                name: data.collectionName, cover: data.collectionCover,
+            }).then((data)=> {
+                Object.assign(this.data, {id: data.id, ...data.attributes});
+            });
         }
     };
 
@@ -54,7 +63,6 @@
             $(this.view.el).on('submit', 'form',(e)=>{
                 e.preventDefault();
                 let form = $(this.view.el).find('form').get(0);
-                console.log(form.collectionName.value)
                 let items = ['collectionName', 'collectionCover'];
                 let data = {};
                 items.reduce((prev, i)=>{
@@ -63,12 +71,16 @@
                 }, data);
 
                 if(data.collectionName !== '') {
-                    this.model.create(data);
+                    this.model.create(data)
+                        .then(()=>{
+                            let data = JSON.parse(JSON.stringify(this.model.data));
+                            eventHub.emit('createSongCollectionFinished', data)
+                        });
                 }else {
                     $(this.view.el).find("[name='collectionName']").addClass('needInput').get(0).focus();
                 }
 
-            })
+            });
         },
 
         bindEventHub() {
@@ -77,6 +89,10 @@
             });
 
             eventHub.on('createSongCollectionFinished', ()=>{
+                $(this.view.el).addClass('active');
+            });
+
+            eventHub.on('selectCollection', () => {
                 $(this.view.el).addClass('active');
             })
         }

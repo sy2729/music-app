@@ -9,6 +9,16 @@ button[type='submit'] {font: inherit;}
     clear: both;
 }
 
+button:hover {
+    background: #372D6E;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
 .animate {
     animation: slideUp .5s ease-in-out forwards;
 }
@@ -52,7 +62,7 @@ nav > ul {
 
 /* window section */
 body {
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 .window {
     width: 100%;
@@ -313,11 +323,16 @@ body {
     line-height: 3;
     text-indent: 5px;
     cursor: pointer;
+    transition: all .4s ease;
 }
-
 #songCollection > .song-collection-list > li:hover {
     background: #ccc;
 }
+#songCollection > .song-collection-list > li.active {
+    background: #372D6E;
+    color: #fff;
+}
+
 
 
 
@@ -413,3 +428,138 @@ body {
     background: #372D6E;
     color: #fff;
 }
+
+
+/* songCollection Each component*/
+#songCollectionEach {
+    display: none;
+    padding: 40px;
+    height: 100vh;
+}
+#songCollectionEach.active {
+    display: block;
+}
+
+#songCollectionEach > .collection-upper {
+    display: flex;
+    justify-content: space-between;
+    
+}
+#songCollectionEach > .collection-upper > .collection-upper-left {
+    flex: 1 1 auto;
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .return {
+    display: block;
+    width: 200px;
+    padding: 7px;
+    background: transparent;
+    border: 1px solid #372D6E;
+    cursor: pointer;
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info {
+    margin-top: 30px;
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info > li{
+    margin: 15px 0;
+}
+
+
+#songCollectionEach > .collection-upper > .collection-cover-wrap {
+    width: 300px;
+    overflow: hidden;
+    position: relative;
+}
+#songCollectionEach > .collection-upper > .collection-cover-wrap:hover .cover-shade {
+    opacity: 1;
+}
+
+#songCollectionEach > .collection-upper > .collection-cover-wrap > img{
+    width: auto;
+    height: 300px;
+} 
+#songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade {
+    opacity: 0;
+    transition: opacity .4s ease;
+    position: absolute;
+    top: 0;left: 0;bottom: 0;right: 0;
+    background: rgba(0,0,0, 0.4);
+    background: linear-gradient(0deg, rgba(0,0,0,0.958420868347339) 0%, rgba(0,0,0,0) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade > button {
+    background: transparent;
+    font: inherit;
+    padding: 6px 10px;
+    margin: 10px 0;
+    color: #fff;
+}
+#songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade > button:hover {
+    background: #372D6E;
+}
+
+#songCollectionEach > .collection-songs {
+    width: 100%;
+    height: calc(100vh - 300px - 50px - 40px);
+    overflow: scroll;
+}
+#songCollectionEach > .collection-songs > li {
+    margin: 20px 0;
+    padding: 5px 0px 5px 6px;
+    border-bottom: 1px solid #bbb;
+}
+
+
+
+/* #songCollectionEach .return {
+    display: block;
+    width: 200px;
+    padding: 7px;
+    background: transparent;
+    border: 1px solid #372D6E;
+    cursor: pointer;
+}
+#songCollectionEach .return:hover {
+    background: #372D6E;
+}
+
+#songCollectionEach .collection-songs {
+    overflow: scroll;
+    height: 400px;
+}
+}
+
+#songCollectionEach .collection-songs > li {
+    margin: 10px 0;
+
+}
+
+
+
+
+#songCollectionEach > .collection-cover-wrap {
+
+    display: flex;
+    flex-direction: column;
+}
+
+#songCollectionEach > .collection-cover-wrap > img {
+    width: 300px;
+    height: auto;
+} */
+/* 
+#songCollectionEach > .collection-cover-wrap > button {
+    padding: 7px 10px;
+    margin-top: 30px;
+    background: transparent;
+    border: 1px solid #372D6E;
+    font: inherit;
+    cursor: pointer;
+}
+#songCollectionEach > .collection-cover-wrap > button:hover {
+    background: #372D6E;
+    color: #fff;
+} */

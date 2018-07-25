@@ -1,3 +1,5 @@
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 {
     let view = {
         el: '#newCollection',
@@ -24,11 +26,22 @@
     };
 
     let model = {
-        collection: {},
+        data: {
+            name: '',
+            cover: '',
+            id: ''
+        },
 
         create(data) {
 
-            eventHub.emit('createSongCollectionFinished');
+            var SongCollection = AV.Object.extend('SongCollection');
+            // 新建对象
+            var songCollection = new SongCollection();
+            return songCollection.save({
+                name: data.collectionName, cover: data.collectionCover
+            }).then(data => {
+                Object.assign(this.data, _extends({ id: data.id }, data.attributes));
+            });
         }
     };
 
@@ -51,7 +64,6 @@
             $(this.view.el).on('submit', 'form', e => {
                 e.preventDefault();
                 let form = $(this.view.el).find('form').get(0);
-                console.log(form.collectionName.value);
                 let items = ['collectionName', 'collectionCover'];
                 let data = {};
                 items.reduce((prev, i) => {
@@ -60,7 +72,10 @@
                 }, data);
 
                 if (data.collectionName !== '') {
-                    this.model.create(data);
+                    this.model.create(data).then(() => {
+                        let data = JSON.parse(JSON.stringify(this.model.data));
+                        eventHub.emit('createSongCollectionFinished', data);
+                    });
                 } else {
                     $(this.view.el).find("[name='collectionName']").addClass('needInput').get(0).focus();
                 }
@@ -73,6 +88,10 @@
             });
 
             eventHub.on('createSongCollectionFinished', () => {
+                $(this.view.el).addClass('active');
+            });
+
+            eventHub.on('selectCollection', () => {
                 $(this.view.el).addClass('active');
             });
         }
