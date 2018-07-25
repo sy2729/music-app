@@ -26,7 +26,7 @@
                     <div class="cover-shade">
                         <form class="url-input">
                             <input name='url' class='input-url'></input>
-                            <input type='button' value='submit'>
+                            <input type="submit" value='submit'>
                             <p class='select-other-input'> < back </p>
                         </form>
                         <button class="use-url animate" >URL</button>
@@ -146,13 +146,11 @@
                 $(this.view.el).find('.url-input').removeClass('active animate').siblings().removeClass('active');
             });
 
-            
-            // $(this.view.el).find('.url-input').on('submit', "[name='url']", (e) => {
-            //     e.preventDefault();
-            //     console.log(1)
-            //     let value = $(this.view.el).find('.url-input').get(0).url;
-            //     console.log(value);
-            // });
+            $(this.view.el).on('submit', 'form', (e) => {
+                e.preventDefault();
+                let value = $(this.view.el).find('.url-input').get(0).url.value;
+                this.updateCover(value);
+            });
         },
 
         bindEventHub() {

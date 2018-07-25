@@ -9,7 +9,7 @@ button[type='submit'] {font: inherit;}
     clear: both;
 }
 
-button:hover {
+button:hover, input[type = 'submit']:hover {
     background: #372D6E;
     color: #fff;
     cursor: pointer;
@@ -317,7 +317,7 @@ body {
 }
 
 #songCollection > .song-collection-list {
-    height: 100vh;
+    height: calc(100vh - 50px);
     width: 20%;
     min-width: 150px;
     background: #ddd;
@@ -344,8 +344,9 @@ body {
 #songCollection > .otherArea {
     width: 80%;
     float: right;
-    height: 100vh;
+    height: calc(100vh - 50px);
     position: relative;
+    overflow: hidden;
 }
 
 #songCollection > .otherArea > #createNewCollection.active {
@@ -437,8 +438,8 @@ body {
 /* songCollection Each component*/
 #songCollectionEach {
     display: none;
-    padding: 40px;
-    height: 100vh;
+    padding: 40px 40px 10px 40px;
+    height: calc(100vh - 50px);
 }
 #songCollectionEach.active {
     display: block;
@@ -447,6 +448,7 @@ body {
 #songCollectionEach > .collection-upper {
     display: flex;
     justify-content: space-between;
+    height: 300px;
     
 }
 #songCollectionEach > .collection-upper > .collection-upper-left {
@@ -525,7 +527,7 @@ body {
     color: rgb(185, 176, 235);
 }
 
-#songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade > button {
+#songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade button, .cover-shade input[type='submit'] {
     background: transparent;
     font: inherit;
     padding: 4px 10px;
@@ -541,7 +543,7 @@ body {
 
 #songCollectionEach > .collection-songs {
     width: 100%;
-    height: calc(100vh - 300px - 50px - 40px);
+    height: calc(100% - 300px);
     overflow-y: scroll;
 }
 #songCollectionEach > .collection-songs > li {
