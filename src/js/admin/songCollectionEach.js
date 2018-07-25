@@ -22,7 +22,7 @@
                     </ul>
                 </div>
                 <div class="collection-cover-wrap">
-                    <img src={{cover}} />
+                    
                     <div class="cover-shade">
                         <form class="url-input">
                             <input name='url' class='input-url'></input>
@@ -83,17 +83,14 @@
 
             });
             
+            $(this.el).html(template);
             if (!data.songCollection.cover) {
-
-                template = template.replace(`{{cover}}`, data.defaultCover);
-
+                $(this.el).find('.collection-cover-wrap').css('background-image', `url(${data.defaultCover})`);
+                
             }else {
-
-                template = template.replace(`{{cover}}`, data.songCollection.cover);
+                $(this.el).find('.collection-cover-wrap').css('background-image', `url(${data.songCollection.cover})`)
 
             }
-
-            $(this.el).html(template);
         },
 
     };

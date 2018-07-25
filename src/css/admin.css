@@ -462,6 +462,10 @@ body {
     border: 1px solid #372D6E;
     cursor: pointer;
 }
+#songCollectionEach > .collection-upper > .collection-upper-left > .return:hover {
+    background: #372D6E;
+}
+
 #songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info {
     margin-top: 30px;
 }
@@ -474,15 +478,13 @@ body {
     width: 300px;
     overflow: hidden;
     position: relative;
+    background: transparent center center no-repeat;
+    background-size: cover;
 }
 #songCollectionEach > .collection-upper > .collection-cover-wrap:hover .cover-shade {
     opacity: 1;
 }
 
-#songCollectionEach > .collection-upper > .collection-cover-wrap > img{
-    width: auto;
-    height: 300px;
-} 
 #songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade {
     opacity: 0;
     transition: opacity .4s ease;
