@@ -24,8 +24,13 @@
                 <div class="collection-cover-wrap">
                     <img src={{cover}} />
                     <div class="cover-shade">
-                        <button class="use-url">URL</button>
-                        <button class="use-upload" id='uploadBtn'>Upload</button>
+                        <form class="url-input">
+                            <input name='url' class='input-url'></input>
+                            <input type='button' value='submit'>
+                            <p class='select-other-input'> < back </p>
+                        </form>
+                        <button class="use-url animate" >URL</button>
+                        <button class="use-upload animate" id='uploadBtn'>Upload</button>
                     </div>
                 </div>
             </div>
@@ -133,6 +138,21 @@
                 
             });
 
+            $(this.view.el).on('click', '.use-url', () => {
+                $(this.view.el).find('.url-input').addClass('active animate').siblings().addClass('active');
+            });
+
+            $(this.view.el).on('click', '.select-other-input', () => {
+                $(this.view.el).find('.url-input').removeClass('active animate').siblings().removeClass('active');
+            });
+
+            
+            // $(this.view.el).find('.url-input').on('submit', "[name='url']", (e) => {
+            //     e.preventDefault();
+            //     console.log(1)
+            //     let value = $(this.view.el).find('.url-input').get(0).url;
+            //     console.log(value);
+            // });
         },
 
         bindEventHub() {
@@ -140,7 +160,7 @@
             eventHub.on('selectCollection', (id)=>{
                 this.model.fill(id);
                 this.view.render(this.model.data);
-                this.initQiniu();
+                // this.initQiniu();
                 $(this.view.el).removeClass('active');
                 let timeId = setTimeout(() => {
                     $(this.view.el).addClass('active');

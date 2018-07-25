@@ -19,6 +19,10 @@ button:focus {
     outline: none;
 }
 
+.opacity-none {
+    opacity: 0;
+}
+
 .animate {
     animation: slideUp .5s ease-in-out forwards;
 }
@@ -488,14 +492,48 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: #fff;
+}
+#songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade > .url-input {
+    display: none;   
+}
+#songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade > .url-input.active {
+    display: block;
+}
+#songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade > .url-input.active > input {
+    height: 28px;
+}
+#songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade > .url-input > [type = 'button'] {
+    padding: 4px 6px;
+    color: inherit;
+    font: inherit;
+    background: transparent;
+    cursor: pointer;
+}
+
+#songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade > .url-input > [type = 'button']:hover {
+    background: #372D6E;
+}
+#songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade > .url-input > .select-other-input {
+    margin-top: 20px;
+    text-align: center;
+    color: inherit;
+    cursor: pointer;
+}
+
+#songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade > .url-input > .select-other-input:hover {
+    color: rgb(185, 176, 235);
 }
 
 #songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade > button {
     background: transparent;
     font: inherit;
-    padding: 6px 10px;
+    padding: 4px 10px;
     margin: 10px 0;
-    color: #fff;
+    color: inherit;
+}
+#songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade > button.active {
+    display: none;
 }
 #songCollectionEach > .collection-upper > .collection-cover-wrap > .cover-shade > button:hover {
     background: #372D6E;
@@ -504,7 +542,7 @@ body {
 #songCollectionEach > .collection-songs {
     width: 100%;
     height: calc(100vh - 300px - 50px - 40px);
-    overflow: scroll;
+    overflow-y: scroll;
 }
 #songCollectionEach > .collection-songs > li {
     margin: 20px 0;
