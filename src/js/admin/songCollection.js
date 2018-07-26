@@ -8,6 +8,10 @@
             <section class='otherArea'>
                 <div id='newCollection' class='active animate'></div>
                 <div id='createNewCollection' class='animate'></div>
+
+                <div class='page-shade animate-3' id='pageShade'></div>
+                <div class='songSelection animate-2' id='songSelection'></div>
+
                 <div id='songCollectionEach' class='animate clearfix'></div>
                 <div id='songsInCollection'></div>
             </section>
@@ -58,6 +62,7 @@
             this.createComponent('./dist/js/admin/createNewCollection.js');
             this.createComponent('./dist/js/admin/songCollectionEach.js');
             this.createComponent('./dist/js/admin/pageShade.js');
+            this.createComponent('./dist/js/admin/songSelection.js');
         },
         
         getAllData() {
@@ -77,7 +82,9 @@
                 let id = $(e.currentTarget).attr('data-id');
                 let song = this.querySong(id);
                 eventHub.emit('selectCollection', song);
-            })
+                console.log('clicked songCollection')
+            });
+            
         },
 
         querySong(id){

@@ -35,8 +35,6 @@
                 </div>
             </div>
 
-            <div class='page-shade animate-3' id='pageShade'></div>
-            <div class='songSelection animate-2' id='songSelection'></div>
             <div class="addSong">+</div>
 
             <ul class='collection-songs'>
@@ -152,14 +150,11 @@
                 let value = $(this.view.el).find('.url-input').get(0).url.value;
                 this.updateCover(value);
             });
-            $(this.view.el).one('click', '.addSong', (e) => {
-                this.createComponent('./dist/js/admin/songSelection.js');
-            });
             
             $(this.view.el).on('click', '.addSong', (e) => {
                 eventHub.emit('addSongToCollecton');
                 setTimeout(() => {
-                    $(this.view.el).on('click', (e) => {
+                    $('#pageShade').on('click', (e) => {
                         if (e.target.id && e.target.id === 'pageShade') {
                             eventHub.emit('closeAddSongToCollection');
                         }else{
@@ -204,11 +199,11 @@
                 })
         },
 
-        createComponent(path) {
-            let script = document.createElement('script');
-            script.src = path;
-            $(document.body).append(script);
-        },
+        // createComponent(path) {
+        //     let script = document.createElement('script');
+        //     script.src = path;
+        //     $(document.body).append(script);
+        // },
 
         initQiniu() {
             var uploader = Qiniu.uploader({

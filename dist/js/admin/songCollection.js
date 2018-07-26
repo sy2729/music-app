@@ -10,6 +10,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             <section class='otherArea'>
                 <div id='newCollection' class='active animate'></div>
                 <div id='createNewCollection' class='animate'></div>
+
+                <div class='page-shade animate-3' id='pageShade'></div>
+                <div class='songSelection animate-2' id='songSelection'></div>
+
                 <div id='songCollectionEach' class='animate clearfix'></div>
                 <div id='songsInCollection'></div>
             </section>
@@ -57,6 +61,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.createComponent('./dist/js/admin/createNewCollection.js');
             this.createComponent('./dist/js/admin/songCollectionEach.js');
             this.createComponent('./dist/js/admin/pageShade.js');
+            this.createComponent('./dist/js/admin/songSelection.js');
         },
 
         getAllData() {
@@ -73,6 +78,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 let id = $(e.currentTarget).attr('data-id');
                 let song = this.querySong(id);
                 eventHub.emit('selectCollection', song);
+                console.log('clicked songCollection');
             });
         },
 
