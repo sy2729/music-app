@@ -75,8 +75,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
 
         play() {
-            $(this.el).find('audio')[0].play();
-            $(this.el).find('.disc').addClass('active');
+            this.playPromise = $(this.el).find('audio')[0].play();
+            if (this.playPromise !== undefined) {
+                this.playPromise.then(_ => {
+                    // Automatic playback started!
+                    $(this.el).find('.disc').addClass('active');
+                    // We can now safely pause video...
+                    console.log('Automatic playback started!');
+                    // this.pause();
+                });
+            }
         },
 
         pause() {
