@@ -21,11 +21,24 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         
         `,
         render(data = {}) {
-            $(this.el).html(this.template);
+            if (!data.songSelecting) {
 
-            if (data.allSongs) {
-                let lis = this.createSongLis(data.allSongs);
-                $(this.el).find('.song-list-total').empty().append(lis);
+                $(this.el).html(this.template);
+
+                if (data.allSongs) {
+                    let lis = this.createSongLis(data.allSongs);
+                    $(this.el).find('.song-list-total').empty().append(lis);
+                } else {
+                    // for initial rendering
+                    // console.log('no all song data');
+                }
+            } else {
+                console.log(data.songSelected);
+                let lis = data.songSelected.map(i => {
+                    let li = $('<li></li>').text(i.name).attr('data-id', i.id);
+                    return li;
+                });
+                $(this.el).find('.song-list-selected').empty().append(lis);
             }
         },
 
@@ -43,7 +56,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     let model = {
         data: {
             allSongs: [],
-            songSelected: []
+            songSelected: [],
+            songSelecting: false
         },
 
         getAllSong() {
@@ -77,9 +91,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         bindEvent() {
             $(this.view.el).on('click', '.song-list-total > li > span', e => {
                 let id = $(e.currentTarget).addClass('active').attr('data-id');
+                let name = $(e.currentTarget).text();
                 $(e.currentTarget).parent().eq(0).addClass('active');
-
-                console.log(id);
+                this.model.data.songSelected.push({ id: id, name: name });
+                this.model.data.songSelecting = true;
+                this.view.render(this.model.data);
             });
         },
 

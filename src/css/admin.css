@@ -661,7 +661,7 @@ body {
 }
 #songSelection > .list-wrap ul li > span.active{
     pointer-events: none;
-    background: #bbb;
+    background: rgba(187, 187, 187, 0.6);
 }
 
 #songSelection > .list-wrap ul li:hover {

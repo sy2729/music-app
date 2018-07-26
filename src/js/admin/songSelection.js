@@ -19,12 +19,26 @@
         
         `,
         render(data = {}){
-            $(this.el).html(this.template);
+            if(!data.songSelecting) {
+                
+                $(this.el).html(this.template);
 
-            if(data.allSongs) {
-                let lis = this.createSongLis(data.allSongs);
-                $(this.el).find('.song-list-total').empty().append(lis);
+                if (data.allSongs) {
+                    let lis = this.createSongLis(data.allSongs);
+                    $(this.el).find('.song-list-total').empty().append(lis);
+                }else {
+                    // for initial rendering
+                    // console.log('no all song data');
+                }
+            }else {
+                console.log(data.songSelected);
+                let lis = data.songSelected.map((i)=>{
+                    let li = $('<li></li>').text(i.name).attr('data-id', i.id);
+                    return li
+                });
+                $(this.el).find('.song-list-selected').empty().append(lis);
             }
+
 
 
         },
@@ -44,6 +58,7 @@
         data: {
             allSongs:[],
             songSelected: [],
+            songSelecting: false,
         },
 
         getAllSong(){
@@ -79,9 +94,11 @@
         bindEvent(){
             $(this.view.el).on('click', '.song-list-total > li > span', (e)=>{
                 let id = $(e.currentTarget).addClass('active').attr('data-id');
+                let name = $(e.currentTarget).text();
                 $(e.currentTarget).parent().eq(0).addClass('active');
-                
-                console.log(id);
+                this.model.data.songSelected.push({id: id, name: name});
+                this.model.data.songSelecting = true;
+                this.view.render(this.model.data);
             })
         },
 
