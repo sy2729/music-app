@@ -640,7 +640,7 @@ body {
     border-bottom: 1px solid #bbb;
 }
 #songSelection > .list-wrap ul{
-    flex: 1 1 auto;
+    width: 50%;
     border: 1px solid #bbb;
     padding: 10px;
     background: rgba(255, 255, 255, 0.5);

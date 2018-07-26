@@ -7,8 +7,7 @@
 
                 </ul>
                 <ul class='song-list-selected'>
-                    <li>song1</li>
-                    <li>song8</li>
+                    <p style='color: #ddd;'>Select songs from the left panel<p>
                 </ul>
             </div>
 
@@ -99,7 +98,12 @@
                 this.model.data.songSelected.push({id: id, name: name});
                 this.model.data.songSelecting = true;
                 this.view.render(this.model.data);
+            });
+            
+            $(this.view.el).on('click', '.cancel', (e)=>{
+                eventHub.emit('closeAddSongToCollection');
             })
+            
         },
 
         bindEventHub(){
