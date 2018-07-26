@@ -30,6 +30,20 @@ button:focus {
     from {transform: translateY(30px); opacity: 0;}
     to {transform: translateY(0px); opacity: 1}
 }
+.animate-2 {
+    animation: slideUp2 .5s ease-in-out forwards;
+}
+@keyframes slideUp2 {
+    from {margin-top: 200px; opacity: 0;}
+    to {margin-top: 0px; opacity: 1}
+}
+.animate-3 {
+    animation: show .5s ease-in-out forwards;
+}
+@keyframes show {
+    from {opacity: 0;}
+    to {opacity: 1}
+}
 
 
 /* nav section */
@@ -440,10 +454,68 @@ body {
     display: none;
     padding: 40px 40px 10px 40px;
     height: calc(100vh - 50px);
+    position: relative;
 }
 #songCollectionEach.active {
     display: block;
 }
+
+#songCollectionEach > .addSong {
+    position: absolute;
+    top: calc(40px + 300px);
+    left: 40px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font: inherit;
+    font-size: 30px;
+    border-radius: 50%;
+    background: #fff;
+    text-align: center;
+    box-shadow: 2px 2px 10px 0 rgba(100, 100, 100, 0.4);
+    z-index: 1;
+}
+
+#songCollectionEach > .addSong:hover {
+    background: #372D6E;
+    color: #fff;
+}
+
+#songCollectionEach > #songSelection {
+    position: absolute;
+    background: #fff;
+    width: 70%;
+    height: 400px;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 2px 2px 10px 0 rgba(100, 100, 100, 0.4);
+    z-index: 3;
+    padding: 20px;
+    background: #fff url('../../dist/img/logo.svg') center center no-repeat;
+    background-size: 50%;
+}
+#songCollectionEach > #songSelection.active {
+    display: block;
+}
+#songCollectionEach > #pageShade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 2;
+}
+#songCollectionEach > #pageShade.active {
+    display: block;
+}
+
 
 #songCollectionEach > .collection-upper {
     display: flex;
@@ -456,7 +528,7 @@ body {
 }
 #songCollectionEach > .collection-upper > .collection-upper-left > .return {
     display: block;
-    width: 200px;
+    width: 100px;
     padding: 7px;
     background: transparent;
     border: 1px solid #372D6E;
@@ -480,6 +552,8 @@ body {
     position: relative;
     background: transparent center center no-repeat;
     background-size: cover;
+    box-shadow: 2px 2px 13px 0 rgba(100, 100, 100, 0.4);
+    margin-right: 30px;
 }
 #songCollectionEach > .collection-upper > .collection-cover-wrap:hover .cover-shade {
     opacity: 1;
@@ -552,6 +626,41 @@ body {
     margin: 20px 0;
     padding: 5px 0px 5px 6px;
     border-bottom: 1px solid #bbb;
+}
+
+
+
+/* songSelection - add song to the collection - a complex UI interface component */
+#songSelection > .list-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 300px;
+    border-bottom: 1px solid #bbb;
+}
+#songSelection > .list-wrap ul{
+    flex: 1 1 auto;
+    border: 1px solid #bbb;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.5);
+}
+#songSelection > .list-wrap ul li{
+    padding: 4px 0;
+    overflow-y: scroll;
+}
+#songSelection > .info-wrap {
+    height: calc(100% - 300px);
+}
+#songSelection > .info-wrap > .confirm {
+    float: right;
+    font: inherit;
+    background: #372D6E;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 6px 20px;
+    border: none;
+
 }
 
 

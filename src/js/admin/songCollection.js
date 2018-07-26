@@ -17,7 +17,7 @@
             if(data) {
                 let collections = data.songCollections;
                 let lis = collections.map((i, index)=>{
-                    let li = $('<li></li>').text(i.name).attr('data-id', i.id).addClass('animate opacity-none').css('animation-delay', `${0.1*index}s`);
+                    let li = $('<li></li>').text(i.name).attr('data-id', i.id).addClass('animate opacity-none').css('animation-delay', `${0.05*index}s`);
                     return li;
                 });
                 $(this.el).find('.song-collection-list').empty().append(lis);
@@ -57,6 +57,7 @@
             this.createComponent('./dist/js/admin/newCollection.js');
             this.createComponent('./dist/js/admin/createNewCollection.js');
             this.createComponent('./dist/js/admin/songCollectionEach.js');
+            this.createComponent('./dist/js/admin/pageShade.js');
         },
         
         getAllData() {

@@ -34,7 +34,11 @@
                     </div>
                 </div>
             </div>
-            
+
+            <div class='page-shade animate-3' id='pageShade'></div>
+            <div class='songSelection animate-2' id='songSelection'></div>
+            <div class="addSong">+</div>
+
             <ul class='collection-songs'>
                 <li>song1</li>
                 <li>song2</li>
@@ -141,6 +145,22 @@
                 let value = $(this.view.el).find('.url-input').get(0).url.value;
                 this.updateCover(value);
             });
+            $(this.view.el).one('click', '.addSong', e => {
+                this.createComponent('./dist/js/admin/songSelection.js');
+            });
+
+            $(this.view.el).on('click', '.addSong', e => {
+                eventHub.emit('addSongToCollecton');
+                setTimeout(() => {
+                    $(this.view.el).on('click', e => {
+                        if (e.target.id && e.target.id === 'pageShade') {
+                            eventHub.emit('closeAddSongToCollection');
+                        } else {
+                            return;
+                        };
+                    });
+                }, 0);
+            });
         },
 
         bindEventHub() {
@@ -172,6 +192,12 @@
                 this.view.render(this.model.data);
                 $(this.view.el).addClass('active');
             });
+        },
+
+        createComponent(path) {
+            let script = document.createElement('script');
+            script.src = path;
+            $(document.body).append(script);
         },
 
         initQiniu() {
@@ -216,6 +242,7 @@
                     },
                     'Error': function (up, err, errTip) {
                         //上传出错时,处理相关的事情
+                        alert(err);
                     },
                     'UploadComplete': function () {
                         //队列文件处理完毕后,处理相关的事情
