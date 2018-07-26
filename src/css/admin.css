@@ -647,11 +647,23 @@ body {
     overflow-y: scroll;
 }
 #songSelection > .list-wrap ul li{
-    padding: 10px 2px;
     text-indent: 3px;
     transition: background .4s ease;
     cursor: pointer;
 }
+#songSelection > .list-wrap ul li.active{
+    cursor: not-allowed;
+}
+#songSelection > .list-wrap ul li > span{
+    padding: 10px 2px;
+    display: block;
+    width: 100%;   
+}
+#songSelection > .list-wrap ul li > span.active{
+    pointer-events: none;
+    background: #bbb;
+}
+
 #songSelection > .list-wrap ul li:hover {
     background: #ccc;
 }

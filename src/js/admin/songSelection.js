@@ -31,7 +31,8 @@
 
         createSongLis(data) {
             let lis = data.map((i)=>{
-                return $('<li></li>').text(i.name).attr('data-id', i.id);
+                let span = $('<span></span>').text(i.name).attr('data-id', i.id);
+                return $('<li></li>').append(span)
             });
 
             return lis;
@@ -42,6 +43,7 @@
     let model = {
         data: {
             allSongs:[],
+            songSelected: [],
         },
 
         getAllSong(){
@@ -75,7 +77,12 @@
         },
 
         bindEvent(){
-
+            $(this.view.el).on('click', '.song-list-total > li > span', (e)=>{
+                let id = $(e.currentTarget).addClass('active').attr('data-id');
+                $(e.currentTarget).parent().eq(0).addClass('active');
+                
+                console.log(id);
+            })
         },
 
         bindEventHub(){

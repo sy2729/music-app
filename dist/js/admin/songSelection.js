@@ -31,7 +31,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
         createSongLis(data) {
             let lis = data.map(i => {
-                return $('<li></li>').text(i.name).attr('data-id', i.id);
+                let span = $('<span></span>').text(i.name).attr('data-id', i.id);
+                return $('<li></li>').append(span);
             });
 
             return lis;
@@ -41,7 +42,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
     let model = {
         data: {
-            allSongs: []
+            allSongs: [],
+            songSelected: []
         },
 
         getAllSong() {
@@ -72,7 +74,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
         },
 
-        bindEvent() {},
+        bindEvent() {
+            $(this.view.el).on('click', '.song-list-total > li > span', e => {
+                let id = $(e.currentTarget).addClass('active').attr('data-id');
+                $(e.currentTarget).parent().eq(0).addClass('active');
+
+                console.log(id);
+            });
+        },
 
         bindEventHub() {
             eventHub.on('addSongToCollecton', () => {
