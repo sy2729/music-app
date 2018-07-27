@@ -38,41 +38,7 @@
             <div class="addSong">+</div>
 
             <ul class='collection-songs'>
-                <li>song1</li>
-                <li>song2</li>
-                <li>song3</li>
-                    <li>song4</li>
-                    <li>song5</li>
-                    <li>song6</li>
-                    <li>song7</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, necessitatibus. Quam perspiciatis, libero quisquam praesentium quo consequatur maxime sequi! Commodi dicta quaerat a incidunt distinctio fugiat quidem. Tempora, maxime eum.</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                    <li>song8</li>
-                <li>song8</li>
+               
             </ul>
 
            
@@ -90,6 +56,15 @@
             } else {
                 $(this.el).find('.collection-cover-wrap').css('background-image', `url(${data.songCollection.cover})`);
             }
+
+            let songs = data.songCollection.songs;
+            if (songs !== undefined) {
+                console.log('has songs');
+                let lis = songs.map(i => {
+                    return $('<li></li>').text(i.name).attr('id', i.id);
+                });
+                $(this.el).find('.collection-songs').append(lis);
+            }
         }
 
     };
@@ -102,6 +77,10 @@
 
         fill(data) {
             this.data.songCollection = data;
+            this.findAllSongs(data).then(() => {
+
+                eventHub.emit('songIdFetchedInCollection');
+            });
         },
 
         updateCover(link) {
@@ -112,6 +91,29 @@
 
                 return response;
             });
+        },
+
+        findAllSongs(data) {
+            // 微积分课程
+            let songCollection = AV.Object.createWithoutData('SongCollection', data.id);
+            // 构建 StudentCourseMap 的查询
+            var query = new AV.Query('SongMapSongCollection');
+
+            // 查询所有选择了线性代数的学生
+            query.equalTo('collection', songCollection);
+
+            let songIds = [];
+            // 执行查询
+            return query.find().then(songMapSongCollection => {
+                // studentCourseMaps 是所有 course 等于线性代数的选课对象
+                // 然后遍历过程中可以访问每一个选课对象的 student,course,duration,platform 等属性
+                songMapSongCollection.forEach((scm, i, a) => {
+                    let song = scm.get('song');
+                    songIds.push(song.id);
+                });
+                this.data.songIds = songIds;
+            });
+            return;
         }
     };
 
@@ -179,6 +181,25 @@
 
                 $(this.view.el).removeClass('active');
             });
+            eventHub.on('sendBackAllSongDataToCollection', allData => {
+
+                this.filterFromAllSongData(allData, this.model.data.songIds);
+            });
+        },
+
+        filterFromAllSongData(allSongData, ids) {
+            let songs = [];
+            ids.map(id => {
+                for (let i = 0; i < allSongData.length; i++) {
+                    if (allSongData[i].id === id) {
+                        songs.push(allSongData[i]);
+                        break;
+                    }
+                }
+            });
+
+            this.model.data.songCollection.songs = songs;
+            this.view.render(this.model.data);
         },
 
         updateCover(link) {
@@ -188,7 +209,6 @@
                 $(this.view.el).addClass('active');
             });
         },
-
         // createComponent(path) {
         //     let script = document.createElement('script');
         //     script.src = path;

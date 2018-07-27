@@ -79,10 +79,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             if (this.playPromise !== undefined) {
                 this.playPromise.then(_ => {
                     // Automatic playback started!
+                    console.log('Automatic playback started!');
                     $(this.el).find('.disc').addClass('active');
                     // We can now safely pause video...
-                    console.log('Automatic playback started!');
-                    // this.pause();
                 });
             }
         },

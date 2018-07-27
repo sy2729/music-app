@@ -35,17 +35,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 let lis = this.createSongLis(data.songSelected, true);
                 $(this.el).find('.song-list-selected').empty().append(lis);
             };
-
-            console.log(data.songSelected);
-            console.log(data.songSelected.length);
             if (data.songSelected.length === 0) {
-                console.log(1);
                 this.disableBUtton();
-                console.log('disabled');
             } else {
-                console.log(2);
                 this.enableButton();
-                console.log('enabled');
             }
         },
 
@@ -134,6 +127,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             // // 保存选课表对象
             // studentCourseMapTom.save();
 
+            // let collection = this.data;
+            // let obj = {};
+            // obj = {...collection};
+            // console.log(obj);
+
             let collection = AV.Object.createWithoutData('SongCollection', this.data.collectionId);
             this.data.songSelected.map(i => {
                 let song = AV.Object.createWithoutData('Song', i.id);
@@ -201,6 +199,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
             eventHub.on('saveAddSongToCollection', () => {
                 $(this.view.el).removeClass('active');
+            });
+            eventHub.on('songIdFetchedInCollection', () => {
+                eventHub.emit('sendBackAllSongDataToCollection', this.model.data.allSongs);
             });
         }
     };
