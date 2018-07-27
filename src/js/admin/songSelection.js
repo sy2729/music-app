@@ -3,9 +3,7 @@
         el: '#songSelection',
         template: `
             <div class="list-wrap">
-                <ul class='song-list-total'>
-
-                </ul>
+                <ul class='song-list-total'></ul>
                 <ul class='song-list-selected'>
                     <p style='color: #ddd;'>Select songs from the left panel<p>
                 </ul>

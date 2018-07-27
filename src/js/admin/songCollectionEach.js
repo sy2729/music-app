@@ -38,7 +38,7 @@
             <div class="addSong">+</div>
 
             <ul class='collection-songs'>
-               
+               <div class='animation'><div></div><div></div><div>
             </ul>
 
            
@@ -64,7 +64,7 @@
                 let lis = songs.map((i)=>{
                     return $('<li></li>').text(i.name).attr('id', i.id);
                 });
-                $(this.el).find('.collection-songs').append(lis);
+                $(this.el).find('.collection-songs').empty().append(lis);
             }
         },
 
