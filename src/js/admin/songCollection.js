@@ -82,7 +82,6 @@
                 let id = $(e.currentTarget).attr('data-id');
                 let song = this.querySong(id);
                 eventHub.emit('selectCollection', song);
-                console.log('clicked songCollection')
             });
             
         },

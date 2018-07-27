@@ -13,7 +13,7 @@
 
             <div class='info-wrap clearfix'>
                 <button class='cancel'>Cancel</button>
-                <button class='confirm'>OK</button>
+                <button class='confirm' disabled>OK</button>
             </div>
         
         `,
@@ -23,32 +23,59 @@
                 $(this.el).html(this.template);
 
                 if (data.allSongs) {
-                    let lis = this.createSongLis(data.allSongs);
+                    let lis = this.createSongLis(data.allSongs, false);
                     $(this.el).find('.song-list-total').empty().append(lis);
                 }else {
                     // for initial rendering
-                    // console.log('no all song data');
+                    // 
                 }
             }else {
-                console.log(data.songSelected);
-                let lis = data.songSelected.map((i)=>{
-                    let li = $('<li></li>').text(i.name).attr('data-id', i.id);
-                    return li
-                });
+                let lis = this.createSongLis(data.songSelected, true);
                 $(this.el).find('.song-list-selected').empty().append(lis);
+            };
+
+            
+            console.log(data.songSelected)
+            console.log(data.songSelected.length)
+            if(data.songSelected.length === 0) {
+                console.log(1)
+                this.disableBUtton();
+                console.log('disabled')
+            }else{
+                console.log(2)
+                this.enableButton();
+                console.log('enabled')
             }
 
 
 
         },
 
-        createSongLis(data) {
+        createSongLis(data, selectedColumn) {
             let lis = data.map((i)=>{
-                let span = $('<span></span>').text(i.name).attr('data-id', i.id);
-                return $('<li></li>').append(span)
+                if (selectedColumn) {
+                    let span = $('<span></span>').text(i.name)
+                    let icon = $('<i></i>').text('x');
+                    return $('<li></li>').append(span, icon).attr('data-id', i.id);;
+                }else {
+                    let span = $('<span></span>').text(i.name).attr('data-id', i.id);
+                    return $('<li></li>').append(span)
+                }
+
             });
 
             return lis;
+        },
+
+        deselectStyle(id){
+            $(this.el).find(`[data-id = '${id}']`).removeClass('active').parent().removeClass('active');
+        },
+
+        enableButton(){
+            $(this.el).find('.confirm').prop('disabled', false);
+        },
+        disableBUtton(){
+            $(this.el).find('.confirm').get(0).disabled = true;
         }
 
     };
@@ -58,6 +85,7 @@
             allSongs:[],
             songSelected: [],
             songSelecting: false,
+            collectionId: '',
         },
 
         getAllSong(){
@@ -69,6 +97,55 @@
                 return data
 
             });
+        },
+
+        cancelAddTheSong(id){
+            let songs = this.data.songSelected;
+            for (let i = 0; i < songs.length; i++) {
+                if(songs[i].id === id) {
+                    songs.splice(i, 1);
+                    break
+                }
+            };
+            this.data.songSelected = songs;
+        },
+
+        addSong(obj){
+            this.data.songSelecting = true;
+            this.data.songSelected.push(obj);
+        },
+
+        saveCollectionSong(){
+            // var studentTom = new AV.Object('Student');
+            // studentTom.set('name', 'Tom');// 学生 Tom
+
+            // var courseLinearAlgebra = new AV.Object('Course');
+            // courseLinearAlgebra.set('name', '线性代数');
+
+            // // 选课表对象
+            // var studentCourseMapTom = new AV.Object('StudentCourseMap');
+
+            // // 设置关联
+            // studentCourseMapTom.set('student', studentTom);
+            // studentCourseMapTom.set('course', courseLinearAlgebra);
+
+            // // 设置学习周期
+            // studentCourseMapTom.set('duration', [new Date(2015, 2, 19), new Date(2015, 4, 21)]);
+
+            // // 设置操作平台
+            // studentCourseMapTom.set('platform', 'web');
+
+            // // 保存选课表对象
+            // studentCourseMapTom.save();
+
+            let collection = AV.Object.createWithoutData('SongCollection', this.data.collectionId);
+            this.data.songSelected.map((i)=>{
+                let song = AV.Object.createWithoutData('Song', i.id);
+                let songMapSongCollection = new AV.Object('SongMapSongCollection');
+                songMapSongCollection.save({song: song, collection, collection});
+            })
+
+            // Song.set('name', '东莞');
         }
     };
 
@@ -77,8 +154,6 @@
             this.view = view;
             this.model = model;
             this.getAllSong();
-
-            this.view.render({});
             this.bindEvent();
             this.bindEventHub();
         },
@@ -95,25 +170,46 @@
                 let id = $(e.currentTarget).addClass('active').attr('data-id');
                 let name = $(e.currentTarget).text();
                 $(e.currentTarget).parent().eq(0).addClass('active');
-                this.model.data.songSelected.push({id: id, name: name});
-                this.model.data.songSelecting = true;
+                this.model.addSong({ id: id, name: name });
                 this.view.render(this.model.data);
             });
             
             $(this.view.el).on('click', '.cancel', (e)=>{
                 eventHub.emit('closeAddSongToCollection');
             })
+            $(this.view.el).on('click', '.song-list-selected > li', (e)=>{
+                let id = $(e.currentTarget).attr('data-id');
+                
+                this.model.cancelAddTheSong(id);
+                this.view.render(this.model.data);
+                this.deselectStyle(id);
+                
+            });
+
+            $(this.view.el).on('click', '.confirm', ()=>{
+                this.model.saveCollectionSong();
+                eventHub.emit('saveAddSongToCollection')
+            })
             
         },
 
+        deselectStyle(id){
+            this.view.deselectStyle(id);
+        },
+
+
         bindEventHub(){
-            eventHub.on('addSongToCollecton', ()=>{
+            eventHub.on('addSongToCollecton', (id)=>{
+                this.model.data.collectionId = id;
                 $(this.view.el).addClass('active');
             });
             eventHub.on('closeAddSongToCollection', ()=>{
                 
                 $(this.view.el).removeClass('active');
-            })
+            });
+            eventHub.on('saveAddSongToCollection', ()=>{
+                $(this.view.el).removeClass('active');
+            });
         }
     };
 

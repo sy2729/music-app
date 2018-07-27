@@ -19,6 +19,11 @@ button:focus {
     outline: none;
 }
 
+button:disabled {
+    color: #ddd !important;
+    background: #eee !important;
+}
+
 .opacity-none {
     opacity: 0;
 }
@@ -654,7 +659,7 @@ body {
 #songSelection > .list-wrap ul li.active{
     cursor: not-allowed;
 }
-#songSelection > .list-wrap ul li > span{
+#songSelection > .list-wrap ul li > span, #songSelection > .list-wrap ul li > i{
     padding: 10px 2px;
     display: block;
     width: 100%;   
@@ -666,6 +671,37 @@ body {
 
 #songSelection > .list-wrap ul li:hover {
     background: #ccc;
+}
+/* style for the songSelection right column */
+#songSelection > .list-wrap ul.song-list-selected > li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+#songSelection > .list-wrap ul.song-list-selected > li:hover {
+    background: initial;
+}
+#songSelection > .list-wrap ul.song-list-selected > li > i {
+    display: none;
+    width: initial;
+    font: inherit;
+    color: #C2C2C2;
+    padding: 0;
+    text-indent: initial;
+    border: 1px solid #C2C2C2;
+    text-align: center;
+    min-width: 25px;
+    height: 25px;
+    /* line-height: 25px; */
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    
+    
+}
+#songSelection > .list-wrap ul.song-list-selected > li:hover > i{
+    display: flex;
 }
 
 

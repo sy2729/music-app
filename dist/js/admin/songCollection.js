@@ -78,7 +78,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 let id = $(e.currentTarget).attr('data-id');
                 let song = this.querySong(id);
                 eventHub.emit('selectCollection', song);
-                console.log('clicked songCollection');
             });
         },
 

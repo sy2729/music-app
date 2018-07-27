@@ -27,6 +27,9 @@
             eventHub.on('closeAddSongToCollection', () => {
                 $(this.view.el).removeClass('active');
             });
+            eventHub.on('saveAddSongToCollection', () => {
+                $(this.view.el).removeClass('active');
+            });
         }
     };
 

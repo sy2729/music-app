@@ -145,7 +145,7 @@
             });
 
             $(this.view.el).on('click', '.addSong', e => {
-                eventHub.emit('addSongToCollecton');
+                eventHub.emit('addSongToCollecton', this.model.data.songCollection.id);
                 setTimeout(() => {
                     $('#pageShade').on('click', e => {
                         if (e.target.id && e.target.id === 'pageShade') {
