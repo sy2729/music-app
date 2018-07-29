@@ -19,6 +19,7 @@
 
             this.view.render();
             this.bindEvents();
+            this.bindEventHub();
         },
 
         bindEvents() {
@@ -33,6 +34,12 @@
                 page = $(e.currentTarget).attr('data-page');
                 eventHub.emit('switchPage', page);
             });
+        },
+
+        bindEventHub() {
+            // eventHub.on('viewCollectionList', ()=>{
+            //     $(this.view.el).addClass('active');
+            // })
         }
     };
 

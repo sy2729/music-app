@@ -23,6 +23,9 @@ ul > li {list-style: none;}
     width: 100%;
     z-index: 3;
 }
+.wrap-content-above.active {
+    display: none;
+}
 
 
 // top section
@@ -62,6 +65,10 @@ ul > li {list-style: none;}
     display: flex;
     border-bottom: 1px solid #E5E5E5;
     background: #fff;
+
+    &.active {
+        display: none;
+    }
 
     div {
         width: 33.3%;
@@ -139,6 +146,13 @@ ul > li {list-style: none;}
 // list recommendation area
 
  .list-recommendation-wrap {
+     a.more {
+        transform: translateY(-100%);
+        padding: 5px 10px;
+        text-decoration: underline;
+        color: #8A8A8A;
+        display: block;
+     }
      ul {
          display: flex;
          flex-wrap: wrap;
@@ -160,6 +174,7 @@ ul > li {list-style: none;}
                  height: px(104.55);
                  width: 100%;
                  z-index: 1;
+                 pointer-events: none;
              }
 
 
@@ -269,4 +284,11 @@ ul > li {list-style: none;}
         // -webkit-transform: scale(.75);
         // transform: scale(.75);
     }
+}
+
+
+////------------ collectionList Page ------------
+.songCollectionList {
+    
+
 }

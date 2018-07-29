@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+        !function () {
+            var pageWidth = window.innerWidth;
+
+            document.write(`<style>html{font-size: ${pageWidth / 10}px}</style>`)
+        }()
+    </script>
+    <link rel="stylesheet" href="./dist/css/normalize.css">
+
+</head>
+
+<body>
+
+    <div class='songCollectionList' id="songCollectionList"></div>
+
+
+
+
+    <script src="./vendor/av-min.js"></script>
+    <script src="./vendor/av.js"></script>
+    <script src="./vendor/qiniu.min.js"></script>
+    <script src="./vendor/jquery.js"></script>
+    <script src="./dist/js/eventHub.js"></script>
+    <script src="./dist/js/app/eachSongCollectionList.js"></script>
+</body>
+
+</html>

@@ -149,12 +149,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
             let collection = AV.Object.createWithoutData('SongCollection', this.data.collectionId);
             this.data.songSelected.map(i => {
+
                 let song = AV.Object.createWithoutData('Song', i.id);
                 let songMapSongCollection = new AV.Object('SongMapSongCollection');
-                songMapSongCollection.save({ song: song, collection, collection });
+                songMapSongCollection.save({ song: song, collection, collection, songName: i.name });
             });
-
-            // Song.set('name', '东莞');
         }
     };
 

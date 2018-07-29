@@ -64,6 +64,9 @@
                     $(this.view.el).addClass('active').siblings().removeClass('active');
                 }
             })
+            // eventHub.on('viewCollectionList', () => {
+            //     $(this.view.el).removeClass('active');
+            // })
         }
     }
 
