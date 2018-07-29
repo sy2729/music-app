@@ -71,7 +71,8 @@
     let model = {
         data: {
             songCollection: {},
-            defaultCover: './dist/img/temp_2.png'
+            defaultCover: './dist/img/temp_2.png',
+            songIds: []
         },
 
         fill(data) {
@@ -186,12 +187,12 @@
 
                 $(this.view.el).removeClass('active');
             });
-            // eventHub.on('saveAddSongToCollection', () => {
-
-            //     this.updateCover(link);
-
-            //     $(this.view.el).removeClass('active');
-            // })
+            eventHub.on('saveAddSongToCollection', (data = {}) => {
+                data.forEach(i => {
+                    this.model.data.songCollection.songs.push(i);
+                });
+                this.view.render(this.model.data);
+            });
             eventHub.on('sendBackAllSongDataToCollection', allData => {
 
                 this.filterFromAllSongData(allData, this.model.data.songIds);

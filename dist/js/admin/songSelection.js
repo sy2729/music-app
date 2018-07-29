@@ -196,7 +196,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
             $(this.view.el).on('click', '.confirm', () => {
                 this.model.saveCollectionSong();
-                eventHub.emit('saveAddSongToCollection');
+                eventHub.emit('saveAddSongToCollection', this.model.data.songSelected);
             });
         },
 
@@ -208,6 +208,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             eventHub.on('addSongToCollecton', data => {
                 this.model.data.collectionId = data.collectionId;
                 this.model.data.alreadySelected = data.songsInCollection;
+                this.view.render(this.model.data);
                 this.view.disableAlreadySelected(this.model.data.alreadySelected);
                 $(this.view.el).addClass('active');
             });

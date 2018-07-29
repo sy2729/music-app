@@ -200,7 +200,7 @@
 
             $(this.view.el).on('click', '.confirm', ()=>{
                 this.model.saveCollectionSong();
-                eventHub.emit('saveAddSongToCollection')
+                eventHub.emit('saveAddSongToCollection', this.model.data.songSelected)
             })
             
         },
@@ -214,6 +214,7 @@
             eventHub.on('addSongToCollecton', (data)=>{
                 this.model.data.collectionId = data.collectionId;
                 this.model.data.alreadySelected = data.songsInCollection;
+                this.view.render(this.model.data);
                 this.view.disableAlreadySelected(this.model.data.alreadySelected)
                 $(this.view.el).addClass('active');
             });
