@@ -29,6 +29,9 @@
             eventHub.on('songAdding', ()=>{
                 $(this.view.el).removeClass('active');
             })
+            eventHub.on('collectionDeleting', ()=>{
+                $(this.view.el).removeClass('active');
+            })
             eventHub.on('songDeleted', ()=>{
                 $(this.view.el).addClass('active');
             })
@@ -39,6 +42,9 @@
                 $(this.view.el).addClass('active');
             })
             eventHub.on('updated', ()=>{
+                $(this.view.el).addClass('active');
+            })
+            eventHub.on('collectionDeleted', ()=>{
                 $(this.view.el).addClass('active');
             })
         }

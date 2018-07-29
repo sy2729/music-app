@@ -7,7 +7,7 @@
                     <button class='return'>Return</button>
                     <ul class='collection-basic-info'>
                         <li>
-                            <span>Collection Name:</span>
+                            <span>Collection Name: </span>
                             <span>{{name}}</span>
                         </li>
                         <li>
@@ -17,6 +17,9 @@
                         <li class='tags'>
                             <span>{{tag}}</span>
                             <span>{{tag}}</span>
+                        </li>
+                        <li>
+                            <button class='delete'>Delete</button>
                         </li>
                         
                     </ul>
@@ -117,6 +120,17 @@
                 this.data.songIds = songIds;
             });
             return;
+        },
+
+        delete(id) {
+            console.log(id);
+            var collection = AV.Object.createWithoutData('SongCollection', id);
+            console.log(collection);
+
+            return collection.destroy().then(success => {}, function (error) {
+                console.log('删除失败');
+                console.log(error);
+            });
         }
     };
 
@@ -148,6 +162,14 @@
                 let value = $(this.view.el).find('.url-input').get(0).url.value;
                 this.updateCover(value);
             });
+            $(this.view.el).on('click', '.delete', e => {
+                eventHub.emit('collectionDeleting');
+                this.model.delete(this.model.data.songCollection.id).then(() => {
+                    eventHub.emit('collectionDeleted', this.model.data.songCollection.id);
+                    eventHub.emit('returnToHome');
+                    this.model.data = {};
+                });
+            });
 
             $(this.view.el).on('click', '.addSong', e => {
                 eventHub.emit('addSongToCollecton', {
@@ -168,8 +190,8 @@
 
         bindEventHub() {
             // this.on
-            eventHub.on('selectCollection', id => {
-                this.model.fill(id);
+            eventHub.on('selectCollection', data => {
+                this.model.fill(data);
                 this.view.render(this.model.data);
                 // this.initQiniu();
                 $(this.view.el).removeClass('active');

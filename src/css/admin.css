@@ -24,6 +24,11 @@ button:disabled {
     background: #eee !important;
 }
 
+button.delete:hover {
+    background: rgb(212, 39, 39);
+    color: #fcfcfc;
+}
+
 .opacity-none {
     opacity: 0;
 }
@@ -559,6 +564,19 @@ body {
 }
 #songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info > li{
     margin: 15px 0;
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info > li > button.delete{
+    background: transparent;
+    font: inherit;
+    border-color: #ddd;
+    color: #ddd;
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info > li > button.delete:hover {
+    background: rgb(212, 39, 39);
+    color: #fcfcfc;
 }
 
 

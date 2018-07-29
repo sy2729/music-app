@@ -117,6 +117,17 @@
                 this.model.data.songCollections.push(data);
                 this.view.render(this.model.data)
             })
+            eventHub.on('collectionDeleted', (id)=>{
+                let collections = this.model.data.songCollections;
+                for (let i = 0; i < collections.length; i++) {
+                    if(collections[i].id === id) {
+                        collections.splice(i,1);
+                        break
+                    }
+                }
+                this.model.data.songCollections = collections;
+                this.view.render(this.model.data);
+            })
         },
 
         createComponent(path) {
