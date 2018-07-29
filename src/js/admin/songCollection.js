@@ -70,6 +70,7 @@
         getAllData() {
             this.model.find()
             .then(()=>{
+                eventHub.emit('fullyLoaded');
                 this.view.render(this.model.data);
             })
             .then(()=>{

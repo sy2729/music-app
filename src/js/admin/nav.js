@@ -11,6 +11,7 @@
         `, 
         render(){
             $(this.el).html(this.template);
+            $(this.el).find('li').eq(0).addClass('active');
         }
 
     };

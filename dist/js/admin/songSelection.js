@@ -39,7 +39,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 this.enableButton();
             };
 
-            console.log(data.alreadySelected);
             // if(this.model.data.alreadySelected !== undefined) {
             //     this.model.data.alreadySelected.map((i)=>{
             //         console.log(i);

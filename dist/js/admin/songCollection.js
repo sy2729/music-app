@@ -68,6 +68,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
         getAllData() {
             this.model.find().then(() => {
+                eventHub.emit('fullyLoaded');
                 this.view.render(this.model.data);
             }).then(() => {
                 this.bindEventHub();

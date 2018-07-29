@@ -37,7 +37,6 @@
                 this.enableButton();
             };
 
-            console.log(data.alreadySelected);
             // if(this.model.data.alreadySelected !== undefined) {
             //     this.model.data.alreadySelected.map((i)=>{
             //         console.log(i);

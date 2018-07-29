@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./src/css/admin.css">
 </head>
 <body>
-    
+    <div id='loading'></div>
     <nav id='nav'>
         
     </nav>
@@ -33,13 +33,6 @@
 
 
 
-    <script>
-        window.onerror = function(file, message, row) {
-            // console.log(file)
-            // console.log(message)
-            // console.log(row)
-        }
-    </script>
     <script src="./vendor/jquery.js"></script>
     <script src="./vendor/av-min.js"></script>
     <script src="./vendor/av.js"></script>
@@ -64,17 +57,8 @@
     <script src="./dist/js/admin/upload-song.js"></script>
     <script src="./dist/js/admin/nav.js"></script>
     <script src="./dist/js/admin/songCollection.js"></script>
+    <script src="./dist/js/admin/loading.js"></script>
     
-
-
-
-    <script>
-        window.onload = function () {
-            $('nav > ul > li').eq(0).addClass('active');
-        }
-
-    </script>
-
 
     <script>
         var anim = $('.uploadAnim');
