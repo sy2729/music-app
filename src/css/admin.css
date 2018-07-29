@@ -633,6 +633,7 @@ body {
     margin: 20px 0;
     padding: 5px 0px 5px 6px;
     border-bottom: 1px solid #bbb;
+    opacity: 0;
 }
 #songCollectionEach > .collection-songs > .animation {
     position: absolute;
@@ -654,7 +655,6 @@ body {
 }
 #songCollectionEach > .collection-songs > .animation > div:nth-child(2) {
     background: rgba(55, 45, 110, 0.3);
-    animation: scaling .5s infinite ease-in-out reverse;
     animation-delay: .3s;
 }
 @keyframes scaling {

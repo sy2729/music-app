@@ -35,6 +35,8 @@
     let model = {
         data: {
             songCollections: [],
+            currentSelected: '',
+            rightPanelBlank: true,
         },
 
         find(){
@@ -81,7 +83,11 @@
                 $(e.currentTarget).addClass('active').siblings().removeClass('active');
                 let id = $(e.currentTarget).attr('data-id');
                 let song = this.querySong(id);
-                eventHub.emit('selectCollection', song);
+                this.model.data.rightPanelBlank = false;
+                if (this.model.data.currentSelected !== id || this.model.data.rightPanelBlank) {
+                    this.model.data.currentSelected = id;
+                    eventHub.emit('selectCollection', song);
+                }
             });
             
         },
@@ -101,6 +107,8 @@
         bindEventHub() {
             switchPage.call(this, 'songCollection');
             eventHub.on('returnToHome', () => {
+                this.model.data.rightPanelBlank = true;
+                this.model.data.currentSelected = '';
                 $(this.view.el).find('.song-collection-list > li').removeClass('active');
             });
 

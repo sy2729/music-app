@@ -59,9 +59,8 @@
 
             let songs = data.songCollection.songs;
             if (songs !== undefined) {
-                console.log('has songs');
-                let lis = songs.map(i => {
-                    return $('<li></li>').text(i.name).attr('id', i.id);
+                let lis = songs.map((i, index) => {
+                    return $('<li></li>').text(i.name).attr('id', i.id).addClass('animate').css('animation-delay', `${0.05 * index}s`);
                 });
                 $(this.el).find('.collection-songs').empty().append(lis);
             }
@@ -77,6 +76,10 @@
 
         fill(data) {
             this.data.songCollection = data;
+            console.log(this.data.songCollection.songs);
+            if (this.data.songCollection.songs !== undefined) {
+                return;
+            }
             this.findAllSongs(data).then(() => {
 
                 eventHub.emit('songIdFetchedInCollection');
@@ -147,7 +150,10 @@
             });
 
             $(this.view.el).on('click', '.addSong', e => {
-                eventHub.emit('addSongToCollecton', this.model.data.songCollection.id);
+                eventHub.emit('addSongToCollecton', {
+                    collectionId: this.model.data.songCollection.id,
+                    songsInCollection: this.model.data.songIds
+                });
                 setTimeout(() => {
                     $('#pageShade').on('click', e => {
                         if (e.target.id && e.target.id === 'pageShade') {
@@ -181,6 +187,12 @@
 
                 $(this.view.el).removeClass('active');
             });
+            // eventHub.on('saveAddSongToCollection', () => {
+
+            //     this.updateCover(link);
+
+            //     $(this.view.el).removeClass('active');
+            // })
             eventHub.on('sendBackAllSongDataToCollection', allData => {
 
                 this.filterFromAllSongData(allData, this.model.data.songIds);
