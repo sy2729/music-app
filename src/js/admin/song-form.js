@@ -21,6 +21,7 @@
             <textarea type="text" name='lyrics'>{{lyrics}}</textarea></div>
 
             <button type='submit'>Submit</button>
+            <button class='delete'>Delete</button>
             </form>
         `,
 
@@ -81,6 +82,15 @@
                 Object.assign(this.data, data);
                 return response;
             });
+        },
+
+        delete(data) {
+            var song = AV.Object.createWithoutData('Song', data.id);
+            return song.destroy().then((success)=> {
+                
+            }, function (error) {
+                console.log('删除失败')
+            });
         }
     };
 
@@ -97,7 +107,7 @@
         bindEvents(){
             this.view.$el.on('submit', 'form', (e)=>{
                 e.preventDefault();
-                
+                eventHub.emit('songAdding')
                 if(this.model.data.id) {
                     this.update();
                 }else {
@@ -108,6 +118,15 @@
             });
 
             this.checkNameInput();
+            this.view.$el.on('click', '.delete', ()=>{
+                eventHub.emit('songDeleting');
+                this.model.delete(this.model.data)
+                .then(()=>{
+                    eventHub.emit('songDeleted', this.model.data.id);
+                    this.model.data = {};
+                        this.view.render(this.model.data);
+                    })
+            })
         },
 
         create(){
@@ -121,6 +140,7 @@
             if (checkResult) {
                 this.model.create(data)
                     .then(() => {
+                        eventHub.emit('created');
                         var string = JSON.stringify(this.model.data);
                         var newData = JSON.parse(string);
                         this.view.reset();
@@ -141,6 +161,7 @@
             if(checkResult) {
                 this.model.update(data)
                     .then(()=>{
+                        eventHub.emit('updated');
                         eventHub.emit('update', this.model.data);
                 });
             }

@@ -110,6 +110,18 @@
 
             switchPage.call(this, 'songList');
 
+            eventHub.on('songDeleted', (data)=>{
+                let songs = this.model.data.songs;
+                for (let i = 0; i < songs.length; i++) {
+                    if(songs[i].id === data) {
+                        songs.splice(i, 1);
+                        break
+                    }
+                };
+                this.model.data.songs = songs;
+                this.view.render(this.model.data);
+            })
+
         }
     };
 
