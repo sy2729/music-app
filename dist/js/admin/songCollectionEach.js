@@ -76,7 +76,6 @@
 
         fill(data) {
             this.data.songCollection = data;
-            console.log(this.data.songCollection.songs);
             if (this.data.songCollection.songs !== undefined) {
                 return;
             }

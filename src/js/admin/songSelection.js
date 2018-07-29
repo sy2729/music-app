@@ -35,7 +35,14 @@
                 this.disableBUtton();
             }else{
                 this.enableButton();
-            }
+            };
+
+            console.log(data.alreadySelected);
+            // if(this.model.data.alreadySelected !== undefined) {
+            //     this.model.data.alreadySelected.map((i)=>{
+            //         console.log(i);
+            //     })
+            // }
 
 
 
@@ -66,6 +73,16 @@
         },
         disableBUtton(){
             $(this.el).find('.confirm').get(0).disabled = true;
+        },
+        disableAlreadySelected(ids) {
+            ids.map((i)=>{
+                let lis = $(this.el).find('.song-list-total').children();
+                for (let j = 0; j < lis.length; j++) {
+                    if($(lis[j]).children().attr('data-id') === i) {
+                        $(lis[j]).addClass('active').children().addClass('active');
+                    };
+                }
+            })
         }
 
     };
@@ -194,8 +211,10 @@
 
 
         bindEventHub(){
-            eventHub.on('addSongToCollecton', (id)=>{
-                this.model.data.collectionId = id;
+            eventHub.on('addSongToCollecton', (data)=>{
+                this.model.data.collectionId = data.collectionId;
+                this.model.data.alreadySelected = data.songsInCollection;
+                this.view.disableAlreadySelected(this.model.data.alreadySelected)
                 $(this.view.el).addClass('active');
             });
             eventHub.on('closeAddSongToCollection', ()=>{
