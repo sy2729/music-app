@@ -220,6 +220,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             eventHub.on('songIdFetchedInCollection', () => {
                 eventHub.emit('sendBackAllSongDataToCollection', this.model.data.allSongs);
             });
+            eventHub.on('create', newSong => {
+                this.model.data.allSongs.push(newSong);
+                this.view.render(this.model.data);
+            });
         }
     };
 

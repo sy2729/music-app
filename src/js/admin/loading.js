@@ -38,7 +38,7 @@
             eventHub.on('songDeleted', ()=>{
                 $(this.view.el).addClass('active');
             })
-            eventHub.on('created', ()=>{
+            eventHub.on('create', ()=>{
                 $(this.view.el).addClass('active');
             })
             eventHub.on('updated', ()=>{

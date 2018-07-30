@@ -139,8 +139,7 @@
             let checkResult = this.checkSubmit(data);
             if (checkResult) {
                 this.model.create(data)
-                    .then(() => {
-                        eventHub.emit('created');
+                    .then(() => {;
                         var string = JSON.stringify(this.model.data);
                         var newData = JSON.parse(string);
                         this.view.reset();

@@ -75,7 +75,6 @@
             })
             .then(()=>{
                 this.bindEventHub();
-
                 })
         },
 
@@ -135,8 +134,6 @@
             script.src = path;
             $(document.body).append(script);
         },
-
-
     };
 
 

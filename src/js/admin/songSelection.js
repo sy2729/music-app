@@ -226,6 +226,10 @@
             eventHub.on('songIdFetchedInCollection', ()=>{
                 eventHub.emit('sendBackAllSongDataToCollection', this.model.data.allSongs);
             });
+            eventHub.on('create', (newSong) => {
+                this.model.data.allSongs.push(newSong);
+                this.view.render(this.model.data);
+            })
         }
     };
 

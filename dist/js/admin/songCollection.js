@@ -130,7 +130,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             script.src = path;
             $(document.body).append(script);
         }
-
     };
 
     controller.init(view, model);
