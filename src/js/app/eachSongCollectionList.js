@@ -4,33 +4,55 @@
         template: `
             <section class="upper">
                 <div class="cover">
-                    hello
+                    <img src='' class="cover-img">
+                    <span class="inner-tag"></span>
+                    <span class="inner-listened"></span>
                 </div>
-            
-                <div class='info-wrap'>
-                    <p class='title'></p>
-                </div>
-                <ul class='song-list'>
 
-                </ul>
+                 <div class='info-wrap'>
+                    <p class='title'></p>
+                 </div>
             </section>
+
+            <section class="middle info-wrap">
+                
+            </section>
+
+            <section id="sectionSongList"></section>
         `,
 
         init() {
             this.$el = $(this.el);
         },
-        render(data) {
-            
+        render(data = {}) { 
+
             this.$el.html(this.template);
 
-            let songs = data.collections.songs;
-            let lis = songs.map((i)=>{
-                let a = $('<a></a>').attr('href', `./song.html?id=${i.id}`).text(i.name)
-                let li = $('<li></li>').append(a);
-                return li
-            })
-            console.log(lis)
-            this.$el.find('.song-list').empty().append(lis);
+
+
+
+
+
+
+
+
+
+
+
+            
+            // this.$el.find('.cover').css('background-image', `url(${data.collections.cover})`).children().eq(0).attr('src', data.collections.cover);
+
+
+
+
+
+            // let songs = data.collections.songs;
+            // let lis = songs.map((i)=>{
+            //     let a = $('<a></a>').attr('href', `./song.html?id=${i.id}`).text(i.name)
+            //     let li = $('<li></li>').append(a);
+            //     return li
+            // })
+            // this.$el.find('.song-list').empty().append(lis);
         }
     };
 
@@ -39,32 +61,16 @@
             collections: [],
         },
 
-        getAllInfo() {
-
+        queryCollectionInfo(id) {
+            let collection = new AV.Query('SongCollection');
+            return collection.get(id).then((i)=>{
+                // console.log(i)
+                let obj = {id: i.id, ...i.attributes}
+                this.data.collections = {...obj};
+            })
+            
         },
 
-        queryCollection(id){
-            let songCollection = AV.Object.createWithoutData('SongCollection', id);
-            var query = new AV.Query('SongMapSongCollection');
-            
-            // 查询所有选择了线性代数的学生
-            query.equalTo('collection', songCollection);
-            
-            let songs = [];
-            // 执行查询
-            return query.find().then((songMapSongCollection) => {
-                // studentCourseMaps 是所有 course 等于线性代数的选课对象
-                // 然后遍历过程中可以访问每一个选课对象的 student,course,duration,platform 等属性
-                songMapSongCollection.forEach((scm, i, a) => {
-                    let song = scm.get('song');
-                    let songName = scm.get('songName');
-                    songs.push({name: songName, id: song.id});
-                });
-                this.data.collections.songs = songs;
-            }, (e)=>{
-                console.log(e)
-            });     
-        }
     };
 
     let controller = {
@@ -72,11 +78,8 @@
             this.view = view;
             this.model = model;
             this.view.init();
+            this.view.render({});
             this.getCollectionInfo();
-            this.model.getAllInfo();
-
-
-
             this.bindEvent();
             this.bindEventHub();
         },
@@ -91,8 +94,9 @@
 
         getCollectionInfo(){
             let id = this.getCollectionId();
-            this.model.queryCollection(id)
-                .then(()=>{
+            this.model.data.collections.id = id;
+            this.model.queryCollectionInfo(id)
+                .then((i)=>{
                     this.view.render(this.model.data);
                 })
         },
@@ -118,6 +122,10 @@
 
             return id;
         },
+
+        // createScript(path){
+        //     $(document.body).append($('<script></script>').attr('src', path));
+        // }
     };
 
     controller.init(view, model);
