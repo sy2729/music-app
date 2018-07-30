@@ -10,9 +10,14 @@
                             <span>Collection Name: </span>
                             <span>{{name}}</span>
                         </li>
-                        <li>
+                        <li class="descrip-wrap">
                             <span>Collection Description:</span>
-                            <span>{{description}}</span>
+                            <p class="description">{{description}}</p>
+                             <form class='descrip-form'>
+                                <textarea></textarea>
+                                <input type='submit' value='confirm'>
+                            </form>
+                            <p class='edit'>edit</p>
                         </li>
                         <li class='tags'>
                             <span>{{tag}}</span>
@@ -92,6 +97,16 @@
                     eventHub.emit('songIdFetchedInCollection');
                 });
         },
+
+        updateDescription(data){
+            var collection = AV.Object.createWithoutData('SongCollection', this.data.songCollection.id);
+            collection.set('description', data)
+            return collection.save().then((response) => {
+                this.data.songCollection.description = data;
+                return response;
+            });
+        },
+
 
         updateCover(link) {
             var collection = AV.Object.createWithoutData('SongCollection', this.data.songCollection.id);
@@ -198,6 +213,18 @@
                 }, 0);
             });
 
+            $(this.view.el).on('click', '.edit', (e) => {
+                $(this.view.el).find('.descrip-wrap').children().addClass('active');
+            })
+            $(this.view.el).on('submit', '.descrip-form', (e) => {
+                e.preventDefault();
+                let value = $('.descrip-form > textarea').get(0).value;
+                this.model.updateDescription(value)
+                    .then(()=>{
+                        $(this.view.el).find('.descrip-wrap').find('.description').removeClass('active').text(this.model.data.songCollection.description).siblings().removeClass('active');
+                    })
+            })
+            
 
         },
 

@@ -562,6 +562,18 @@ body {
 #songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info {
     margin-top: 30px;
 }
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info .description.active {
+    display: none;
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info .descrip-form {
+    display: none;
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info .descrip-form.active {
+    display: block;
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info .edit.active {
+    display: none;
+}
 #songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info > li{
     margin: 15px 0;
 }
