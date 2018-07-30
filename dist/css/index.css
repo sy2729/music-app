@@ -195,8 +195,10 @@ ul > li {
   z-index: 1;
   pointer-events: none;
 }
-.list-recommendation-wrap ul li img {
-  width: 100%;
+.list-recommendation-wrap ul li .list-recommend-cover {
+  background: transparent center center no-repeat;
+  background-size: cover;
+  width: 3.2671875rem;
   height: 3.2671875rem;
 }
 .list-recommendation-wrap ul li .list-recommend-descrip {

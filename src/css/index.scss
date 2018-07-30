@@ -218,8 +218,10 @@ ul > li {list-style: none;}
              }
 
 
-             img {
-                 width: 100%;
+             .list-recommend-cover {
+                 background: transparent center center no-repeat;
+                 background-size: cover;
+                 width: px(104.55);
                  height: px(104.55);
              }
 

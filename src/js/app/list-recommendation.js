@@ -23,7 +23,8 @@
             $(this.el).html(this.template);
             let lis = [];
             data.forEach((i)=>{
-                let img = $(`<img>`).attr('src', i.cover);
+                let img = $("<div></div>").addClass('list-recommend-cover').css('background-image', `url(${i.cover})`);
+                // let img = $(`<img>`).attr('src', i.cover);
                 let p = $(`<p></p>`).addClass('list-recommend-descrip').text(i.name);
                 let iEl = $(`<i></i>`).addClass('list-recommend-info-wrap-icon iconfont').html('&#xe645;');
                 let span = $(`<span></span>`).addClass('list-recommend-info-wrap-text').text(i.listened);
