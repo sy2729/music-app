@@ -46,6 +46,13 @@
             eventHub.on('collectionDeleted', () => {
                 $(this.view.el).addClass('active');
             });
+            eventHub.on('descripSaving', () => {
+                $(this.view.el).removeClass('active');
+            });
+            eventHub.on('descripSaved', () => {
+                console.log('saved');
+                $(this.view.el).addClass('active');
+            });
         }
     };
 

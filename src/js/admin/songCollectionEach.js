@@ -55,7 +55,11 @@
             let keys = 'name description tag'.split(' ');
             let template = this.template;
             keys.map((i)=>{
-                template = template.replace(`{{${i}}}`, data.songCollection[i] || '');
+                if (i === 'description') {
+                    template = template.replace(`{{${i}}}`, data.songCollection[i] || 'No Description');
+                }else {
+                    template = template.replace(`{{${i}}}`, data.songCollection[i] || '');
+                }
             });
             
             $(this.el).html(template);
@@ -84,6 +88,7 @@
             },
             defaultCover: './dist/img/temp_2.png',
             songIds: [],
+            // editStatus: false,
         },
 
         fill(data) {
@@ -142,15 +147,11 @@
         },
 
         delete(id){
-            console.log(id)
             var collection = AV.Object.createWithoutData('SongCollection', id);
-            console.log(collection);
 
             return collection.destroy().then((success) => {
 
             }, function (error) {
-                console.log('删除失败')
-                console.log(error)
             });
         }
     };
@@ -215,27 +216,37 @@
 
             // open description editing panel
             $(this.view.el).on('click', '.edit', (e) => {
+                
                 $(this.view.el).find('.descrip-wrap').children().addClass('active');
                 $(this.view.el).find('.descrip-form > textarea').val(this.model.data.songCollection.description || '');
-
-                // close panel watching
-                setTimeout(() => {
-                    $(this.view.el).one('click', (e) => {
-                        let attr = $(e.target).attr('data-id');
-                        if (attr !== 'descripForm') {
-                            $(this.view.el).find('.descrip-wrap').children().removeClass('active');
-                        }
-                    })
-                }, 0);
-
+            
+            // watching the panel to close
+                let watchUncloseEditingPanel = ()=>{
+                        setTimeout(() => {
+                        
+                        $(this.view.el).one('click', (e) => {
+                            let attr = $(e.target).attr('data-id');
+                            if (attr !== 'descripForm') {
+                                $(this.view.el).find('.descrip-wrap').children().removeClass('active');
+                            }else {
+                                watchUncloseEditingPanel();
+                            }
+                        })
+                    }, 0);
+                };
+                watchUncloseEditingPanel();
             })
+           
+
 
             // get the input of the description
             $(this.view.el).on('submit', '.descrip-form', (e) => {
                 e.preventDefault();
+                eventHub.emit('descripSaving');
                 let value = $('.descrip-form > textarea').get(0).value;
                 this.model.updateDescription(value)
-                    .then(()=>{
+                .then(()=>{
+                    eventHub.emit('descripSaved');
                         $(this.view.el).find('.description').removeClass('active').text(this.model.data.songCollection.description).siblings().removeClass('active');
                     })
             })

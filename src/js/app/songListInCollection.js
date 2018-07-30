@@ -2,6 +2,7 @@
     let view = {
         el: '#sectionSongList',
         template: `
+            <h3 class="heading">Song List</h3>
             <ul class='song-list'>
                {{__lis__}}
             </ul>

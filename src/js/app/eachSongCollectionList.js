@@ -19,7 +19,8 @@
             </section>
 
             <section class="middle descrip-info">
-                {{__description__}}
+                <div class="tags"><div>
+                <div class="description">Description: {{__description__}}<div>
             </section>
 
             <section id="sectionSongList"></section>
@@ -37,10 +38,10 @@
 
             this.$el.html(template);
 
-            console.log(data)
+            
             // if(data !== {}){
-                this.$el.find('.cover-bg').css('background-image', `url(${data.collections.cover})`)
-                this.$el.find('.cover').css('background-image', `url(${data.collections.cover})`)
+                this.$el.find('.cover-bg').css('background-image', `url(${data.collections.cover || "./dist/img/logo.svg"})`)
+            this.$el.find('.cover').css('background-image', `url(${data.collections.cover || "./dist/img/logo.svg"})`)
 
                 // .children().eq(0).attr('src', data.collections.cover);
                 

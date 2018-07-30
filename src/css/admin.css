@@ -546,6 +546,7 @@ body {
 }
 #songCollectionEach > .collection-upper > .collection-upper-left {
     flex: 1 1 auto;
+    width: calc(100% - 300px);
 }
 #songCollectionEach > .collection-upper > .collection-upper-left > .return {
     display: block;
@@ -568,6 +569,37 @@ body {
 #songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info .descrip-form {
     display: none;
 }
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info .descrip-form > textarea {
+    height: 90px;
+    width: 80%;
+    
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info .descrip-form > input {
+    display: block;
+    padding: 5px 6px;
+    border: 1px solid #372D6E;
+    color: #372D6E;
+    background: transparent;
+    font-size: 12px;
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info .descrip-wrap > p.description {
+    padding: 10px 2px;
+    font-size: 14px;
+    color: #565656;
+    max-height: 100px;
+    width: 100%;
+    overflow-y: scroll;
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info .descrip-wrap > .edit {
+    display: block;
+    padding: 5px 6px;
+    text-decoration: underline;
+    color: #372D6E;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+
 #songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info .descrip-form.active {
     display: block;
 }

@@ -97,13 +97,39 @@ ul > li {list-style: none;}
             .creator-name {
                 display: inline-block;
                 width: px(30);
-                // height: px(30);
                 border-radius: 50%;
                 vertical-align: middle;
                 margin-right: px(5);
                 color: hsla(0,0%,100%,.7);
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
             }
 
         }
+    }
+}
+
+.middle {
+    height: px(115);
+    margin: 0 px(10) 0 px(15);
+    padding-top: px(10);
+    line-height: px(19);
+    color: #666;
+    width: 100%;
+
+    .description {
+        font-size: px(14);
+    }
+}
+
+
+#sectionSongList {
+    width: 100%;
+    .heading {
+        height: px(23);
+        line-height: px(23);
+        padding: 0 px(10);
+        font-size: px(12);
+        color: #666;
+        background-color: #eeeff0;
     }
 }
