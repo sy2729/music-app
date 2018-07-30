@@ -3,14 +3,18 @@
         el: '#songCollectionList',
         template: `
             <section class="upper">
+                <div class="cover-bg"></div>
                 <div class="cover">
-                    <img src='' class="cover-img">
-                    <span class="inner-tag"></span>
+                    <span class="inner-tag">Collection</span>
                     <span class="inner-listened"></span>
                 </div>
 
                  <div class='info-wrap'>
-                    <p class='title'></p>
+                    <p class='title'>{{__title__}}</p>
+                    <div class='creator-info'>
+                        <span class="creator-profile"></span>
+                        <span class="creator-name">Admin</span>
+                    </div>
                  </div>
             </section>
 
@@ -25,34 +29,21 @@
             this.$el = $(this.el);
         },
         render(data = {}) { 
-
-            this.$el.html(this.template);
-
-
-
+            let template = this.template;
+            console.log(data.collections.name)
+            template = template.replace('{{__title__}}', data.collections.name || '');
 
 
+            this.$el.html(template);
 
+            console.log(data)
+            // if(data !== {}){
+                this.$el.find('.cover-bg').css('background-image', `url(${data.collections.cover})`)
+                this.$el.find('.cover').css('background-image', `url(${data.collections.cover})`)
 
-
-
-
-
-
-            
-            // this.$el.find('.cover').css('background-image', `url(${data.collections.cover})`).children().eq(0).attr('src', data.collections.cover);
-
-
-
-
-
-            // let songs = data.collections.songs;
-            // let lis = songs.map((i)=>{
-            //     let a = $('<a></a>').attr('href', `./song.html?id=${i.id}`).text(i.name)
-            //     let li = $('<li></li>').append(a);
-            //     return li
-            // })
-            // this.$el.find('.song-list').empty().append(lis);
+                // .children().eq(0).attr('src', data.collections.cover);
+                
+            // }
         }
     };
 
@@ -78,7 +69,7 @@
             this.view = view;
             this.model = model;
             this.view.init();
-            this.view.render({});
+            // this.view.render({});
             this.getCollectionInfo();
             this.bindEvent();
             this.bindEventHub();

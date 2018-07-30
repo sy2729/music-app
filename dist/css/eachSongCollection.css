@@ -1,0 +1,98 @@
+p, span, a {
+  font-size: 0.5rem;
+}
+
+h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul > li {
+  list-style: none;
+}
+
+.upper {
+  height: 5.4375rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.9375rem 0.3125rem 0.9375rem 0.46875rem;
+  position: relative;
+  overflow: hidden;
+}
+.upper .cover-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent center center no-repeat;
+  background-size: cover;
+  z-index: 2;
+  filter: blur(20px);
+}
+.upper .cover {
+  width: 3.5625rem;
+  height: 3.5625rem;
+  background: transparent center center no-repeat;
+  background-size: cover;
+  z-index: 3;
+  position: relative;
+}
+.upper .cover .inner-tag {
+  position: absolute;
+  position: absolute;
+  z-index: 3;
+  top: 0.3125rem;
+  left: 0;
+  padding: 0 0.25rem;
+  height: 0.53125rem;
+  color: #fff;
+  font-size: 0.28125rem;
+  text-align: center;
+  line-height: 0.53125rem;
+  background-color: rgba(217, 48, 48, 0.8);
+  border-top-right-radius: 0.53125rem;
+  border-bottom-right-radius: 0.53125rem;
+}
+.upper .info-wrap {
+  width: 5.15625rem;
+  height: 3.5625rem;
+  margin-left: 0.5rem;
+  position: relative;
+  z-index: 3;
+}
+.upper .info-wrap .title {
+  padding-top: 1px;
+  font-size: 0.53125rem;
+  line-height: 1.3;
+  color: #fefefe;
+  height: 1.375rem;
+  font-weight: 400;
+}
+.upper .info-wrap .creator-info {
+  height: 3.28125rem;
+  margin-top: 0.625rem;
+}
+.upper .info-wrap .creator-info .creator-profile {
+  display: inline-block;
+  height: 0.9375rem;
+  width: 0.9375rem;
+  background: transparent url("../img/inDev.png") center center no-repeat;
+  background-size: cover;
+  vertical-align: middle;
+}
+.upper .info-wrap .creator-info .creator-name {
+  display: inline-block;
+  width: 0.9375rem;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 0.15625rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/*# sourceMappingURL=eachSongCollection.css.map */

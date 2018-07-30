@@ -1,0 +1,108 @@
+$pageWidth: 320;
+$theme: #d33a31;
+$fontColor: #333;
+
+@function px($size) {
+  $remSize: $size / $pageWidth * 10;
+  @return #{$remSize}rem;
+}
+// clear style
+p, span, a {
+    font-size: px(16);
+}
+
+h2,h3,h4,h5,h6 {margin: 0;padding: 0;}
+a {text-decoration: none;}
+ul > li {list-style: none;}
+
+
+.upper {
+    height: px(174);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: px(30) px(10) px(30) px(15);
+    position: relative;
+    overflow: hidden;
+
+    .cover-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent center center no-repeat;
+        background-size: cover;
+        z-index: 2;
+        filter: blur(20px);
+    }
+
+
+    .cover {
+        width: px(114);
+        height: px(114);
+        background: transparent center center no-repeat;
+        background-size: cover;
+        z-index: 3;
+        position: relative;
+
+        .inner-tag {
+            position: absolute;
+                position: absolute;
+                z-index: 3;
+                top: px(10);
+                left: 0;
+                padding: 0 px(8);
+                height: px(17);
+                color: #fff;
+                font-size: px(9);
+                text-align: center;
+                line-height: px(17);
+                background-color: rgba(217,48,48,.8);
+                border-top-right-radius: px(17);
+                border-bottom-right-radius: px(17);
+        }
+    }
+
+    .info-wrap {
+        width: px(165);
+        height: px(114);
+        margin-left: px(16);
+        position: relative;
+        z-index: 3;
+
+        .title {
+            padding-top: 1px;
+            font-size: px(17);
+            line-height: 1.3;
+            color: #fefefe;
+            height: px(44);
+            font-weight: 400;
+        }
+
+        .creator-info {
+            height: px(105);
+            margin-top: px(20);
+
+            .creator-profile {
+                display: inline-block;
+                height: px(30);
+                width: px(30);
+                background: transparent url('../img/inDev.png') center center no-repeat;
+                background-size: cover;
+                vertical-align: middle;
+            }
+
+            .creator-name {
+                display: inline-block;
+                width: px(30);
+                // height: px(30);
+                border-radius: 50%;
+                vertical-align: middle;
+                margin-right: px(5);
+                color: hsla(0,0%,100%,.7);
+            }
+
+        }
+    }
+}
