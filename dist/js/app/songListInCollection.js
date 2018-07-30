@@ -12,12 +12,12 @@
             let songs = data.songs;
 
             let _li_template = `<li>
-        <a href=./song.html?id={{__id__}}>{{__name__}}</a>
+        <a href="./song.html?id={{__id__}}&cid={{__cid__}}">{{__name__}}</a>
         </li>`;
 
             let lis = songs.reduce((prev, i) => {
                 let template = _li_template;
-                prev += template.replace('{{__id__}}', i.id).replace('{{__name__}}', i.name);
+                prev += template.replace('{{__id__}}', i.id).replace('{{__cid__}}', data.cid).replace('{{__name__}}', i.name);
                 return prev;
             }, '');
 
@@ -30,6 +30,7 @@
         data: {},
 
         getSongData(collectionId) {
+            this.data.cid = collectionId;
             let songCollection = AV.Object.createWithoutData('SongCollection', collectionId);
             var query = new AV.Query('SongMapSongCollection');
 

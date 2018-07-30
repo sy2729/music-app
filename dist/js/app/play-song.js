@@ -27,8 +27,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
         <div class="app-intro">
-            <a type="button" class="app-open">Open</a>
-            <a type="button" class="app-download">Download</a>
+            <a type="button" class="prev">Prev</a>
+            <a type="button" class="next">Next</a>
         </div>
         <audio src="{{songUrl}}"></audio>
         `,
@@ -143,6 +143,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 let { id, attributes } = data;
                 Object.assign(this.data.song, _extends({ id }, attributes));
             });
+        },
+        // get all song data from this collection
+        getCollectionInfo(id) {
+            this.data.cid = id;
+            let songCollection = AV.Object.createWithoutData('SongCollection', id);
+            var query = new AV.Query('SongMapSongCollection');
+
+            // 查询所有选择了线性代数的学生
+            query.equalTo('collection', songCollection);
+
+            let songs = [];
+            // 执行查询
+            return query.find().then(songMapSongCollection => {
+                // studentCourseMaps 是所有 course 等于线性代数的选课对象
+                // 然后遍历过程中可以访问每一个选课对象的 student,course,duration,platform 等属性
+                songMapSongCollection.forEach((scm, i, a) => {
+                    let song = scm.get('song');
+                    let songName = scm.get('songName');
+                    songs.push({ name: songName, id: song.id });
+                });
+                this.data.songs = songs;
+            }, e => {
+                console.log(e);
+            });
         }
 
     };
@@ -166,6 +190,41 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 this.model.data.status = false;
                 this.view.checkStatus(this.model.data.status);
             });
+
+            // play the next song
+
+            $(this.view.el).on('click', '.prev', () => {
+                let prevSong = this.prevSong(this.model.data.song.id);
+                this.model.getSongData(prevSong.id).then(() => {
+                    this.view.render(this.model.data);
+                });
+                // this.switchSong(prevSong);
+            });
+
+            $(this.view.el).on('click', '.next', () => {
+                let id = this.nextSong(this.model.data.song.id);
+            });
+        },
+
+        //  switchSong(songData){
+        //      console.log(`./song.html?id=${songData.id}&cid=${this.model.data.cid}`)
+        //      window.location.href = `./song.html?id=${songData.id}&cid=${this.model.data.cid}`
+        //  },
+
+        prevSong(id) {
+            let allSongs = this.model.data.songs;
+            let prevSong;
+            for (let i = 0; i < allSongs.length; i++) {
+                if (allSongs[i].id === id) {
+                    if (i === 0) {
+                        prevSong = allSongs[allSongs.length - 1];
+                    } else {
+                        prevSong = allSongs[i - 1];
+                    }
+                    break;
+                }
+            }
+            return prevSong;
         },
 
         playSong() {
@@ -188,18 +247,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 query = query.substring(1);
             }
             let queryArray = query.split('&').filter(v => v);
-            let id = '';
+            [id, cid] = '';
             queryArray.map(i => {
                 let kv = i.split('=');
                 let key = kv[0];
                 let value = kv[1];
                 if (key === 'id') {
                     id = value;
-                    return;
                 };
+                if (key === 'cid') {
+                    cid = value;
+                }
             });
 
+            if (cid) {
+                this.getCollectionInfo(cid);
+            }
             return id;
+        },
+
+        getCollectionInfo(cid) {
+            this.model.getCollectionInfo(cid).then(() => {
+                console.log(this.model.data);
+                // this.model.getAllSongInCollection()
+            });
         },
 
         watchSongPlay() {
