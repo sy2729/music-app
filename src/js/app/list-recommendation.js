@@ -52,6 +52,8 @@
             let songCollections = new AV.Query('SongCollection');
             songCollections.limit(6);
             return songCollections.find().then((data)=>{
+                // remove loading anima
+                eventHub.emit('loaded');
                 data.map((i)=>{
                     this.data.listRecom.push({
                         id: i.id,
@@ -91,9 +93,7 @@
                 // $('.wrap-content-above').addClass('active');
 
             })
-            console.log(JSON.stringify($('.list-recommendation-wrap > ul > li')))
             this.view.$el.on('click', 'ul>li', (e) => {
-                console.log('gagag')
                 let id = $(e.currentTarget).attr('id');
                 window.location.href = './eachSongCollection.html?' + `id=${id}`;
             });

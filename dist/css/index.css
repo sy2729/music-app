@@ -19,11 +19,47 @@ ul > li {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 3;
+  z-index: 5;
 }
 
 .wrap-content-above.active {
   display: none;
+}
+
+@keyframes loading-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.loading {
+  background: #fff;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 4;
+}
+.loading.active {
+  display: none;
+}
+.loading .loading-inner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: none;
+  border: 2px solid transparent;
+  border-right-color: #D13D39;
+  animation: loading-rotate 0.4s linear infinite;
+  margin-top: -20px;
+  margin-left: -20px;
+  left: 50%;
+  top: 50%;
 }
 
 .topfix {
@@ -92,12 +128,18 @@ ul > li {
   height: 2px;
 }
 
+.pages {
+  position: relative;
+  margin-top: 3.875rem;
+  height: calc(100vh - 3.25rem);
+}
 .pages .page {
   display: none;
-  margin-top: 3.875rem;
+  overflow: hidden;
 }
 .pages .page.active {
   display: block;
+  overflow: unset;
 }
 .pages #inDev img {
   position: absolute;

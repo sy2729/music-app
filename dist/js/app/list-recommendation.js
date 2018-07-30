@@ -54,6 +54,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             let songCollections = new AV.Query('SongCollection');
             songCollections.limit(6);
             return songCollections.find().then(data => {
+                // remove loading anima
+                eventHub.emit('loaded');
                 data.map(i => {
                     this.data.listRecom.push(_extends({
                         id: i.id
@@ -91,9 +93,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 // $('.wrap-content-above').addClass('active');
 
             });
-            console.log(JSON.stringify($('.list-recommendation-wrap > ul > li')));
             this.view.$el.on('click', 'ul>li', e => {
-                console.log('gagag');
                 let id = $(e.currentTarget).attr('id');
                 window.location.href = './eachSongCollection.html?' + `id=${id}`;
             });

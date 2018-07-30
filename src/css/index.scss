@@ -21,10 +21,46 @@ ul > li {list-style: none;}
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 3;
+    z-index: 5;
 }
 .wrap-content-above.active {
     display: none;
+}
+
+// loading
+@keyframes loading-rotate {
+  from{transform: rotate(0deg)}
+  to{transform: rotate(360deg)}
+}
+.loading {
+  background: #fff;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 4;
+
+  &.active {
+      display: none;
+  }
+
+  .loading-inner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: none;
+    // transform: translate(-50%, -50%);
+    border: 2px solid transparent;
+    border-right-color: #D13D39;
+    animation: loading-rotate .4s linear infinite; 
+    margin-top: -20px;
+    margin-left: -20px;
+    left: 50%;
+    top: 50%; 
+  }
 }
 
 
@@ -102,13 +138,17 @@ ul > li {list-style: none;}
 
 //------------ page switch section ------------
 .pages {
+    position: relative;
+    margin-top: px(124);
+    height: calc(100vh - 3.25rem);
     .page {
         display: none;
-        margin-top: px(124);
+        overflow: hidden;
     }
-
+    
     .page.active {
         display: block;
+        overflow: unset;
     }
 
     #inDev {
