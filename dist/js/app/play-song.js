@@ -36,7 +36,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             window.testData = data;
             let { status, song } = data;
             $(this.el).html(this.template);
-            let content = this.template.replace("{{songUrl}}", song.link).replace("{{songName}}", song.name);
+            let content = this.template.replace("{{songUrl}}", song.link || '').replace("{{songName}}", song.name);
 
             // use reg to split the time
             let reg = /\[([\d:.]+)\](.+)/;
@@ -198,18 +198,31 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 this.model.getSongData(prevSong.id).then(() => {
                     this.view.render(this.model.data);
                 });
-                // this.switchSong(prevSong);
             });
 
             $(this.view.el).on('click', '.next', () => {
-                let id = this.nextSong(this.model.data.song.id);
+                let nextSong = this.nextSong(this.model.data.song.id);
+                this.model.getSongData(nextSong.id).then(() => {
+                    this.view.render(this.model.data);
+                });
             });
         },
 
-        //  switchSong(songData){
-        //      console.log(`./song.html?id=${songData.id}&cid=${this.model.data.cid}`)
-        //      window.location.href = `./song.html?id=${songData.id}&cid=${this.model.data.cid}`
-        //  },
+        nextSong(id) {
+            let allSongs = this.model.data.songs;
+            let nextSong;
+            for (let i = 0; i < allSongs.length; i++) {
+                if (allSongs[i].id === id) {
+                    if (i === allSongs.length - 1) {
+                        nextSong = allSongs[0];
+                    } else {
+                        nextSong = allSongs[i + 1];
+                    }
+                    break;
+                }
+            }
+            return nextSong;
+        },
 
         prevSong(id) {
             let allSongs = this.model.data.songs;
