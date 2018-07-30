@@ -13,9 +13,9 @@
                         <li class="descrip-wrap">
                             <span>Collection Description:</span>
                             <p class="description">{{description}}</p>
-                             <form class='descrip-form'>
-                                <textarea></textarea>
-                                <input type='submit' value='confirm'>
+                             <form class='descrip-form' data-id='descripForm'>
+                                <textarea data-id='descripForm'></textarea>
+                                <input type='submit' value='confirm' data-id='descripForm'>
                             </form>
                             <p class='edit'>edit</p>
                         </li>
@@ -201,14 +201,28 @@
                 }, 0);
             });
 
+            // open description editing panel
             $(this.view.el).on('click', '.edit', e => {
                 $(this.view.el).find('.descrip-wrap').children().addClass('active');
+                $(this.view.el).find('.descrip-form > textarea').val(this.model.data.songCollection.description || '');
+
+                // close panel watching
+                setTimeout(() => {
+                    $(this.view.el).one('click', e => {
+                        let attr = $(e.target).attr('data-id');
+                        if (attr !== 'descripForm') {
+                            $(this.view.el).find('.descrip-wrap').children().removeClass('active');
+                        }
+                    });
+                }, 0);
             });
+
+            // get the input of the description
             $(this.view.el).on('submit', '.descrip-form', e => {
                 e.preventDefault();
                 let value = $('.descrip-form > textarea').get(0).value;
                 this.model.updateDescription(value).then(() => {
-                    $(this.view.el).find('.descrip-wrap').find('.description').removeClass('active').text(this.model.data.songCollection.description).siblings().removeClass('active');
+                    $(this.view.el).find('.description').removeClass('active').text(this.model.data.songCollection.description).siblings().removeClass('active');
                 });
             });
         },
