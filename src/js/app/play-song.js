@@ -73,6 +73,11 @@
             }else {
                 $(this.el).find('.song-lyrics').css('overflow', 'scroll');
             }
+
+            // automaticallt start the music
+            if(status) {
+                this.play()
+            }
             
             
         },
@@ -139,7 +144,7 @@
                 cover: '',
                 defaultCover: 'http://res.cloudinary.com/shuaiyuan/image/upload/q_53/v1532056943/1_vyrvol.jpg',
             },
-            status: false
+            status: true
         },
         getSongData(id){
             var query = new AV.Query('Song');

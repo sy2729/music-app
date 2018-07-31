@@ -72,6 +72,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             } else {
                 $(this.el).find('.song-lyrics').css('overflow', 'scroll');
             }
+
+            // automaticallt start the music
+            if (status) {
+                this.play();
+            }
         },
 
         play() {
@@ -135,7 +140,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 cover: '',
                 defaultCover: 'http://res.cloudinary.com/shuaiyuan/image/upload/q_53/v1532056943/1_vyrvol.jpg'
             },
-            status: false
+            status: true
         },
         getSongData(id) {
             var query = new AV.Query('Song');
