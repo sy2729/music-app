@@ -34,6 +34,7 @@ ul > li {
   background-size: cover;
   z-index: 2;
   filter: blur(20px);
+  transform: scale(1.2);
 }
 .upper .cover {
   width: 3.5625rem;
@@ -118,6 +119,46 @@ ul > li {
   font-size: 0.375rem;
   color: #666;
   background-color: #eeeff0;
+}
+#sectionSongList .song-list li {
+  height: 1.71875rem;
+  padding: 0.1875rem 0;
+  border-bottom: 1px solid #DFDFDF;
+  display: flex;
+}
+#sectionSongList .song-list li .index {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.53125rem;
+  color: #999;
+  width: 1.25rem;
+}
+#sectionSongList .song-list li .song-info {
+  width: 7.4375rem;
+}
+#sectionSongList .song-list li .song-info a {
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: normal;
+  display: inline-block;
+  width: 100%;
+}
+#sectionSongList .song-list li .play-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#sectionSongList .song-list li .play-icon i.song-play {
+  padding: 0 0.3125rem;
+  display: inline-block;
+  width: 0.6875rem;
+  height: 0.6875rem;
+  align-items: center;
+  box-sizing: border-box;
+  color: #AAAAAA;
 }
 
 /*# sourceMappingURL=eachSongCollection.css.map */

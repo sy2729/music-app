@@ -33,7 +33,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         render(data = {}) {
             let template = this.template;
-            console.log(data.collections.name);
+            // console.log(data.collections.name)
             template = template.replace('{{__title__}}', data.collections.name || '').replace('{{__description__}}', data.collections.description || '');
 
             this.$el.html(template);

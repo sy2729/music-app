@@ -12,17 +12,35 @@
         let songs = data.songs;
 
         let _li_template = `<li>
-        <a href="./song.html?id={{__id__}}&cid={{__cid__}}">{{__name__}}</a>
+        <div class='index'>{{__index__}}</div>
+        <div class='song-info'>
+            <a href="./song.html?id={{__id__}}&cid={{__cid__}}">
+            {{__name__}}
+            </a>
+        </div>
+        <a href="./song.html?id={{__id__}}&cid={{__cid__}}" class='play-icon'>
+            <i class="song-play iconfont">&#xe720;</i>
+        </a>
         </li>`;
         
-        let lis = songs.reduce((prev, i) => {
-            let template = _li_template;
-            prev += template
-            .replace('{{__id__}}', i.id)
-            .replace('{{__cid__}}', data.cid)
-            .replace('{{__name__}}', i.name);
-            return prev
-        }, '');
+            let lis = '';
+            songs.map((i, index)=>{
+                lis += _li_template
+                    .replace('{{__id__}}', i.id)
+                    .replace('{{__cid__}}', data.cid)
+                    .replace('{{__name__}}', i.name)
+                    .replace('{{__index__}}', index + 1)
+            })
+
+
+        // let lis = songs.reduce((prev, i) => {
+        //     let template = _li_template;
+        //     prev += template
+        //     .replace('{{__id__}}', i.id)
+        //     .replace('{{__cid__}}', data.cid)
+        //     .replace('{{__name__}}', i.name)
+        //     return prev
+        // }, '');
         
 
         let template = this.template.replace('{{__lis__}}', lis);

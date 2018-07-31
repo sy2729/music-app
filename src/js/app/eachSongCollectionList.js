@@ -31,7 +31,7 @@
         },
         render(data = {}) { 
             let template = this.template;
-            console.log(data.collections.name)
+            // console.log(data.collections.name)
             template = template.replace('{{__title__}}', data.collections.name || '')
                 .replace('{{__description__}}', data.collections.description || '')
 
@@ -41,7 +41,7 @@
             
             // if(data !== {}){
                 this.$el.find('.cover-bg').css('background-image', `url(${data.collections.cover || "./dist/img/logo.svg"})`)
-            this.$el.find('.cover').css('background-image', `url(${data.collections.cover || "./dist/img/logo.svg"})`)
+                this.$el.find('.cover').css('background-image', `url(${data.collections.cover || "./dist/img/logo.svg"})`)
 
                 // .children().eq(0).attr('src', data.collections.cover);
                 
