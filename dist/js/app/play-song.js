@@ -189,6 +189,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             eventHub.on('songEnd', () => {
                 this.model.data.status = false;
                 this.view.checkStatus(this.model.data.status);
+                let nextSong = this.nextSong(this.model.data.song.id);
+                this.model.getSongData(nextSong.id).then(() => {
+                    this.view.render(this.model.data);
+                });
             });
 
             // play the next song
