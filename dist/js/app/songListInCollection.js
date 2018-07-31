@@ -39,6 +39,7 @@
 
 
             let template = this.template.replace('{{__lis__}}', lis);
+            console.log('final step');
             $(this.el).html(template);
         }
     };
@@ -84,7 +85,9 @@
         getSongData() {
             let id = this.getCollectionId();
             this.model.getSongData(id).then(() => {
+
                 this.view.render(this.model.data);
+                eventHub.emit('listLoaded');
             });
         },
 

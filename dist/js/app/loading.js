@@ -26,6 +26,10 @@
             eventHub.on('loaded', () => {
                 $(this.view.el).addClass('active');
             });
+
+            eventHub.on('listLoaded', () => {
+                $(this.view.el).addClass('active');
+            });
         }
     };
 
