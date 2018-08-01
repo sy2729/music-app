@@ -26,8 +26,8 @@
             let lis = '';
             songs.map((i, index)=>{
                 lis += _li_template
-                    .replace('{{__id__}}', i.id)
-                    .replace('{{__cid__}}', data.cid)
+                    .replace(/{{__id__}}/g, i.id)
+                    .replace(/{{__cid__}}/g, data.cid)
                     .replace('{{__name__}}', i.name)
                     .replace('{{__index__}}', index + 1)
             })
