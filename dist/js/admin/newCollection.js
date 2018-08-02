@@ -38,7 +38,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             // 新建对象
             var songCollection = new SongCollection();
             return songCollection.save({
-                name: data.collectionName, cover: data.collectionCover
+                name: data.collectionName, cover: data.collectionCover, played: 0
             }).then(data => {
                 Object.assign(this.data, _extends({ id: data.id }, data.attributes));
             });

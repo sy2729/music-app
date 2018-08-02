@@ -27,7 +27,7 @@
                 // let img = $(`<img>`).attr('src', i.cover);
                 let p = $(`<p></p>`).addClass('list-recommend-descrip').text(i.name);
                 let iEl = $(`<i></i>`).addClass('list-recommend-info-wrap-icon iconfont').html('&#xe645;');
-                let span = $(`<span></span>`).addClass('list-recommend-info-wrap-text').text(i.listened);
+                let span = $(`<span></span>`).addClass('list-recommend-info-wrap-text').text(i.played || 0);
                 let div = $(`<div></div>`).addClass('list-recommend-info-wrap').append(iEl).append(span);
                 let li = $(`<li></li>`).append(img).append(p).append(div).attr('id',i.id);
 
@@ -59,7 +59,6 @@
                     this.data.listRecom.push({
                         id: i.id,
                         ...i.attributes, 
-                        listened: 1000,
                         cover: i.attributes.cover || './dist/img/inDev.png'
                         })
                 })

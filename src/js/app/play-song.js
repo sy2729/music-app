@@ -188,12 +188,42 @@
                  });
                  return data
              });
-         }
+         },
 
         //  switchSong(newSong) {
         //      let id = newSong.id;
         //      
         //  }
+
+        songPlayedIncrease(){
+            let times;    
+            if(this.data.song.times === undefined) {
+                times = 1;
+            }else {
+                times = parseInt(this.data.song.times, 10);
+            }
+            var song = AV.Object.createWithoutData('Song', this.data.song.id);
+            song.set('listened', times)
+            return song.save().then((response) => {
+                Object.assign(this.data, data);
+                return response;
+            });
+        },
+
+        increaseListenedTimes(cid) {
+            var todo = AV.Object.createWithoutData('SongCollection', cid);
+            todo.save().then(function (todo) {
+                todo.increment('played', 1);
+                todo.fetchWhenSave(true);
+                return todo.save();
+            }).then(function (todo) {
+                console.log('success')
+                // 使用了 fetchWhenSave 选项，save 成功之后即可得到最新的 views 值
+            }, function (error) {
+                // 异常处理
+                console.log(error)
+            });
+        }
      };
 
      let controller = {
@@ -214,6 +244,7 @@
              this.pauseSong();
              eventHub.on('songEnd', () => {
                 this.model.data.status = false;
+                this.model.songPlayedIncrease();
                 this.view.checkStatus(this.model.data.status);
                 let nextSong = this.nextSong(this.model.data.song.id);
                 this.model.getSongData(nextSong.id)
@@ -317,6 +348,10 @@
              return id;
          },
 
+         increaseListenedTimes(cid){
+            this.model.increaseListenedTimes(cid)
+         },
+
          getAllSongs(){  
              this.model.getAllSongs()
              .then(()=>{
@@ -327,6 +362,8 @@
          getCollectionInfo(cid) {
           this.model.getCollectionInfo(cid)
                 .then(()=>{
+                    this.increaseListenedTimes(cid);
+                    console.log(this.model.data)
                     // console.log(this.model.data)
                     // this.model.getAllSongInCollection()
                 })

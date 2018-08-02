@@ -37,7 +37,7 @@
             // 新建对象
             var songCollection = new SongCollection();
             return songCollection.save({
-                name: data.collectionName, cover: data.collectionCover,
+                name: data.collectionName, cover: data.collectionCover, played: 0,
             }).then((data)=> {
                 Object.assign(this.data, {id: data.id, ...data.attributes});
             });
