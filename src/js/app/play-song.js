@@ -31,7 +31,6 @@
         <audio src="{{songUrl}}"></audio>
         `,
         render(data) {
-            window.testData = data;
             let {status, song} = data;
             $(this.el).html(this.template);
             let content = this.template
@@ -155,6 +154,9 @@
         },
         // get all song data from this collection
          getCollectionInfo(id) {
+            //  atomatic start to play the song
+             this.data.status = true;
+
              this.data.cid = id;
              let songCollection = AV.Object.createWithoutData('SongCollection', id);
              var query = new AV.Query('SongMapSongCollection');
@@ -178,9 +180,19 @@
              });     
          },
 
+         getAllSongs(){
+             let dataQuery = new AV.Query('Song');
+             return dataQuery.find().then((data) => {
+                this.data.songs = data.map((i) => {
+                     return { id: i.id, ...i.attributes };
+                 });
+                 return data
+             });
+         }
+
         //  switchSong(newSong) {
         //      let id = newSong.id;
-        //      console.log(id);
+        //      
         //  }
      };
 
@@ -296,17 +308,26 @@
                      cid = value;
                  }
              })
-
-             if(cid) {
+             
+             if(cid !== undefined) {
                  this.getCollectionInfo(cid);
+                } else {
+                 this.getAllSongs();
              }
              return id;
          },
 
+         getAllSongs(){  
+             this.model.getAllSongs()
+             .then(()=>{
+
+                })
+         },
+
          getCollectionInfo(cid) {
-            this.model.getCollectionInfo(cid)
+          this.model.getCollectionInfo(cid)
                 .then(()=>{
-                    console.log(this.model.data)
+                    // console.log(this.model.data)
                     // this.model.getAllSongInCollection()
                 })
          },

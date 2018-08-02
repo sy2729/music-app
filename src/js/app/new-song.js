@@ -62,6 +62,9 @@
         getAllData() {
             this.model.find().then((data)=>{
                 this.view.render(this.model.data);
+                // remove loading anima
+                eventHub.emit('loaded');
+
             })
         }
 

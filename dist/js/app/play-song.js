@@ -33,7 +33,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         <audio src="{{songUrl}}"></audio>
         `,
         render(data) {
-            window.testData = data;
             let { status, song } = data;
             $(this.el).html(this.template);
             let content = this.template.replace("{{songUrl}}", song.link || '').replace("{{songName}}", song.name);
@@ -151,6 +150,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         // get all song data from this collection
         getCollectionInfo(id) {
+            //  atomatic start to play the song
+            this.data.status = true;
+
             this.data.cid = id;
             let songCollection = AV.Object.createWithoutData('SongCollection', id);
             var query = new AV.Query('SongMapSongCollection');
@@ -172,8 +174,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }, e => {
                 console.log(e);
             });
+        },
+
+        getAllSongs() {
+            let dataQuery = new AV.Query('Song');
+            return dataQuery.find().then(data => {
+                this.data.songs = data.map(i => {
+                    return _extends({ id: i.id }, i.attributes);
+                });
+                return data;
+            });
         }
 
+        //  switchSong(newSong) {
+        //      let id = newSong.id;
+        //      
+        //  }
     };
 
     let controller = {
@@ -282,15 +298,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 }
             });
 
-            if (cid) {
+            if (cid !== undefined) {
                 this.getCollectionInfo(cid);
+            } else {
+                this.getAllSongs();
             }
             return id;
         },
 
+        getAllSongs() {
+            this.model.getAllSongs().then(() => {});
+        },
+
         getCollectionInfo(cid) {
             this.model.getCollectionInfo(cid).then(() => {
-                console.log(this.model.data);
+                // console.log(this.model.data)
                 // this.model.getAllSongInCollection()
             });
         },

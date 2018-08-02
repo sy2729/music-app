@@ -53,8 +53,8 @@
             let songCollections = new AV.Query('SongCollection');
             songCollections.limit(6);
             return songCollections.find().then((data)=>{
-                // remove loading anima
-                eventHub.emit('loaded');
+                // // remove loading anima
+                // eventHub.emit('loaded');
                 data.map((i)=>{
                     this.data.listRecom.push({
                         id: i.id,
