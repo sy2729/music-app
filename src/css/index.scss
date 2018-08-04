@@ -395,5 +395,15 @@ ul > li {list-style: none;}
             padding: px(15) px(10);
             font-size: px(14);
         }
+
+        .result-list {
+            ul {
+                li {
+                    a {
+                        padding: px(4) px(15);
+                    }
+                }
+            }
+        }
     }
 }

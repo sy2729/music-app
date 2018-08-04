@@ -25,10 +25,14 @@
             if (data !== undefined) {
                 if (data.searchedSong !== {}) {
                     console.log(data.searchedSong);
-                    let a = $('<a></a>').attr('href', `./song.html?id=${data.searchedSong.id}`).text(data.searchedSong.name);
-                    let lis = $('<li></li>').append(a);
+                    lisDom = [];
+                    data.searchedSong.map(i => {
+                        let a = $('<a></a>').attr('href', `./song.html?id=${i.id}`).text(i.name);
+                        let lis = $('<li></li>').append(a);
+                        lisDom.push(lis);
+                    });
 
-                    $(this.el).find('.result-list > ul').append(lis);
+                    $(this.el).find('.result-list > ul').empty().append(lisDom);
                 } else {
                     return;
                 }
@@ -41,15 +45,20 @@
 
     let model = {
         data: {
-            allSongData: []
+            allSongData: [],
+            searchedSong: []
         },
 
         matchSong(data) {
             this.data.allSongData.map(i => {
-                if (i.name === data) {
-                    this.data.searchedSong = i;
+                if (i.name.indexOf(data) !== -1) {
+                    this.data.searchedSong.push(i);
                 }
             });
+        },
+
+        clearSearchedSong() {
+            this.data.searchedSong = [];
         }
     };
 
@@ -71,6 +80,7 @@
             $(this.view.el).on('submit', 'form', e => {
                 e.preventDefault();
                 let value = $('.song-search').get(0).value;
+                this.model.clearSearchedSong();
                 this.model.matchSong(value);
                 this.view.render(this.model.data);
             });

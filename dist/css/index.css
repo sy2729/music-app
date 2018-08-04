@@ -316,5 +316,8 @@ ul > li {
   padding: 0.46875rem 0.3125rem;
   font-size: 0.4375rem;
 }
+#page3 .result .result-list ul li a {
+  padding: 0.125rem 0.46875rem;
+}
 
 /*# sourceMappingURL=index.css.map */
