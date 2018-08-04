@@ -44,7 +44,6 @@
         
 
         let template = this.template.replace('{{__lis__}}', lis);
-        console.log('final step')
         $(this.el).html(template)
 
         }

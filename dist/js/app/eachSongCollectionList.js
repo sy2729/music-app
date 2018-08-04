@@ -4,26 +4,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     let view = {
         el: '#songCollectionList',
         template: `
-            <section class="upper">
-                <div class="cover-bg"></div>
-                <div class="cover">
-                    <span class="inner-tag">Collection</span>
-                    <span class="inner-listened"></span>
-                </div>
-
-                 <div class='info-wrap'>
-                    <p class='title'>{{__title__}}</p>
-                    <div class='creator-info'>
-                        <span class="creator-profile"></span>
-                        <span class="creator-name">Admin</span>
-                    </div>
-                 </div>
-            </section>
-
-            <section class="middle descrip-info">
-                <div class="tags"><div>
-                <div class="description">Description: {{__description__}}<div>
-            </section>
+            <div class='upper-section'></div>
 
             <section id="sectionSongList"></section>
         `,
@@ -31,20 +12,42 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         init() {
             this.$el = $(this.el);
         },
-        render(data = {}) {
-            let template = this.template;
-            // console.log(data.collections.name)
-            template = template.replace('{{__title__}}', data.collections.name || '').replace('{{__description__}}', data.collections.description || '');
+        render(data) {
+            if (data === undefined) {
+                this.$el.html(this.template);
+            } else {
+                // let template = this.template;
+                let _upper_template = `
+                    <section class="upper">
+                        <div class="cover-bg"></div>
+                        <div class="cover">
+                            <span class="inner-tag">Collection</span>
+                            <span class="inner-listened"></span>
+                        </div>
+    
+                        <div class='info-wrap'>
+                            <p class='title'>{{__title__}}</p>
+                            <div class='creator-info'>
+                                <span class="creator-profile"></span>
+                                <span class="creator-name">Admin</span>
+                            </div>
+                        </div>
+                    </section>
+    
+                    <section class="middle descrip-info">
+                        <div class="tags"><div>
+                        <div class="description">Description: {{__description__}}<div>
+                    </section>
+                `;
+                _upper_template = _upper_template.replace('{{__title__}}', data.collections.name || '').replace('{{__description__}}', data.collections.description || '');
 
-            this.$el.html(template);
+                // render upper section
 
-            // if(data !== {}){
-            this.$el.find('.cover-bg').css('background-image', `url(${data.collections.cover || "./dist/img/logo.svg"})`);
-            this.$el.find('.cover').css('background-image', `url(${data.collections.cover || "./dist/img/logo.svg"})`);
+                this.$el.find('.upper-section').append($(_upper_template));
 
-            // .children().eq(0).attr('src', data.collections.cover);
-
-            // }
+                this.$el.find('.cover-bg').css('background-image', `url(${data.collections.cover || "./dist/img/logo.svg"})`);
+                this.$el.find('.cover').css('background-image', `url(${data.collections.cover || "./dist/img/logo.svg"})`);
+            }
         }
     };
 
@@ -56,7 +59,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         queryCollectionInfo(id) {
             let collection = new AV.Query('SongCollection');
             return collection.get(id).then(i => {
-                // console.log(i)
                 let obj = _extends({ id: i.id }, i.attributes);
                 this.data.collections = _extends({}, obj);
             });
@@ -69,7 +71,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.view = view;
             this.model = model;
             this.view.init();
-            // this.view.render({});
+            this.view.render();
             this.getCollectionInfo();
             this.bindEvent();
             this.bindEventHub();

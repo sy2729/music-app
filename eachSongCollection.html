@@ -45,7 +45,16 @@
 
 
 
-
+    <script src="node_modules/vconsole/dist/vconsole.min.js"></script>
+      <script>
+        // init vConsole
+        var vConsole = new VConsole();
+        // window.onerror = function(file, message, row) {
+        //   console.log(file)
+        //   console.log(message)
+        //   console.log(row)
+        // }
+      </script>
     <script src="./vendor/av-min.js"></script>
     <script src="./vendor/av.js"></script>
     <script src="./vendor/qiniu.min.js"></script>
@@ -53,6 +62,9 @@
     <script src="./dist/js/eventHub.js"></script>
     <script src="./dist/js/app/loading.js"></script>
     <script src="./dist/js/app/eachSongCollectionList.js"></script>
+    <script>
+        console.log('to load song list')
+    </script>
     <script src="./dist/js/app/songListInCollection.js"></script>
 </body>
 

@@ -274,6 +274,11 @@ ul > li {list-style: none;}
                  font-size: px(17);
                  display: inline-block;
                  margin-bottom: px(3);
+                 width: px(268);
+                 overflow: hidden;
+                 text-overflow: ellipsis;
+                 white-space: nowrap;
+                 word-break: normal;
              }
              .song-info-other {
                  font-size: px(12);
