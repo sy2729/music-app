@@ -582,6 +582,30 @@ body {
     background: transparent;
     font-size: 12px;
 }
+
+/* edit the collection name */
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info .collection-name.active {
+    display: none;
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info .collection-name-form {
+    display: none;
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info  .collection-name-form.active {
+    display: inline;
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info  .editName {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #372D6E;
+}
+#songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info  .editName.active {
+    display: none;
+}
+
+
+
+
+
 #songCollectionEach > .collection-upper > .collection-upper-left > .collection-basic-info .descrip-wrap > p.description {
     padding: 10px 2px;
     font-size: 14px;

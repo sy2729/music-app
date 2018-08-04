@@ -8,7 +8,12 @@
                     <ul class='collection-basic-info'>
                         <li>
                             <span>Collection Name: </span>
-                            <span>{{name}}</span>
+                            <span class='collection-name'>{{name}}</span>
+                            <form class="collection-name-form" data-id='collectionNameForm'>
+                                <input class='name-edit' data-id='collectionNameForm'>
+                                <input type="submit" name="submit" data-id='collectionNameForm'>
+                            </form>
+                            <span class='editName'>edit</span>
                         </li>
                         <li class="descrip-wrap">
                             <span>Collection Description:</span>
@@ -153,6 +158,15 @@
 
             }, function (error) {
             });
+        },
+
+        updateCollectionName(value) {
+            var collection = AV.Object.createWithoutData('SongCollection', this.data.songCollection.id);
+            collection.set('name', value)
+            return collection.save().then((response) => {
+                this.data.songCollection.name = value;
+                return response;
+            });
         }
     };
 
@@ -249,7 +263,47 @@
                     eventHub.emit('descripSaved');
                         $(this.view.el).find('.description').removeClass('active').text(this.model.data.songCollection.description).siblings().removeClass('active');
                     })
-            })
+            });
+
+
+            // open collection name editing panel
+            $(this.view.el).on('click', '.editName', ()=>{
+                $('.editName').addClass('active');
+                let value = $('.collection-name').addClass('active').text();
+                $('.collection-name-form').addClass('active').find('.name-edit').get(0).value = value;
+
+                // watching the panel to close
+                var watchUncloseEditingPanel = () => {
+                    setTimeout(() => {
+                        $(this.view.el).one('click', (e) => {
+                            let attr = $(e.target).attr('data-id');
+                            if (attr !== 'collectionNameForm') {
+                                $('.editName').removeClass('active');
+                                $('.collection-name').removeClass('active')
+                                $('.collection-name-form').removeClass('active')
+                            } else {
+                                watchUncloseEditingPanel();
+                            }
+                        })
+                    }, 0);
+                };
+                watchUncloseEditingPanel();
+            });
+
+            // get the input of the collection name form
+            $(this.view.el).on('submit', '.collection-name-form', (e) => {
+                e.preventDefault();
+                let value = $('.name-edit').get(0).value;
+                eventHub.emit('collectionNameSaving', {value: value, id: this.model.data.songCollection.id});
+                this.model.updateCollectionName(value)
+                    .then(() => {
+                        eventHub.emit('collectionNameSaved');
+                        $(this.view.el).find('.collection-name').removeClass('active').text(this.model.data.songCollection.name);
+                        $('.collection-name-form').removeClass('active')
+                        $('.editName').removeClass('active');
+                    })
+
+            });
         },
 
         bindEventHub() {
@@ -257,7 +311,7 @@
             eventHub.on('selectCollection', (data)=>{
                 this.model.fill(data);
                 this.view.render(this.model.data);
-                // this.initQiniu();
+                this.initQiniu();
                 $(this.view.el).removeClass('active');
                 let timeId = setTimeout(() => {
                     $(this.view.el).addClass('active');

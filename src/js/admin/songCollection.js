@@ -127,6 +127,19 @@
                 this.model.data.songCollections = collections;
                 this.view.render(this.model.data);
             })
+
+
+            // save the songCollection name updates
+            eventHub.on('collectionNameSaving', (data)=>{
+                let {value, id} = data;
+                let list = $('.song-collection-list').children();
+                list.each((index, i)=>{
+                    if($(i).attr('data-id') === id) {
+                        $(i).text(value);
+                        return
+                    }
+                })
+            })
         },
 
         createComponent(path) {

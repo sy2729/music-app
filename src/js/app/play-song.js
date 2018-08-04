@@ -217,7 +217,7 @@
                 todo.fetchWhenSave(true);
                 return todo.save();
             }).then(function (todo) {
-                console.log('success')
+
                 // 使用了 fetchWhenSave 选项，save 成功之后即可得到最新的 views 值
             }, function (error) {
                 // 异常处理

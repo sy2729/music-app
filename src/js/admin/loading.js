@@ -51,7 +51,12 @@
                 $(this.view.el).removeClass('active');
             })
             eventHub.on('descripSaved', ()=>{
-                console.log('saved')
+                $(this.view.el).addClass('active');
+            })
+            eventHub.on('collectionNameSaving', ()=>{
+                $(this.view.el).removeClass('active');
+            })
+            eventHub.on('collectionNameSaved', ()=>{
                 $(this.view.el).addClass('active');
             })
         }
