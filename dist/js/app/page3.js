@@ -51,7 +51,7 @@
 
         matchSong(data) {
             this.data.allSongData.map(i => {
-                if (i.name.indexOf(data) !== -1) {
+                if (i.name.toLowerCase().indexOf(data.toLowerCase()) !== -1) {
                     this.data.searchedSong.push(i);
                 }
             });
