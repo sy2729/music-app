@@ -22,14 +22,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 <ul>
                     <a href="./eachSongCollection.html?id={{__collectionId__}}">
                         <li>
-                            {{__collectionName__}} 
+                            <div class="collection-cover" style="background-image: url({{__cover__}})"></div>
+                            <span class="collection-name">{{__collectionName__}}</span>
+                            <span class='played-times'>Played: {{__played__}}</span>
                         </li>
                     </a>
                 </ul>
             `;
             let list_template_dom = '';
             data.collections.map(i => {
-                list_template_dom += _list_template.replace('{{__collectionName__}}', i.name).replace('{{__collectionId__}}', i.id);
+                console.log(i);
+                list_template_dom += _list_template.replace('{{__collectionName__}}', i.name).replace('{{__collectionId__}}', i.id).replace('{{__cover__}}', i.cover).replace('{{__played__}}', i.played);
             });
 
             let template = this.template.replace('{{__collectionList__}}', list_template_dom);

@@ -1,0 +1,55 @@
+$pageWidth: 320;
+$theme: #d33a31;
+$fontColor: #333;
+
+@function px($size) {
+  $remSize: $size / $pageWidth * 10;
+  @return #{$remSize}rem;
+}
+// clear style
+p, span, a {
+    font-size: px(16);
+}
+
+h2,h3,h4,h5,h6 {margin: 0;padding: 0;}
+a {text-decoration: none;}
+ul > li {list-style: none;}
+
+.collection-list{
+    ul{
+        a {
+            color: #333;
+            li {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: px(5) 2px;
+                border-bottom: 1px solid #EEEFF0;
+
+                .collection-cover {
+                    width: 30px;
+                    height: 30px;
+                    background: transparent center no-repeat;
+                    background-size: cover;
+                    margin: 0 4px;
+                    
+                }
+
+                .collection-name {
+                    margin-right: 4px;
+                    color: inherit;
+                }
+
+                .played-times {
+                    font-size: px(12);
+                    color: #8A8A8A;
+                }
+            }
+        }
+    }
+    
+}
+
+
+
+
