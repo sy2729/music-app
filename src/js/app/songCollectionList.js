@@ -1,5 +1,3 @@
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 {
     let view = {
         el: '#songCollectionList',
@@ -13,7 +11,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             </section>
         `,
 
-        init(data) {
+        init(data){
             this.$el = $(this.el);
         },
         render(data) {
@@ -26,29 +24,31 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                         </li>
                     </a>
                 </ul>
-            `;
+            `
             let list_template_dom = '';
-            data.collections.map(i => {
-                list_template_dom += _list_template.replace('{{__collectionName__}}', i.name).replace('{{__collectionId__}}', i.id);
-            });
+            data.collections.map((i)=>{
+                list_template_dom += _list_template.replace('{{__collectionName__}}', i.name)
+                                                    .replace('{{__collectionId__}}', i.id)
+            })
 
-            let template = this.template.replace('{{__collectionList__}}', list_template_dom);
-            this.$el.html(template);
+            let template = this.template.replace('{{__collectionList__}}', list_template_dom)
+            this.$el.html(template)
         }
     };
 
     let model = {
         data: {
-            collections: []
+            collections: [],
         },
 
-        getAllInfo() {
+        getAllInfo(){
             let dataQuery = new AV.Query('SongCollection');
-            return dataQuery.find().then(data => {
-                this.data.collections = data.map(i => {
-                    return _extends({ id: i.id }, i.attributes);
+            return dataQuery.find().then((data) => {
+                this.data.collections = data.map((i) => {
+                    return { id: i.id, ...i.attributes };
                 });
-                return data;
+                return data
+
             });
         }
     };
@@ -60,18 +60,24 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.view.init();
             this.getAllInfo();
         },
-
-        getAllInfo() {
-            this.model.getAllInfo().then(() => {
+        
+        getAllInfo(){
+            this.model.getAllInfo()
+            .then(()=>{
                 this.view.render(this.model.data);
                 this.bindEvent();
                 this.bindEventHub();
-            });
+                
+                })
+        },
+        
+        bindEvent(){
+
         },
 
-        bindEvent() {},
+        bindEventHub(){
 
-        bindEventHub() {}
+        }
     };
 
     controller.init(view, model);

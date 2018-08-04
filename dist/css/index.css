@@ -286,4 +286,35 @@ ul > li {
   line-height: 16px;
 }
 
+#page3 form {
+  width: 100%;
+  padding: 0.46875rem 0.3125rem;
+  border-bottom: 1px solid #EEEFF0;
+}
+#page3 form .input-wrap {
+  width: 100%;
+  padding: 0 10px;
+  background: #ebecec;
+  border-radius: 30px;
+  display: flex;
+  height: 0.9375rem;
+}
+#page3 form .input-wrap .song-search {
+  border: none;
+  width: 100%;
+  display: inline-block;
+  line-height: 0.5625rem;
+  background: transparent;
+  font-size: 0.4375rem;
+  color: #333;
+}
+#page3 form .input-wrap .song-search:focus {
+  outline: none;
+}
+#page3 .result .search-confirm {
+  width: 100%;
+  padding: 0.46875rem 0.3125rem;
+  font-size: 0.4375rem;
+}
+
 /*# sourceMappingURL=index.css.map */

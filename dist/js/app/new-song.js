@@ -57,6 +57,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         getAllData() {
             this.model.find().then(data => {
                 this.view.render(this.model.data);
+                eventHub.emit('allSongLoaded', this.model.data.songs);
                 // remove loading anima
                 eventHub.emit('loaded');
             });

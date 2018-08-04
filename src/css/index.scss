@@ -334,3 +334,66 @@ ul > li {list-style: none;}
     
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// page 3
+
+#page3 {
+    form {
+        width: 100%;
+        padding: px(15) px(10);
+        border-bottom: 1px solid #EEEFF0;
+        
+        .input-wrap {
+            width: 100%;
+            padding: 0 10px;
+            background: #ebecec;
+            border-radius: 30px;
+            display: flex;
+            height: px(30);
+
+            .song-search {
+                border: none;
+                width: 100%;
+                display: inline-block;
+                line-height: px(18);
+                background: transparent;
+                font-size: px(14);
+                color: #333;
+
+                &:focus {
+                    outline: none;
+                }
+
+            }
+        }
+    }
+
+    .result {
+
+        .search-confirm {
+            width: 100%;
+            padding: px(15) px(10);
+            font-size: px(14);
+        }
+    }
+}
